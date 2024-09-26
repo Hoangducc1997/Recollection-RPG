@@ -4,6 +4,8 @@ using UnityEngine;
 
 public enum PopupName
 {
-    MainMenu,
-    Loading
+    SamplePopup = 0,
+    MainMenu = 1,
+    Loading = 1,
+    
 }

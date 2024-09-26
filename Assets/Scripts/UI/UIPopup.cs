@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIPopup : MonoBehaviour, IPopup
+public class UIPopup : MonoBehaviour
 {
     [Header("Popup Name")]
     [SerializeField] PopupName _popupName;
@@ -13,12 +13,12 @@ public class UIPopup : MonoBehaviour, IPopup
     #endregion
 
     #region UI Function
-    public void OnShown()
+    public virtual void OnShown(object parament = null)
     {
         this.gameObject.SetActive(true);
     }
 
-    public void OnHide()
+    public virtual void OnHide()
     {
         this.gameObject.SetActive(false);
     }
@@ -31,11 +31,4 @@ public class UIPopup : MonoBehaviour, IPopup
     #endregion
 
 
-}
-
-public interface IPopup
-{
-    public void OnShown();
-
-    public void OnHide();
 }
