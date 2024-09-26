@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] List<UIPopup> _UIPopupList = new List<UIPopup>();
     private UIPopup _currentPopup;
+    private UIPopup _lastPopup;
     public void ShowPopup(PopupName popupName, object popupParamenter = null, bool hideOther = false)
     {
         foreach (var popup in _UIPopupList)
@@ -31,6 +32,7 @@ public class UIManager : MonoBehaviour
                 if(hideOther)
                 {
                     HidePopup(_currentPopup.GetPopupName());
+                    _lastPopup = _currentPopup;
                 }
 
                 _currentPopup = popup;
@@ -40,7 +42,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void HidePopup(PopupName popupName)
+    public void HidePopup(PopupName popupName, bool isShowLast = false)
     {
         if (_currentPopup != null)
         {
@@ -56,6 +58,11 @@ public class UIManager : MonoBehaviour
             {
                 popup.OnHide();
             }
+        }
+
+        if(isShowLast)
+        {
+            _lastPopup.OnShown();
         }
     }
 }

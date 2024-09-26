@@ -6,7 +6,7 @@ public class UIPopup : MonoBehaviour
 {
     [Header("Popup Name")]
     [SerializeField] PopupName _popupName;
-    private object parament;
+    protected object _popupParament;
 
     #region Unity Function
 
@@ -15,6 +15,10 @@ public class UIPopup : MonoBehaviour
     #region UI Function
     public virtual void OnShown(object parament = null)
     {
+        if (parament != null)
+        {
+            _popupParament = parament;
+        }
         this.gameObject.SetActive(true);
     }
 
@@ -26,7 +30,7 @@ public class UIPopup : MonoBehaviour
     public PopupName GetPopupName() {return _popupName; }
     public void SetParamenter(object parament)
     {
-        this.parament = parament;
+        this._popupParament = parament;
     }
     #endregion
 

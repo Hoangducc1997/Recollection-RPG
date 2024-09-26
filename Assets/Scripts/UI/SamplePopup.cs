@@ -7,7 +7,7 @@ public class SamplePopup : UIPopup
     public override void OnShown(object parament = null)
     {
         base.OnShown(parament);
-        if (parament != null) { 
+        if (_popupParament != null) { 
         
         }
         // Do Logic Something
