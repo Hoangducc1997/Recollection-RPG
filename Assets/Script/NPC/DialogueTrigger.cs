@@ -8,8 +8,17 @@ public class DialogueTrigger : MonoBehaviour
     public Actor[] actors;
     public void StartDialogue()
     {
-        FindObjectOfType<DialogueManager>().OpenDialogue(messages, actors);
+        DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
+        if (dialogueManager != null)
+        {
+            dialogueManager.OpenDialogue(messages, actors);
+        }
+        else
+        {
+            Debug.LogError("DialogueManager not found!");
+        }
     }
+
     [System.Serializable]
     public class Message
     {

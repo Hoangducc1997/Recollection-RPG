@@ -22,11 +22,6 @@ public class PlayerManager : MonoBehaviour
         DontDestroyOnLoad(gameObject); // Giữ lại instance khi đổi scene
     }
 
-    void Start()
-    {
-    
-    }
-
     // Cập nhật vị trí của player
     public void SetNewTransform(Vector2 Position)
     {

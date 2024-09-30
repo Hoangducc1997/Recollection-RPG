@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Check and flip the character if needed
         FlipCharacter();
+
     }
 
     void FixedUpdate()
