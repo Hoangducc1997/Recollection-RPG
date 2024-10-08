@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Rendering.Universal;
 
 public class Entrance : MonoBehaviour
 {
     private Animator animator;
+    [SerializeField] private Light2D globalLight; // Reference to the Global Light 2D
     [SerializeField] private CinemachineVirtualCamera virtualCamera; // Reference to the Cinemachine virtual camera
     public float targetOrthoSize = 5f; // The desired orthographic size
     public float smoothSpeed = 2f; // Speed of the transition
-
+    public Color targetLightColor = Color.red; // The desired color for the Global Light 2D
+    [SerializeField] private GameObject rainEffect; // Reference to the GameObject to activate
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -21,6 +25,9 @@ public class Entrance : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            ChangeGlobalLightColor(targetLightColor);
+            // Activate the Rain Effect
+            ActivateObject();
             // First, change the camera orthographic size
             StartCoroutine(ChangeCameraOrthoSize(targetOrthoSize));
         }
@@ -43,5 +50,19 @@ public class Entrance : MonoBehaviour
 
         // Once the camera size change is done, trigger the door animation
         animator.SetBool("isOpen", true);
+    }
+    private void ChangeGlobalLightColor(Color newColor)
+    {
+        if (globalLight != null)
+        {
+            globalLight.color = newColor; // Change the color of the global light
+        }
+    }
+    private void ActivateObject()
+    {
+        if (rainEffect != null)
+        {
+            rainEffect.SetActive(true); // Activate the GameObject
+        }
     }
 }
