@@ -2,44 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class Entrance : MonoBehaviour
 {
     private Animator animator;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera; // Reference to the Cinemachine virtual camera
+    public float targetOrthoSize = 5f; // The desired orthographic size
+    public float smoothSpeed = 2f; // Speed of the transition
 
-    [SerializeField] string sceneName;
     private void Awake()
     {
-
         animator = GetComponent<Animator>();
+        virtualCamera = FindObjectOfType<CinemachineVirtualCamera>(); // Get the Cinemachine virtual camera
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            animator.SetBool("isOpen", true);
-
-            // Wait for a while to let the door open animation complete before switching scenes
-            StartCoroutine(WaitAndLoadScene());
+            // First, change the camera orthographic size
+            StartCoroutine(ChangeCameraOrthoSize(targetOrthoSize));
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private IEnumerator ChangeCameraOrthoSize(float targetSize)
     {
-        if (collision.CompareTag("Player"))
+        float startSize = virtualCamera.m_Lens.OrthographicSize;
+        float elapsed = 0f;
+
+        // Smoothly change the camera size
+        while (elapsed < 1f)
         {
-            animator.SetBool("isOpen", false);
+            elapsed += Time.deltaTime * smoothSpeed;
+            virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(startSize, targetSize, elapsed);
+            yield return null;
         }
-    }
 
-    // Coroutine to wait for the animation to finish and load the next scene
-    private IEnumerator WaitAndLoadScene()
-    {
-        // Wait for about 1.5 seconds (or adjust based on your animation length)
-        yield return new WaitForSeconds(3.5f);
+        virtualCamera.m_Lens.OrthographicSize = targetSize; // Ensure the exact target size is reached
 
-        // Load the next scene, replace "NextScene" with your scene name
-        SceneManager.LoadScene(sceneName);
+        // Once the camera size change is done, trigger the door animation
+        animator.SetBool("isOpen", true);
     }
 }
