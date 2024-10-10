@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - JoyStick
   - Water
   - UI
   - 
@@ -38,12 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Effects
     uniqueID: 2394473913
     locked: 0
   - name: UI
     uniqueID: 3887447
+    locked: 0
+  - name: JoyStick
+    uniqueID: 346671501
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
