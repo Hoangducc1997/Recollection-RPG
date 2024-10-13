@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private Joystick joystick;  // Joystick you're using
+    [SerializeField] private PlayerMovementConfig movementConfig; // Reference to the ScriptableObject
+    [SerializeField] private Joystick joystick;  // Joystick that you're using
     private Animator animator;
     private Vector2 movement;
     private bool isFacingRight = true;  // To track the direction the character is facing
@@ -25,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Check and flip the character if needed
         FlipCharacter();
-
     }
 
     void FixedUpdate()
@@ -33,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         // Move the character by changing its position
         if (movement != Vector2.zero)
         {
-            transform.position += (Vector3)(movement * moveSpeed * Time.fixedDeltaTime);
+            transform.position += (Vector3)(movement * movementConfig.moveSpeed * Time.fixedDeltaTime);
         }
     }
 
@@ -54,8 +53,14 @@ public class PlayerMovement : MonoBehaviour
     {
         // Check movement speed
         bool isRunning = movement.magnitude > 0.1f;
-
+        // Set the animator's isRunning parameter
         animator.SetBool("isRunning", isRunning);
+
+        // Play the running animation if moving
+        if (isRunning)
+        {
+            animator.Play(movementConfig.animations[0].name); // Play the running animation
+        }
     }
 
     private void FlipCharacter()
