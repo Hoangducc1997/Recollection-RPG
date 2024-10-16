@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65824a09e0fc8d448ab4dc2cf967092b, type: 3}
-  m_Name: Player_Kha0
+  m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  name: "Kh\xE1 0"
-  description: Level 0
-  moveSpeed: 2
+  name: 
+  description: 
+  moveSpeed: 3
   animations:
-  - {fileID: 7400000, guid: dfc9de63d66539c4b811d03543657b6f, type: 2}
   - {fileID: 7400000, guid: dfc9de63d66539c4b811d03543657b6f, type: 2}

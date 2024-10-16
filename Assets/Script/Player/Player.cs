@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private PlayerMovementConfig movementConfig; // Reference to the ScriptableObject
+    [SerializeField] private PlayerLevelManager playerLevelManager; // Reference to the ScriptableObject
     [SerializeField] private Joystick joystick;  // Joystick that you're using
     private Animator animator;
     private Vector2 movement;
@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
 
         // Check and flip the character if needed
         FlipCharacter();
+     
     }
 
     void FixedUpdate()
@@ -32,7 +33,7 @@ public class Player : MonoBehaviour
         // Move the character by changing its position
         if (movement != Vector2.zero)
         {
-            transform.position += (Vector3)(movement * movementConfig.moveSpeed * Time.fixedDeltaTime);
+            transform.position += (Vector3)(movement * playerLevelManager.moveSpeed * Time.fixedDeltaTime);
         }
     }
 
@@ -59,7 +60,7 @@ public class Player : MonoBehaviour
         // Play the running animation if moving
         if (isRunning)
         {
-            animator.Play(movementConfig.animations[0].name); // Play the running animation
+            animator.Play(playerLevelManager.animations[0].name); // Play the running animation
         }
     }
 
