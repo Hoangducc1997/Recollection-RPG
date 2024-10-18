@@ -1,30 +1,26 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerLevelManager : MonoBehaviour
 {
     [System.Serializable]
-    public class SceneLevel
+    public class Level
     {
-        public string sceneName;
-        public int level;
+        public string nextLevelTag;  // The tag of the object
+        public int level;  // The level associated with this tag
     }
 
-    [SerializeField] private SceneLevel[] sceneLevels;  // Array of scene names with corresponding levels
+    [SerializeField] private Level[] nextLevels;  // List of levels with corresponding tags
 
-    public int GetLevelForCurrentScene()
+    // Method to get level based on the tag
+    public int GetLevelForTag(string tag)
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-
-        foreach (var sceneLevel in sceneLevels)
+        foreach (var nextLevel in nextLevels)
         {
-            if (sceneLevel.sceneName == currentSceneName)
+            if (nextLevel.nextLevelTag == tag)
             {
-                return sceneLevel.level;
+                return nextLevel.level;
             }
         }
-
-        return 0;  // Default level if no match found
+        return 0;  // Return 0 if no match found
     }
 }

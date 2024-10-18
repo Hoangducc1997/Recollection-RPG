@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -14,10 +13,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        // Assign the Animator
         animator = GetComponent<Animator>();
-        // Set the player's level based on the current scene
-        currentLevel = playerLevelManager.GetLevelForCurrentScene();
+        currentLevel = 1;  // Set default level to 1 at start
     }
 
     void Update()
@@ -31,8 +28,20 @@ public class Player : MonoBehaviour
     {
         if (movement != Vector2.zero)
         {
-            float moveSpeed = characterStats[currentLevel].moveSpeed;
+            float moveSpeed = characterStats[currentLevel - 1].moveSpeed;  // Use (level-1) as array index
             transform.position += (Vector3)(movement * moveSpeed * Time.fixedDeltaTime);
+        }
+    }
+
+    // Detect collision with level triggers (e.g., doors or objects with a tag for the next level)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // Check if the object has the tag corresponding to the level
+        int newLevel = playerLevelManager.GetLevelForTag(other.tag);  // Get the level based on the tag set in the Inspector
+        if (newLevel > 0 && newLevel != currentLevel)
+        {
+            currentLevel = newLevel;  // Set the player's new level
+            Debug.Log("Player leveled up to: " + currentLevel);
         }
     }
 
@@ -54,7 +63,7 @@ public class Player : MonoBehaviour
 
         if (isRunning)
         {
-            AnimationClip[] availableAnimations = characterStats[currentLevel].availableAnimations;
+            AnimationClip[] availableAnimations = characterStats[currentLevel - 1].availableAnimations;
             if (availableAnimations.Length > 0)
             {
                 animator.Play(availableAnimations[0].name);  // Use the first available animation (e.g., running)

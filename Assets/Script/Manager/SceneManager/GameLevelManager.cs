@@ -6,7 +6,7 @@ public class GameLevelManager : MonoBehaviour
 {
     void Start()
     {
-        UIManager.Instance.ShowPopup(PopupName.PlayerNormal);
+        UIManager.Instance.ShowPopup(PopupName.IntroGame);
     }
 
 }
