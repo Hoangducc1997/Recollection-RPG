@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerLevel2
   - PlayerLevel1
+  - BoundaryCamera
   layers:
   - Default
   - TransparentFX

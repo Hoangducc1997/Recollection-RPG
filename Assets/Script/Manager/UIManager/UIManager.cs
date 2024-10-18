@@ -28,8 +28,8 @@ public class UIManager : MonoBehaviour
             if (popup.GetPopupName() == popupName)
             {
                 popup.OnShown(popupParamenter);
-                
-                if(hideOther)
+
+                if (hideOther)
                 {
                     HidePopup(_currentPopup.GetPopupName());
                     _lastPopup = _currentPopup;
@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        if(isShowLast)
+        if (isShowLast)
         {
             _lastPopup.OnShown();
         }

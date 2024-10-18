@@ -8,6 +8,5 @@ public class MainPlayPopup : UIPopup
     public override void OnShown(object parament = null)
     {
         base.OnShown(parament);
-        
     }
 }

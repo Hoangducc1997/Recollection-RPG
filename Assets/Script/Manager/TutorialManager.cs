@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
+    
     [SerializeField] private GameObject tutorialPanel;
     [SerializeField] private GameObject touchSkipTutorial;
 
