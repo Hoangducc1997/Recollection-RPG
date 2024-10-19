@@ -15,7 +15,6 @@ public class UIManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     [SerializeField] List<UIPopup> _UIPopupList = new List<UIPopup>();

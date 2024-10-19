@@ -6,6 +6,6 @@ public enum PopupName
 {
     SamplePopup = 0,
     MainMenu = 1,
-    Loading = 1,
-    
+    Loading = 2,
+    SettingPopup = 3,
 }

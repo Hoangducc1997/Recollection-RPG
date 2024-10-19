@@ -32,6 +32,11 @@ public class UIPopup : MonoBehaviour
     {
         this._popupParament = parament;
     }
+
+    public virtual bool OnBackClick()
+    {
+        return true;
+    }
     #endregion
 
 
