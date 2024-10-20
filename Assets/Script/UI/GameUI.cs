@@ -23,10 +23,16 @@ public class GameUI : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-
     // This method is called when a new scene is loaded
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // Hide the current popup before showing a new one
+        if (UIManager.Instance.CurrentPopup != null)
+        {
+            UIManager.Instance.HidePopup(UIManager.Instance.CurrentPopup.GetPopupName());
+        }
+
+        // Show the popup for the new scene
         ShowPopupForCurrentScene();
     }
 
@@ -38,17 +44,14 @@ public class GameUI : MonoBehaviour
 
     private void ShowPopupForCurrentScene()
     {
-        // Get the current scene's name
         string currentSceneName = SceneManager.GetActiveScene().name;
 
-        // Loop through the array to check for a matching scene
         foreach (var ui in uiInScenes)
         {
             if (ui.sceneName == currentSceneName)
             {
-                // Show the popup for the current scene and hide any other active popups
-                UIManager.Instance.ShowPopup(ui.popup, null, true);
-                Debug.Log("Current Scene: " + currentSceneName);
+                Debug.Log("Showing popup for scene: " + currentSceneName);
+                UIManager.Instance.ShowPopup(ui.popup, null, true);  // Ensure the popup is shown
                 break;
             }
         }

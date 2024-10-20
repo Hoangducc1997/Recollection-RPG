@@ -4,14 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadingManager : MonoBehaviour
+public class LoadingManager : UIPopup
 {
-    public static string nextScene = "MenuGame";  // Scene to load next
+    public static string nextScene = "MainMenu";  // Scene to load next
     [SerializeField] private GameObject processBar;  // Progress bar GameObject
     [SerializeField] private Text textPercent;  // Text to show percentage progress
     [SerializeField] float fixedLoadingTime = 3f;  // Time for fixed loading
     [SerializeField] Button touchToPlay;  // Button to start loading the scene
     [SerializeField] GameObject LoadingBar;  // Game include LoadingBar
+
+    public override void OnShown(object parament = null)
+    {
+
+        base.OnShown(parament);
+    }
 
     private void Start()
     {

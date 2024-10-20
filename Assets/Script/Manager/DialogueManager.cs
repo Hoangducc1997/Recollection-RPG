@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static DialogueTrigger;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : UIPopup
 {
     public Image actorImage;
     public Text actorName;
@@ -17,6 +17,11 @@ public class DialogueManager : MonoBehaviour
     
     int activeMessage = 0;
     public static bool isActive = false;
+
+    public override void OnShown(object parament = null)
+    {
+        base.OnShown(parament);
+    }
 
     public void OpenDialogue(Message[] messages, Actor[] actors)
     {

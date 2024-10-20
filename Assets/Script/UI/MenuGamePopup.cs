@@ -5,7 +5,6 @@ using UnityEngine;
 public class MenuGamePopup : UIPopup
 {
 
-
     public override void OnShown(object parament = null)
     {
         base.OnShown(parament);
@@ -21,8 +20,9 @@ public class MenuGamePopup : UIPopup
 
     public void StartGame()
     {
-        UIManager.Instance.HidePopup(PopupName.IntroGame);
+        UIManager.Instance.ShowPopup(PopupName.IntroPilot);
         // Bat dau man hinh game
+
     }
     public void QuitGame()
     {

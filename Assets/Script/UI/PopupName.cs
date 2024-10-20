@@ -5,11 +5,12 @@ using UnityEngine;
 public enum PopupName
 {
     SamplePopup = 0,
-    MainMenu = 1,
-    Loading = 2,
+    Loading = 1,
+    MainMenu = 2,    
     Setting = 3,
-    IntroGame = 4,
-    Player = 5,
+    IntroPilot = 4,
+    IntroGame = 5,
+    Player = 6,
    
 
 }

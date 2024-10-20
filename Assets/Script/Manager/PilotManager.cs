@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement; // To manage scene transitions
 
-public class ScrollingText : MonoBehaviour
+public class ScrollingText : UIPopup
 {
     [SerializeField] private Text uiText; // Reference to the Text UI component
     [SerializeField] private float revealSpeed = 0.1f; // Time interval to reveal each character
@@ -15,6 +15,12 @@ public class ScrollingText : MonoBehaviour
     private int currentCharIndex = 0; // Tracks the current character to reveal
     private bool isRevealing = true; // Indicates if text is revealing or not
     private int buttonClickCount = 0; // To track the number of button clicks
+
+    public override void OnShown(object parament = null)
+    {
+
+        base.OnShown(parament);
+    }
 
     void Start()
     {
