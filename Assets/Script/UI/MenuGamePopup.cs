@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuGamePopup : UIPopup
 {
+    [SerializeField] private string nextSceneName;
 
     public override void OnShown(object parament = null)
     {
@@ -20,9 +22,7 @@ public class MenuGamePopup : UIPopup
 
     public void StartGame()
     {
-        UIManager.Instance.ShowPopup(PopupName.IntroPilot);
-        // Bat dau man hinh game
-
+        SceneManager.LoadScene(nextSceneName);
     }
     public void QuitGame()
     {

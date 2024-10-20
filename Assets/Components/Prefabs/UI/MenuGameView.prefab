@@ -258,7 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778a5900a0dba3348afc7147c394e6fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _popupName: 1
+  _popupName: 2
+  nextSceneName: IntroPilot
 --- !u!1 &3531675163530310565
 GameObject:
   m_ObjectHideFlags: 0
