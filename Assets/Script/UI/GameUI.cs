@@ -14,12 +14,29 @@ public class GameUI : MonoBehaviour
 
     [SerializeField] private UIInScene[] uiInScenes;  // Array of scenes and their corresponding popups
 
-    void Start()
+    private void Start()
+    {
+        // Show popup for the current scene on start
+        ShowPopupForCurrentScene();
+
+        // Subscribe to the sceneLoaded event to update the popup when the scene changes
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+
+    // This method is called when a new scene is loaded
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         ShowPopupForCurrentScene();
     }
 
-    void ShowPopupForCurrentScene()
+    private void OnDestroy()
+    {
+        // Unsubscribe from the event when the object is destroyed to avoid memory leaks
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void ShowPopupForCurrentScene()
     {
         // Get the current scene's name
         string currentSceneName = SceneManager.GetActiveScene().name;

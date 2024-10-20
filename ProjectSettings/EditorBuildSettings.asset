@@ -6,15 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Island-Castle.unity
-    guid: 30706d0d81ad3fc44b374150992d7765
+    path: Assets/Scenes/LoadingGame.unity
+    guid: cee6f2b6ef7e9784ab58916bf6ab1aa0
+  - enabled: 1
+    path: Assets/Scenes/MenuGame.unity
+    guid: 32b2ddaa60e4355428e3a1fc3eeb98bd
   - enabled: 1
     path: Assets/Scenes/IntroPilot.unity
     guid: 6ac827f306683304eb1cd99a6525e2bc
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
+    path: Assets/Scenes/Island-Castle.unity
+    guid: 30706d0d81ad3fc44b374150992d7765
+  - enabled: 1
+    path: Assets/Scenes/Overcome/Level1.unity
     guid: 47fc1c1d0dff0fd4e86bb8b4a4808ec0
   - enabled: 1
-    path: Assets/Scenes/Level2.unity
+    path: Assets/Scenes/Overcome/Level2.unity
     guid: 135a9c7392626b54aaf4a22726164812
   m_configObjects: {}

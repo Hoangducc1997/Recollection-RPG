@@ -27,10 +27,15 @@ public class UIPopup : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    public PopupName GetPopupName() {return _popupName; }
+    public PopupName GetPopupName() { return _popupName; }
     public void SetParamenter(object parament)
     {
         this._popupParament = parament;
+    }
+
+    public virtual bool OnBackClick()
+    {
+        return true;
     }
     #endregion
 
