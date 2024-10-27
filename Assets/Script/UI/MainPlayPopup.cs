@@ -9,4 +9,9 @@ public class MainPlayPopup : UIPopup
     {
         base.OnShown(parament);
     }
+
+    public void UpdatePlayerUI()
+    {
+         //Health And Movement
+    }
 }

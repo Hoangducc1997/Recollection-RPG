@@ -32,4 +32,11 @@ public class PlayerManager : MonoBehaviour
     {
         return this.transform.position;
     }
+
+
+    public void DecreaseHP(float HP)
+    {
+        //HP
+        //UIManager.Instance.GetPopupByName(PopupName.MainPlay).GetComponent<MainPlayPopup>().UpdatePlayerUI();
+    }
 }

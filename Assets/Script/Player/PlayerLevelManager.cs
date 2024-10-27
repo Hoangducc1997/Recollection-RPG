@@ -1,26 +1,26 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerLevelManager : MonoBehaviour
 {
-    [System.Serializable]
-    public class Level
-    {
-        public string nextLevelTag;  // The tag of the object
-        public int level;  // The level associated with this tag
-    }
+    [SerializeField] private Player player; // Tham chiếu tới script Player
+    [SerializeField] private Weapon[] levelUpWeapons; // Mỗi cấp độ có một vũ khí mới
 
-    [SerializeField] private Level[] nextLevels;  // List of levels with corresponding tags
+    private int currentLevel = 1; // Mặc định là cấp độ 1
 
-    // Method to get level based on the tag
-    public int GetLevelForTag(string tag)
+    // Khi qua màn mới, nhận vũ khí mới và tăng cấp độ
+    public void LevelUp()
     {
-        foreach (var nextLevel in nextLevels)
+        currentLevel++;
+
+        if (currentLevel - 1 < levelUpWeapons.Length)
         {
-            if (nextLevel.nextLevelTag == tag)
-            {
-                return nextLevel.level;
-            }
+            Weapon newWeapon = levelUpWeapons[currentLevel - 1];     
+
+            Debug.Log("Player đã lên cấp " + currentLevel + " và nhận vũ khí mới: " + newWeapon.weaponName);
         }
-        return 0;  // Return 0 if no match found
+        else
+        {
+            Debug.Log("Không còn vũ khí mới cho cấp độ này.");
+        }
     }
 }

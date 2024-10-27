@@ -68,4 +68,13 @@ public class UIManager : MonoBehaviour
             _lastPopup?.OnShown();
         }
     }
+
+    public GameObject GetPopupByName(PopupName popupName)
+    {
+        foreach(var popup in _UIPopupList)
+        {
+            if (popup.GetPopupName() == popupName) { return popup.gameObject; }
+        }
+        return null;
+    }
 }
