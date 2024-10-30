@@ -16,7 +16,7 @@ public class Entrance : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        virtualCamera = FindObjectOfType<CinemachineVirtualCamera>(); // Get the Cinemachine virtual camera
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

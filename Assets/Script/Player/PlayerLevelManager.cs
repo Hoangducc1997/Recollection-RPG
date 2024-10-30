@@ -2,7 +2,7 @@
 
 public class PlayerLevelManager : MonoBehaviour
 {
-    [SerializeField] private Player player; // Tham chiếu tới script Player
+    [SerializeField] private Player player; // Tham chiếu tới script GamePlay
     [SerializeField] private Weapon[] levelUpWeapons; // Mỗi cấp độ có một vũ khí mới
 
     private int currentLevel = 1; // Mặc định là cấp độ 1
@@ -16,7 +16,7 @@ public class PlayerLevelManager : MonoBehaviour
         {
             Weapon newWeapon = levelUpWeapons[currentLevel - 1];     
 
-            Debug.Log("Player đã lên cấp " + currentLevel + " và nhận vũ khí mới: " + newWeapon.weaponName);
+            Debug.Log("GamePlay đã lên cấp " + currentLevel + " và nhận vũ khí mới: " + newWeapon.weaponName);
         }
         else
         {

@@ -160,7 +160,7 @@ MonoBehaviour:
   - {fileID: 9104858094957457972}
   - {fileID: 7835167701485844044}
   - {fileID: 379333176940532362}
-  - {fileID: 0}
+  - {fileID: 5076437489779640645}
 --- !u!114 &1689045825232788245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
     popup: 4
   - sceneName: Island-Castle
     popup: 5
-  - sceneName: Level1
+  - sceneName: Boss1
     popup: 6
 --- !u!1001 &2084225231866458758
 PrefabInstance:
@@ -1200,6 +1200,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb099196289cdfa4cb1e884c7b1d569c, type: 3}
+--- !u!114 &5076437489779640645 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2720262684499971809, guid: bb099196289cdfa4cb1e884c7b1d569c, type: 3}
+  m_PrefabInstance: {fileID: 7184210623202690980}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa154977c385f934698b7e376363ab65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8495925135981012973 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1609165616896303177, guid: bb099196289cdfa4cb1e884c7b1d569c, type: 3}

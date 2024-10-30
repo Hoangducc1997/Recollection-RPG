@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 23
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -134,7 +134,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Boar_Attack_6
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 304
+        width: 37
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d97129fee521b44b8a3a514de6888ad
+      internalID: 1247301211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boar_Attack_7
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 305
+        width: 47
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5daa9297d8752bd4ea78e952d916ff07
+      internalID: -1996529401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boar_Attack_8
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 305
+        width: 50
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ada8f3f9c42b73045a21f3790daef67d
+      internalID: 1920763991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boar_Attack_9
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 304
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 051d395a64b9a4549a74c078135a8d5c
+      internalID: -772484550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boar_Attack_10
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 304
+        width: 37
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57507d57ea208c64984b544c32c08b59
+      internalID: 1227492529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boar_Attack_11
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 304
+        width: 37
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 499dc1856d53ae64fa679763840234d6
+      internalID: 999883273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +271,31 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Boar_Attack_0: 34393531
+      Boar_Attack_1: -2018696094
+      Boar_Attack_10: 1227492529
+      Boar_Attack_11: 999883273
+      Boar_Attack_12: -1508209788
+      Boar_Attack_13: 1775162948
+      Boar_Attack_14: -676780981
+      Boar_Attack_15: 82410367
+      Boar_Attack_16: 1082280206
+      Boar_Attack_17: 1824896997
+      Boar_Attack_18: -1138161651
+      Boar_Attack_19: -1472193013
+      Boar_Attack_2: -256655810
+      Boar_Attack_20: 1018266294
+      Boar_Attack_21: -437570371
+      Boar_Attack_22: -307741054
+      Boar_Attack_23: 141269284
+      Boar_Attack_3: -845723008
+      Boar_Attack_4: 1149837005
+      Boar_Attack_5: 2071086128
+      Boar_Attack_6: 1247301211
+      Boar_Attack_7: -1996529401
+      Boar_Attack_8: 1920763991
+      Boar_Attack_9: -772484550
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -10,7 +10,7 @@ public enum PopupName
     Setting = 3,
     IntroPilot = 4,
     IntroGame = 5,
-    Player = 6,
+    GamePlay = 6,
    
 
 }

@@ -16,18 +16,18 @@ public class EnemyManager : MonoBehaviour
     {
         animator = GetComponent<Animator>();
 
-        // Tìm đối tượng Player bằng tag
+        // Tìm đối tượng GamePlay bằng tag
         player = GameObject.FindWithTag("Player");
         if (player == null)
         {
-            Debug.LogError("Player not found in the scene. Please ensure the Player object has the tag 'Player'.");
+            Debug.LogError("GamePlay not found in the scene. Please ensure the GamePlay object has the tag 'GamePlay'.");
             return;
         }
 
         playerBarManager = player.GetComponent<PlayerBarManager>();
         if (playerBarManager == null)
         {
-            Debug.LogWarning("Player does not have a PlayerBarManager component. Health-related functions will be disabled.");
+            Debug.LogWarning("GamePlay does not have a PlayerBarManager component. Health-related functions will be disabled.");
         }
 
         lastAttackTime = -attackCooldown; // Để kẻ thù có thể tấn công ngay lập tức nếu ở trong phạm vi

@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private WeaponManager weaponManager; // Quản lý vũ khí
     [SerializeField] private string enemyTag = "Enemy"; // Tag cho kẻ thù
 
-    private Animator animator; // Animator cho Player
+    private Animator animator; // Animator cho GamePlay
     private Vector2 movement;
     private bool isFacingRight = true;
     private int currentLevel;
