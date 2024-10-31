@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boar (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2826979651492348882, guid: 9011a926b834bd6458f4eae041247922, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -231,6 +235,10 @@ PrefabInstance:
     - target: {fileID: 2826979651492348882, guid: 9011a926b834bd6458f4eae041247922, type: 3}
       propertyPath: m_Name
       value: Boar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826979651492348882, guid: 9011a926b834bd6458f4eae041247922, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -289,6 +297,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cobra (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -345,6 +357,10 @@ PrefabInstance:
     - target: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
       propertyPath: m_Name
       value: Cobra (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -403,6 +419,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boar (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 2826979651492348882, guid: 9011a926b834bd6458f4eae041247922, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -460,6 +480,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boar (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2826979651492348882, guid: 9011a926b834bd6458f4eae041247922, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -516,6 +540,10 @@ PrefabInstance:
     - target: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
       propertyPath: m_Name
       value: Cobra (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20080,6 +20108,89 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1001 &807787051
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1339746974743403004, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339746974743403004, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339746974743403004, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339746974743403004, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339746974743403004, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339746974743403004, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339746974743403004, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339746974743403004, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339746974743403004, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339746974743403004, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344409309873324905, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_Name
+      value: UIManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7611974883674718684, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+--- !u!114 &807787052 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7025760507637153021, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+  m_PrefabInstance: {fileID: 807787051}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40150ea546fa9c40893e4faab081cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &807787053 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3332066458466217254, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+  m_PrefabInstance: {fileID: 807787051}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42844a4fccbd54746b90cade4ff70f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &846342320
 GameObject:
   m_ObjectHideFlags: 0
@@ -20138,6 +20249,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &926249595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 926249597}
+  - component: {fileID: 926249596}
+  m_Layer: 0
+  m_Name: SpawnerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &926249596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926249595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f551dccc6ea6b641b0b209deebc35e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefabs:
+  - {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
+  - {fileID: 2826979651492348882, guid: 9011a926b834bd6458f4eae041247922, type: 3}
+  enemyInterval: 2
+--- !u!4 &926249597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926249595}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.076795, y: -19.657839, z: -0.12742293}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &990376225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20189,6 +20348,10 @@ PrefabInstance:
     - target: {fileID: 2826979651492348882, guid: 9011a926b834bd6458f4eae041247922, type: 3}
       propertyPath: m_Name
       value: Boar (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826979651492348882, guid: 9011a926b834bd6458f4eae041247922, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20246,6 +20409,10 @@ PrefabInstance:
     - target: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
       propertyPath: m_Name
       value: Cobra
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20423,6 +20590,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cobra (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20530,6 +20701,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cobra (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20543,6 +20718,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 434886188451907554, guid: 5c6d2a625ad428d418c361b8a3102c47, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 807787052}
+    - target: {fileID: 2986191849663918788, guid: 5c6d2a625ad428d418c361b8a3102c47, type: 3}
+      propertyPath: joystick
+      value: 
+      objectReference: {fileID: 807787053}
     - target: {fileID: 4107313595379135709, guid: 5c6d2a625ad428d418c361b8a3102c47, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.8
@@ -20557,7 +20740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6065404996672404234, guid: 5c6d2a625ad428d418c361b8a3102c47, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7755820963871587653, guid: 5c6d2a625ad428d418c361b8a3102c47, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20671,6 +20854,10 @@ PrefabInstance:
     - target: {fileID: 2826979651492348882, guid: 9011a926b834bd6458f4eae041247922, type: 3}
       propertyPath: m_Name
       value: Boar (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826979651492348882, guid: 9011a926b834bd6458f4eae041247922, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29593,6 +29780,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boar (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 2826979651492348882, guid: 9011a926b834bd6458f4eae041247922, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29650,6 +29841,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cobra (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29706,6 +29901,10 @@ PrefabInstance:
     - target: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
       propertyPath: m_Name
       value: Cobra (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29865,6 +30064,10 @@ PrefabInstance:
     - target: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
       propertyPath: m_Name
       value: Cobra (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32240,6 +32443,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boar (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2826979651492348882, guid: 9011a926b834bd6458f4eae041247922, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32408,6 +32615,7 @@ SceneRoots:
   - {fileID: 2007825790}
   - {fileID: 687078886}
   - {fileID: 1034250954}
+  - {fileID: 807787051}
   - {fileID: 1249146045}
   - {fileID: 96432784}
   - {fileID: 20256110}
@@ -32426,3 +32634,4 @@ SceneRoots:
   - {fileID: 204610638}
   - {fileID: 1239055266}
   - {fileID: 235534691}
+  - {fileID: 926249597}
