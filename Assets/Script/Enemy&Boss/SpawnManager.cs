@@ -13,7 +13,7 @@ public class EnemySpawnInfo
     public Text enemyCountInputs;
 }
 
-public class SpawnManager    : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private EnemySpawnInfo[] enemySpawners;
     [SerializeField] private Transform[] spawnPoints;
@@ -59,7 +59,35 @@ public class SpawnManager    : MonoBehaviour
     public void EnemyDefeated(int enemyTypeIndex)
     {
         remainingEnemyCounts[enemyTypeIndex]--;
-        UpdateEnemyCountText(enemyTypeIndex); // Cập nhật Text sau khi tiêu diệt enemy
+        UpdateEnemyCountText(enemyTypeIndex);
+
+        // Kiểm tra nếu tất cả enemy đã bị tiêu diệt
+        if (AreAllEnemiesDefeated())
+        {
+            GamePlayPopup gamePlayPopup = FindObjectOfType<GamePlayPopup>();
+            if (gamePlayPopup != null)
+            {
+                gamePlayPopup.ShowFindBossText(); 
+            }
+            LevelManager levelManager = FindObjectOfType<LevelManager>();
+            if (levelManager != null)
+            {
+                levelManager.AppearObjBossAndNextScene();
+            }
+        }
+    }
+
+
+    public bool AreAllEnemiesDefeated()
+    {
+        foreach (int count in remainingEnemyCounts)
+        {
+            if (count > 0)
+            {
+                return false; // Vẫn còn enemy
+            }
+        }
+        return true; // Không còn enemy nào
     }
 
     private void UpdateEnemyCountText(int enemyIndex)

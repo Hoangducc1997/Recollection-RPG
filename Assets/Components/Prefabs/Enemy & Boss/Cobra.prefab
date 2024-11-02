@@ -227,21 +227,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   timeForAnimDeath: 1.5
-  OnEnemyDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9119155583376347947}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  enemySpawner: {fileID: 0}
+  enemyTypeIndex: 0
 --- !u!114 &3188380326640604550
 MonoBehaviour:
   m_ObjectHideFlags: 0
