@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class BossHealth : MonoBehaviour
 {
     private Animator animator;
     [SerializeField] private int maxHealth = 100;
     private int currentHealth;
     [SerializeField] private float timeForAnimDeath = 1f;
 
-    public SpawnManager enemySpawner;
-    public int enemyTypeIndex;
+    public SpawnManager bossSpawner;
+    public int bossTypeIndex;
 
     void Start()
     {
@@ -48,7 +48,7 @@ public class EnemyHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(timeForAnimDeath);
 
-        enemySpawner.EnemyDefeated(enemyTypeIndex); // Thông báo số lượng enemy đã giảm
+        bossSpawner.EnemyDefeated(bossTypeIndex); // Thông báo số lượng enemy đã giảm
 
         Destroy(gameObject);
     }
