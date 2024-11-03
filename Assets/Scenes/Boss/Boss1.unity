@@ -333,9 +333,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e704347750d76a6478f884f4108d6af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossAppearAndNextScene: {fileID: 1714390436}
-  bossPrefab: {fileID: 5766554503039412232, guid: 998e032cb55073f4a8abd90536ecd50f, type: 3}
-  spawnPoint: {fileID: 1714390439}
+  nextScene: {fileID: 1714390436}
+  bossAppear: {fileID: 1629946694}
 --- !u!61 &605067850
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -29558,6 +29557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1629946695}
   - component: {fileID: 1629946697}
+  - component: {fileID: 1629946698}
   - component: {fileID: 1629946696}
   m_Layer: 0
   m_Name: ColliderBossAppear&NextScene (1)
@@ -29678,6 +29678,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1629946698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629946694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d870532eadb9e04d9db4a1fd2b1f5bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossAppear: {fileID: 1629946694}
+  bossPrefab: {fileID: 5766554503039412232, guid: 998e032cb55073f4a8abd90536ecd50f, type: 3}
+  spawnPoint: {fileID: 1629946695}
 --- !u!1 &1714390436
 GameObject:
   m_ObjectHideFlags: 0

@@ -72,7 +72,7 @@ public class SpawnManager : MonoBehaviour
             LevelManager levelManager = FindObjectOfType<LevelManager>();
             if (levelManager != null)
             {
-                levelManager.AppearObjBossAndNextScene();
+                levelManager.AppearObjBoss();
             }
         }
     }

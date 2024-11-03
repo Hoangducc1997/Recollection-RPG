@@ -10,7 +10,7 @@ public class PlayerBarManager : MonoBehaviour
 
     [SerializeField] int maxHealth;
     int currentHealth;
-    public PlayerBar     healthBar;
+    public PlayerBar healthBar;
 
     public void Start()
     {

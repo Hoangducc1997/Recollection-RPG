@@ -32,11 +32,14 @@ public class BossBarManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             animator.SetBool("isDeath", true);
-
+            LevelManager levelManager = FindObjectOfType<LevelManager>();
+            if (levelManager != null)
+            {
+                levelManager.AppearObjNextScene();
+            }
             StartCoroutine(WaitBackHome());
         }
     }
-
 
     private IEnumerator HurtAnim()
     {

@@ -6,26 +6,21 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public GameObject bossAppearAndNextScene;
-    public GameObject bossPrefab;
-    public Transform spawnPoint; // Vị trí spawn cho bossPrefab
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Kiểm tra nếu đối tượng va chạm là Player
-        if (collision.CompareTag("Player"))
-        {
-            // Spawn bossPrefab tại vị trí spawnPoint
-            Instantiate(bossPrefab, spawnPoint.position, spawnPoint.rotation);
-        }
-    }
+    public GameObject nextScene;
+    public GameObject bossAppear;
     void Start()
     {
-        bossAppearAndNextScene.SetActive(false);
+        nextScene.SetActive(false);
     }
 
-    public void AppearObjBossAndNextScene()
+    public void AppearObjNextScene()
     {
-        bossAppearAndNextScene.SetActive(true);
+        nextScene.SetActive(true);
+        bossAppear.SetActive(false);
+    }
+
+    public void AppearObjBoss()
+    {
+        bossAppear.SetActive(true);
     }
 }
