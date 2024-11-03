@@ -1,16 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-
-public class PlayerBarManager : MonoBehaviour
+public class BossBarManager : MonoBehaviour
 {
     Animator animator;
 
     [SerializeField] int maxHealth;
     int currentHealth;
-    public PlayerBar     healthBar;
+    public BossBar healthBar;
 
     public void Start()
     {
@@ -34,7 +32,7 @@ public class PlayerBarManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             animator.SetBool("isDeath", true);
-           
+
             StartCoroutine(WaitBackHome());
         }
     }
