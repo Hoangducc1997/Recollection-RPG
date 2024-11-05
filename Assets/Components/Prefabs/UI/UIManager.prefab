@@ -1109,6 +1109,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1409296634836063450}
     m_Modifications:
+    - target: {fileID: 121787921369852937, guid: bb099196289cdfa4cb1e884c7b1d569c, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 133
+      objectReference: {fileID: 0}
     - target: {fileID: 725180335091156600, guid: bb099196289cdfa4cb1e884c7b1d569c, type: 3}
       propertyPath: m_Name
       value: GamePlayPopup
@@ -1226,6 +1230,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1409296634836063450}
     m_Modifications:
+    - target: {fileID: 1201879548039294454, guid: 48a529995a4846d429096bbdb5b74ce4, type: 3}
+      propertyPath: m_fontSize
+      value: 117.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1201879548039294454, guid: 48a529995a4846d429096bbdb5b74ce4, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 1201879548039294454, guid: 48a529995a4846d429096bbdb5b74ce4, type: 3}
+      propertyPath: m_isOrthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1201879548039294454, guid: 48a529995a4846d429096bbdb5b74ce4, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 1716243187363309325, guid: 48a529995a4846d429096bbdb5b74ce4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

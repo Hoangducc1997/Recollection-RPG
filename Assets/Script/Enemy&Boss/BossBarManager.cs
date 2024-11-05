@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossBarManager : MonoBehaviour
 {
     Animator animator;
+    private bool isDead = false; // Thêm cờ kiểm tra trạng thái chết của boss
 
     [SerializeField] int maxHealth;
     int currentHealth;
@@ -20,6 +21,8 @@ public class BossBarManager : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isDead) return; // Không thực hiện gì nếu boss đã chết
+
         currentHealth -= damage;
         if (!animator.GetBool("isHurt"))
         {
@@ -30,6 +33,7 @@ public class BossBarManager : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            isDead = true; // Đánh dấu boss đã chết
             Debug.Log("BossDeath");
             LevelManager levelManager = FindObjectOfType<LevelManager>();
             if (levelManager != null)
@@ -49,10 +53,14 @@ public class BossBarManager : MonoBehaviour
     private IEnumerator DestroyBoss()
     {
         animator.SetBool("isDeath", true);
-        // Chờ cho animation "isDeath" hoàn tất (thời gian chờ có thể thay đổi tùy thuộc vào độ dài của animation)
         yield return new WaitForSeconds(3f);
 
-        // Xóa đối tượng boss khỏi scene
         Destroy(gameObject);
+    }
+
+    // Hàm để kiểm tra trạng thái chết từ script khác
+    public bool IsDead()
+    {
+        return isDead;
     }
 }
