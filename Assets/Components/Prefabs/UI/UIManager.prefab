@@ -184,6 +184,8 @@ MonoBehaviour:
     popup: 5
   - sceneName: Boss1
     popup: 6
+  - sceneName: Boss2
+    popup: 6
 --- !u!1001 &2084225231866458758
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,7 +16,6 @@ public class BossBarManager : MonoBehaviour
 
         currentHealth = maxHealth;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
-
     }
 
     public void TakeDamage(int damage)
@@ -31,13 +30,13 @@ public class BossBarManager : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            animator.SetBool("isDeath", true);
+            Debug.Log("BossDeath");
             LevelManager levelManager = FindObjectOfType<LevelManager>();
             if (levelManager != null)
             {
                 levelManager.AppearObjNextScene();
             }
-            StartCoroutine(WaitBackHome());
+            StartCoroutine(DestroyBoss());
         }
     }
 
@@ -47,10 +46,13 @@ public class BossBarManager : MonoBehaviour
         animator.SetBool("isHurt", false);
     }
 
-    private IEnumerator WaitBackHome()
+    private IEnumerator DestroyBoss()
     {
+        animator.SetBool("isDeath", true);
+        // Chờ cho animation "isDeath" hoàn tất (thời gian chờ có thể thay đổi tùy thuộc vào độ dài của animation)
         yield return new WaitForSeconds(3f);
-        //Restart lại level
-    }
 
+        // Xóa đối tượng boss khỏi scene
+        Destroy(gameObject);
+    }
 }

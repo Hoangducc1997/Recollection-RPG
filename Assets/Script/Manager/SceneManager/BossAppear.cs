@@ -15,6 +15,7 @@ public class Boss : MonoBehaviour
         {
             // Spawn bossPrefab tại vị trí spawnPoint
             Instantiate(bossPrefab, spawnPoint.position, spawnPoint.rotation);
+            bossAppear.SetActive(false);
         }
     }
     void Start()
@@ -22,5 +23,4 @@ public class Boss : MonoBehaviour
         bossAppear.SetActive(false);
     }
 
-   
 }
