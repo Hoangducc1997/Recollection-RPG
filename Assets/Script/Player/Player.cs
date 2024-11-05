@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private float lastAttackTime;
     private bool isAttacking; // Biến trạng thái tấn công
     private bool isRunning; // Biến trạng thái chạy
-
+    private BossBarManager bossBarManager;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -103,38 +103,41 @@ public class Player : MonoBehaviour
         Weapon currentWeapon = weaponManager.GetCurrentWeapon();
         if (currentWeapon != null)
         {
-            // Lấy tất cả kẻ thù trong phạm vi tấn công
             GameObject[] enemies = FindEnemiesInRange(currentWeapon.rangeAtk);
 
-            // Kiểm tra nếu có kẻ thù trong vùng
-            if (enemies.Length > 0)
+            if (enemies.Length > 0 && Time.time >= lastAttackTime + currentWeapon.cooldownTime)
             {
-                // Kiểm tra thời gian hồi chiêu
-                if (Time.time >= lastAttackTime + currentWeapon.cooldownTime)
-                {
-                    // Trigger attack animation and set attacking status
-                    isAttacking = true;
-                    animator.SetBool("isAttacking", true);
+                isAttacking = true;
+                animator.SetBool("isAttacking", true);
 
-                    // Tấn công tất cả kẻ thù trong vùng
-                    foreach (GameObject enemy in enemies)
+                foreach (GameObject target in enemies)
+                {
+                    // Kiểm tra nếu đối tượng là Boss
+                    BossBarManager bossBarManager = target.GetComponent<BossBarManager>();
+                    if (bossBarManager != null)
                     {
-                        EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+                        bossBarManager.TakeDamage(currentWeapon.damage);
+                        Debug.Log("Attacked boss: " + target.name + " dealing " + currentWeapon.damage + " damage.");
+                    }
+                    else
+                    {
+                        // Nếu không phải Boss, kiểm tra nếu là Enemy
+                        EnemyHealth enemyHealth = target.GetComponent<EnemyHealth>();
                         if (enemyHealth != null)
                         {
                             enemyHealth.TakeDamage(currentWeapon.damage);
-                            Debug.Log("Attacked " + enemy.name + " dealing " + currentWeapon.damage + " damage.");
+                            Debug.Log("Attacked enemy: " + target.name + " dealing " + currentWeapon.damage + " damage.");
                         }
                     }
-
-                    lastAttackTime = Time.time;
-
-                    // Khôi phục trạng thái không tấn công sau attackDuration
-                    Invoke("ResetAttack", currentWeapon.attackDuration);
                 }
+
+                lastAttackTime = Time.time;
+                Invoke("ResetAttack", currentWeapon.attackDuration);
             }
         }
     }
+
+
 
     private GameObject[] FindEnemiesInRange(float range)
     {

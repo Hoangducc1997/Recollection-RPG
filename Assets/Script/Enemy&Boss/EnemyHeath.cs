@@ -4,48 +4,52 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     private Animator animator;
-    [SerializeField] private int maxHealth = 100; // Lượng máu tối đa của Enemy
+    [SerializeField] private int maxHealth = 100;
     private int currentHealth;
-    [SerializeField] private float timeForAnimDeath = 1f; // Thời gian chờ cho animation isDeath
+    [SerializeField] private float timeForAnimDeath = 1f;
+
+    public SpawnManager enemySpawner;
+    public int enemyTypeIndex;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        currentHealth = maxHealth; // Khởi tạo máu ban đầu bằng máu tối đa
+        currentHealth = maxHealth;
     }
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage; // Trừ máu
+        currentHealth -= damage;
 
         if (currentHealth > 0)
         {
-            animator.SetBool("isHurt", true); // Gọi anim "isHurt" khi bị mất máu
-            StartCoroutine(ResetHurtAnimation()); // Reset isHurt sau khi anim kết thúc
+            animator.SetBool("isHurt", true);
+            StartCoroutine(ResetHurtAnimation());
         }
         else if (currentHealth <= 0)
         {
-            Die(); // Gọi hàm Die nếu máu bằng 0 hoặc ít hơn
+            Die();
         }
     }
 
     private IEnumerator ResetHurtAnimation()
     {
-        // Đợi cho animation "isHurt" hoàn thành
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        animator.SetBool("isHurt", false); // Reset lại trạng thái isHurt
+        animator.SetBool("isHurt", false);
     }
 
     void Die()
     {
-        animator.SetBool("isDeath", true); // Gọi hiệu ứng "isDeath"
+        animator.SetBool("isDeath", true);
         StartCoroutine(WaitForDeathAnimation());
     }
 
     private IEnumerator WaitForDeathAnimation()
     {
-        // Chờ một khoảng thời gian cố định trước khi xóa đối tượng
         yield return new WaitForSeconds(timeForAnimDeath);
-        Destroy(gameObject); // Xóa Enemy khỏi game
+
+        enemySpawner.EnemyDefeated(enemyTypeIndex); // Thông báo số lượng enemy đã giảm
+
+        Destroy(gameObject);
     }
 }

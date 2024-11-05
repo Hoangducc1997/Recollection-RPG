@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: 7723543887603918388}
   - component: {fileID: 6095861144890884188}
   - component: {fileID: 9078915879092522417}
-  - component: {fileID: 8244115686558920001}
   - component: {fileID: 9119155583376347947}
+  - component: {fileID: 8244115686558920001}
   - component: {fileID: 3188380326640604550}
   - component: {fileID: 3061932731302733208}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cobra
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 9
+  m_SortingOrder: 10
   m_Sprite: {fileID: 150427518, guid: 651bda7e2b8be0d468c2e32933985dc5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -104,9 +104,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 5
+  m_LinearDrag: 1
+  m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -151,7 +151,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.005298078, y: -0.0052978992}
+  m_Offset: {x: 0.10665727, y: -0.014361739}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -162,7 +162,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7299491, y: 0.6400299}
+  m_Size: {x: 0.25200224, y: 0.6219022}
   m_EdgeRadius: 0
 --- !u!95 &6095861144890884188
 Animator:
@@ -198,21 +198,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceAttack: 2
-  damageEnemyAttack: 2
+  damageEnemyAttack: 1
   attackCooldown: 5
---- !u!114 &8244115686558920001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4614724405605656515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f1b574a6cd6164ebb6ca292756722e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
 --- !u!114 &9119155583376347947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +214,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   timeForAnimDeath: 1.5
+  enemySpawner: {fileID: 0}
+  enemyTypeIndex: 0
+--- !u!114 &8244115686558920001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4614724405605656515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f1b574a6cd6164ebb6ca292756722e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0.6
 --- !u!114 &3188380326640604550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +282,7 @@ MonoBehaviour:
   repathRateCompatibility: NaN
   canSearchCompability: 0
   orientation: 1
-  enableRotation: 1
+  enableRotation: 0
   autoRepath:
     mode: 2
     interval: 0.5
