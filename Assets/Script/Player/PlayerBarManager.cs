@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class PlayerBarManager : MonoBehaviour
 {
     Animator animator;
@@ -15,12 +14,15 @@ public class PlayerBarManager : MonoBehaviour
     public void Start()
     {
         animator = GetComponent<Animator>();
-
-        currentHealth = maxHealth;
-        healthBar.UpdateHealthBar(currentHealth, maxHealth);
-
+        PlayerStartLevel();
     }
 
+    private void PlayerStartLevel()
+    {
+        currentHealth = maxHealth;
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
+        animator.SetBool("isDeath", false);
+    }
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -34,11 +36,9 @@ public class PlayerBarManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             animator.SetBool("isDeath", true);
-           
-            StartCoroutine(WaitBackHome());
+            StartCoroutine(WaitRestartLevel());
         }
     }
-
 
     private IEnumerator HurtAnim()
     {
@@ -46,10 +46,10 @@ public class PlayerBarManager : MonoBehaviour
         animator.SetBool("isHurt", false);
     }
 
-    private IEnumerator WaitBackHome()
+    private IEnumerator WaitRestartLevel()
     {
-        yield return new WaitForSeconds(3f);
-        //Restart lại level
+        yield return new WaitForSeconds(3f); // Chờ cho animation "isDeath" hoàn tất
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Tải lại scene hiện tại
+        PlayerStartLevel();
     }
-
 }

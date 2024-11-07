@@ -176,15 +176,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _backgroundAudio: {fileID: 8779043118897403081}
   _vfxAudio: {fileID: 5793505480039345247}
-  _musicByStateList:
-  - State: 0
-    AudioClip: {fileID: 0}
-  - State: 1
-    AudioClip: {fileID: 0}
-  - State: 2
-    AudioClip: {fileID: 0}
-  - State: 3
-    AudioClip: {fileID: 0}
+  _musicBySceneList:
+  - SceneName: LoadingGame
+    AudioClip: {fileID: 8300000, guid: 48869e92fc88217498dc3a41ba3d4783, type: 3}
+  - SceneName: MainMenu
+    AudioClip: {fileID: 8300000, guid: 48869e92fc88217498dc3a41ba3d4783, type: 3}
+  - SceneName: IntroPilot
+    AudioClip: {fileID: 8300000, guid: 48869e92fc88217498dc3a41ba3d4783, type: 3}
+  - SceneName: Island-Castle
+    AudioClip: {fileID: 8300000, guid: 48869e92fc88217498dc3a41ba3d4783, type: 3}
+  - SceneName: Boss1
+    AudioClip: {fileID: 8300000, guid: 9b9a80f727676cc4b916fd565407c77d, type: 3}
   _isPause: 0
 --- !u!1 &4093364848182160563
 GameObject:

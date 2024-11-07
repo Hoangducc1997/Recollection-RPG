@@ -1,17 +1,18 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
     [SerializeField] AudioSource _backgroundAudio;
-
     [SerializeField] AudioSource _vfxAudio;
 
-    [SerializeField] List<MusicByState> _musicByStateList;
+    [SerializeField] List<MusicByScene> _musicBySceneList;
     [SerializeField] bool _isPause = false;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -21,64 +22,78 @@ public class AudioManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-    }
-  
 
-    public void RunBackgroundMusic(GameState gameState)
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
     {
-        switch (gameState) {
-            case GameState.Pause:
-                _backgroundAudio.Pause();
-                _isPause = true;
-                break;
-            case GameState.Loading:
-            case GameState.Menu:
-            case GameState.Play:
-                if(_isPause) _backgroundAudio.UnPause();
-                else
-                {
-                    _backgroundAudio.clip = GetAudioClipByState(gameState);
-                    _backgroundAudio.Play();
-                }
-                break;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        RunBackgroundMusic(scene.name);
+    }
+
+    public void RunBackgroundMusic(string sceneName)
+    {
+        if (_isPause)
+        {
+            _backgroundAudio.UnPause();
+            _isPause = false;
+            return;
+        }
+
+        AudioClip sceneClip = GetAudioClipByScene(sceneName);
+        if (sceneClip != null)
+        {
+            // Kiểm tra nếu nhạc hiện tại đã giống với nhạc của scene mới
+            if (_backgroundAudio.clip == sceneClip && _backgroundAudio.isPlaying)
+            {
+                return; // Không đổi nhạc nếu nhạc đã đúng
+            }
+
+            _backgroundAudio.clip = sceneClip;
+            _backgroundAudio.Play();
         }
     }
 
-    AudioClip GetAudioClipByState(GameState gameState) {
-        foreach(var musicByState in _musicByStateList)
+
+    AudioClip GetAudioClipByScene(string sceneName)
+    {
+        foreach (var musicByScene in _musicBySceneList)
         {
-            if(musicByState.State == gameState)
+            if (musicByScene.SceneName == sceneName)
             {
-                return musicByState.AudioClip;
+                return musicByScene.AudioClip;
             }
         }
         return null;
+    }
+
+    public void PauseBackgroundMusic()
+    {
+        _backgroundAudio.Pause();
+        _isPause = true;
     }
 
     public AudioSource GetMusicAudioSource()
     {
         return _backgroundAudio;
     }
-    
+
     public AudioSource GetVFXAudioSource()
     {
         return _vfxAudio;
     }
+
 }
 
-public enum GameState
-{
-    Pause,
-    Loading,
-    Play,
-    Menu
-}
 
 [System.Serializable]
-public class MusicByState
+public class MusicByScene
 {
-    public GameState State;
+    public string SceneName;
     public AudioClip AudioClip;
 }
-
-
