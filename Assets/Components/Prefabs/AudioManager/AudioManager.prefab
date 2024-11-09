@@ -178,15 +178,17 @@ MonoBehaviour:
   _vfxAudio: {fileID: 5793505480039345247}
   _musicBySceneList:
   - SceneName: LoadingGame
-    AudioClip: {fileID: 8300000, guid: 48869e92fc88217498dc3a41ba3d4783, type: 3}
+    AudioClip: {fileID: 8300000, guid: b1ba0dd508f8bef40834c361888b59ae, type: 3}
   - SceneName: MainMenu
-    AudioClip: {fileID: 8300000, guid: 48869e92fc88217498dc3a41ba3d4783, type: 3}
+    AudioClip: {fileID: 8300000, guid: b1ba0dd508f8bef40834c361888b59ae, type: 3}
   - SceneName: IntroPilot
-    AudioClip: {fileID: 8300000, guid: 48869e92fc88217498dc3a41ba3d4783, type: 3}
+    AudioClip: {fileID: 8300000, guid: b1ba0dd508f8bef40834c361888b59ae, type: 3}
   - SceneName: Island-Castle
-    AudioClip: {fileID: 8300000, guid: 48869e92fc88217498dc3a41ba3d4783, type: 3}
+    AudioClip: {fileID: 8300000, guid: b1ba0dd508f8bef40834c361888b59ae, type: 3}
   - SceneName: Boss1
-    AudioClip: {fileID: 8300000, guid: 9b9a80f727676cc4b916fd565407c77d, type: 3}
+    AudioClip: {fileID: 8300000, guid: f6245a4d93cb1a34bb3009da8a925dc7, type: 3}
+  - SceneName: Boss2
+    AudioClip: {fileID: 8300000, guid: 38db7c82402bc174299b00a48f1f15dd, type: 3}
   _isPause: 0
 --- !u!1 &4093364848182160563
 GameObject:

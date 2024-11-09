@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private float lastAttackTime;
     private bool isAttacking; // Biến trạng thái tấn công
     private bool isRunning; // Biến trạng thái chạy
-    private BossBarManager bossBarManager;
+
     void Start()
     {
         animator = GetComponent<Animator>();
