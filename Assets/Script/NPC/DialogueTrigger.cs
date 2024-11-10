@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +16,15 @@ public class DialogueTrigger : MonoBehaviour
         else
         {
             Debug.LogError("DialogueManager not found!");
+        }
+    }
+
+    public void EndDialogue()
+    {
+        DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
+        if (dialogueManager != null)
+        {
+            dialogueManager.CloseDialogue(); // Đóng đối thoại khi kết thúc           
         }
     }
 

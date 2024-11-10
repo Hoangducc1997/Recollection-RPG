@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
@@ -34,6 +34,14 @@ public class DialogueManager : UIPopup
         backgroundBox.LeanScale(Vector3.one, 0.5f).setEaseInOutExpo();
     }
 
+    public void CloseDialogue()
+    {
+        isActive = false;
+        backgroundBox.LeanScale(Vector3.zero, 0.5f).setEaseInOutExpo(); // Ẩn hộp thoại
+        currentMessages = null; // Reset lại các biến nếu cần
+        currentActors = null;
+        Debug.Log("Dialogue closed.");
+    }
 
     void DisplayMessage()
     {
