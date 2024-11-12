@@ -32556,6 +32556,12 @@ MonoBehaviour:
   - actorId: 0
     message: "Ch\xE0o m\u1EEBng \u0111\u1EBFn v\u1EDBi khu r\u1EEBng an nhi\xEAn,
       haha"
+  - actorId: 0
+    message: "Ti\xEAu di\u1EC7t qu\xE1i v\u1EADt ng\u01B0\u01A1i s\u1EBD nh\u1EADn
+      \u0111\u01B0\u1EE3c \u0111i\u1EC3m kinh nghi\u1EC7m"
+  - actorId: 0
+    message: "H\xE3y suy ngh\u0129 th\u1EADt k\u1EF9 khi n\xE2ng c\u1EA5p k\u1EF9
+      n\u0103ng haha"
   actors:
   - name: Tuto
     sprite: {fileID: 21300000, guid: ce477eb1b4e89b24b9acbcc0036b646e, type: 3}

@@ -1336,7 +1336,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1201879548039294454, guid: 48a529995a4846d429096bbdb5b74ce4, type: 3}
       propertyPath: m_fontSize
-      value: 117.1
+      value: 109
       objectReference: {fileID: 0}
     - target: {fileID: 1201879548039294454, guid: 48a529995a4846d429096bbdb5b74ce4, type: 3}
       propertyPath: m_fontAsset
@@ -1432,7 +1432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2936534239962273781, guid: 48a529995a4846d429096bbdb5b74ce4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -102.14
+      value: -126
       objectReference: {fileID: 0}
     - target: {fileID: 4345525276924281255, guid: 48a529995a4846d429096bbdb5b74ce4, type: 3}
       propertyPath: fixedLoadingTime
@@ -1444,7 +1444,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7115324565930239376, guid: 48a529995a4846d429096bbdb5b74ce4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
