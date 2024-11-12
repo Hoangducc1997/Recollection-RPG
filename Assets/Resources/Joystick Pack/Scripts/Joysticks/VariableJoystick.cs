@@ -1,12 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-
 public class VariableJoystick : Joystick
 {
-    [SerializeField] private Animator joystickAnimator;
+    private Animator joystickAnimator;
     public float MoveThreshold { get { return moveThreshold; } set { moveThreshold = Mathf.Abs(value); } }
 
     [SerializeField] private float moveThreshold = 1;
@@ -19,39 +17,61 @@ public class VariableJoystick : Joystick
         this.joystickType = joystickType;
         if (joystickType == JoystickType.Fixed)
         {
-            background.anchoredPosition = fixedPosition; // Vị trí cố định
-            background.gameObject.SetActive(true); // Luôn hiện joystick khi ở chế độ Fixed
+            background.anchoredPosition = fixedPosition;
+            background.gameObject.SetActive(true);
         }
         else
         {
-            background.gameObject.SetActive(true); // Luôn hiện joystick ở các chế độ khác
+            background.gameObject.SetActive(true);
         }
     }
 
     protected override void Start()
     {
         base.Start();
-        fixedPosition = background.anchoredPosition; // Lưu lại vị trí ban đầu
+        joystickAnimator = background.GetComponentInParent<Animator>();
+        fixedPosition = background.anchoredPosition;
         SetMode(joystickType);
     }
 
+    void Update()
+    {
+        UpdateAnimationBasedOnDirection();
+    }
+
+    private void UpdateAnimationBasedOnDirection()
+    {
+        Vector2 direction = Direction;
+
+        // Reset all animation bools to ensure only one direction is active at a time
+        joystickAnimator.SetBool("JoystickUp", direction.y > 0.5f);
+        joystickAnimator.SetBool("JoystickDown", direction.y < -0.5f);
+        joystickAnimator.SetBool("JoystickRight", direction.x > 0.5f);
+        joystickAnimator.SetBool("JoystickLeft", direction.x < -0.5f);
+    }
     public override void OnPointerDown(PointerEventData eventData)
     {
-        // Joystick chỉ di chuyển khi nhấn vào màn hình
         if (joystickType != JoystickType.Fixed)
         {
-            background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position); // Cập nhật vị trí khi người chơi chạm vào
+            background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
         }
         base.OnPointerDown(eventData);
     }
 
+
     public override void OnPointerUp(PointerEventData eventData)
     {
-        // Đưa joystick về vị trí ban đầu khi thả tay
         if (joystickType != JoystickType.Fixed)
         {
-            background.anchoredPosition = fixedPosition; // Trả về vị trí ban đầu
+            background.anchoredPosition = fixedPosition;
         }
+
+        // Reset tất cả các bool khi joystick được thả
+        joystickAnimator.SetBool("JoystickUp", false);
+        joystickAnimator.SetBool("JoystickDown", false);
+        joystickAnimator.SetBool("JoystickLeft", false);
+        joystickAnimator.SetBool("JoystickRight", false);
+
         base.OnPointerUp(eventData);
     }
 
