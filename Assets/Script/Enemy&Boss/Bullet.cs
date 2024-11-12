@@ -1,10 +1,19 @@
-﻿using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Bullet : BossBase
 {
+    private Animator animator;
     public float speed = 5f;
     private Vector2 target;
+
+    protected override void Start()
+    {
+        animator = GetComponent<Animator>();
+        base.Start();
+        // Hủy viên đạn sau 10 giây
+        Destroy(gameObject, 8f);
+    }
 
     public void SetTarget(Vector2 targetPosition)
     {
@@ -22,8 +31,17 @@ public class Bullet : BossBase
     {
         if (collision.gameObject.CompareTag("Player") && playerBarManager != null)
         {
+            animator.SetTrigger("Explosion");
             playerBarManager.TakeDamage(10); // Gây sát thương cho player
-            Destroy(gameObject); // Hủy viên đạn
+            StartCoroutine(DestroyAfterAnimation());
         }
     }
+
+    private IEnumerator DestroyAfterAnimation()
+    {
+        // Đợi cho đến khi animation kết thúc trước khi hủy viên đạn
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        Destroy(gameObject);
+    }
+
 }
