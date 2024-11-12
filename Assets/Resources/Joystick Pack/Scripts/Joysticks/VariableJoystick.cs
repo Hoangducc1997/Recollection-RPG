@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class VariableJoystick : Joystick
 {
+    [SerializeField] private Animator joystickAnimator;
     public float MoveThreshold { get { return moveThreshold; } set { moveThreshold = Mathf.Abs(value); } }
 
     [SerializeField] private float moveThreshold = 1;
