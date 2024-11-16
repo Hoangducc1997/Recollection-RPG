@@ -801,6 +801,7 @@ GameObject:
   - component: {fileID: 3619981589038072579}
   - component: {fileID: 3589795468283949338}
   - component: {fileID: 222475647124264034}
+  - component: {fileID: 5507312661713097665}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -924,6 +925,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5507312661713097665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291562249978712313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 363ff59a270516347a2a3a6ab1e4406e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LocalizationKey: MainMenu.Setting
 --- !u!1 &1310645240714168150
 GameObject:
   m_ObjectHideFlags: 0
@@ -3033,7 +3047,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ti\u1EBFng Vi\u1EC7t"
+  m_text: "Ti\u1EBFng Anh"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4965,13 +4979,25 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: "Ti\u1EBFng Vi\u1EC7t"
-      m_Image: {fileID: 0}
     - m_Text: "Ti\u1EBFng Anh"
+      m_Image: {fileID: 0}
+    - m_Text: "Ti\u1EBFng Vi\u1EC7t"
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1454459135440071000}
+        m_TargetAssemblyTypeName: SetLanguageDropdown, Assembly-CSharp
+        m_MethodName: OnValueChanged
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!1 &8669205986738542597
 GameObject:

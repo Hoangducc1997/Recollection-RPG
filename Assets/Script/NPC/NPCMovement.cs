@@ -22,7 +22,7 @@ public class NPCMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isPlayerNearby) // Chỉ di chuyển khi không có Player ở gần
+        if (!isPlayerNearby) // Chỉ di chuyển khi không có PlayerMovement ở gần
         {
             NpcMovement();
         }
@@ -46,7 +46,7 @@ public class NPCMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Nếu Player đến gần, NPC sẽ đứng im
+        // Nếu PlayerMovement đến gần, NPC sẽ đứng im
         if (collision.CompareTag("Player"))
         {
             isPlayerNearby = true;
@@ -55,7 +55,7 @@ public class NPCMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // Nếu Player rời khỏi, NPC sẽ tiếp tục di chuyển
+        // Nếu PlayerMovement rời khỏi, NPC sẽ tiếp tục di chuyển
         if (collision.CompareTag("Player"))
         {
             isPlayerNearby = false;

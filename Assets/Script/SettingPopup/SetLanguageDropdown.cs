@@ -1,11 +1,9 @@
-using Assets.SimpleLocalization.Scripts;
-using System;
-using System.Collections;
+﻿using Assets.SimpleLocalization.Scripts;
 using System.Collections.Generic;
+using System;
 using TMPro;
-using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering;
+using UnityEngine;
 
 public class SetLanguageDropdown : MonoBehaviour, IPointerClickHandler
 {
@@ -14,54 +12,60 @@ public class SetLanguageDropdown : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_Dropdown dropdown;
     [SerializeField] GraphicsSetting _graphicSetting;
     string currentLanguage = "";
-    bool isOpen = false;
 
     void OnEnable()
     {
-        //var dropdown = GetComponent<Dropdown>();
-        currentLanguage = SettingManager.Instance.SettingSaveData.GameLanguage.ToString();
-
         if (dropdown == null) dropdown = GetComponent<TMP_Dropdown>();
 
-        Init();
+        // Khởi tạo ngôn ngữ theo cài đặt đã lưu
+        currentLanguage = SettingManager.Instance.SettingSaveData.GameLanguage.ToString();
+        LocalizationManager.Language = currentLanguage; // Cập nhật ngôn ngữ trong LocalizationManager
+
+        InitLanguageList();
         _curLabel.SetText(currentLanguage);
 
-        // Fill the dropdown elements
-        InitLanguageList();
-
+        // Thiết lập listener cho sự kiện thay đổi giá trị dropdown
         dropdown.onValueChanged.RemoveListener(OnValueChanged);
         dropdown.onValueChanged.AddListener(OnValueChanged);
     }
 
-    void Init()
+    // Khi giá trị dropdown thay đổi
+    public void OnValueChanged(int index)
     {
-        currentLanguage = SettingManager.Instance.SettingSaveData.GameLanguage.ToString();
-    }
+        if (index < 0) index = 0;  // Đảm bảo chỉ số hợp lệ
 
-    void OnValueChanged(int index)
-    {
-        if (index < 0)
-        {
-            index = 0;
-            dropdown.value = index;
-        }
+        // Lấy ngôn ngữ đã chọn từ dropdown
         currentLanguage = dropdown.options[index].text;
-        //LocalizationManager.CurrentLanguage = dropdown.options[index].text;
-        _curLabel.SetText(dropdown.options[index].text);
-        _graphicSetting.InitData();
-    }
 
-    public void RevertLanguage()
-    {
-        // = SettingManager.Instance.SettingSaveData.GameLanguage.ToString();
-    }
+        // Cập nhật ngôn ngữ trong LocalizationManager
+        LocalizationManager.Language = currentLanguage;
 
-    private void InitLanguageList()
-
-    {
-        currentLanguage = SettingManager.Instance.SettingSaveData.GameLanguage.ToString();
+        // Cập nhật lại UI với ngôn ngữ đã chọn
         _curLabel.SetText(currentLanguage);
 
+        // Cập nhật lại cài đặt đồ họa nếu cần
+        _graphicSetting.InitData();
+
+        // Lưu ngôn ngữ đã chọn vào SettingManager
+        SettingManager.Instance.SettingSaveData.GameLanguage = (Language)Enum.Parse(typeof(Language), currentLanguage);
+        SettingManager.Instance.SaveSettingSaveData();
+    }
+
+
+
+    // Phục hồi ngôn ngữ đã lưu
+    public void RevertLanguage()
+    {
+        string savedLanguage = SettingManager.Instance.SettingSaveData.GameLanguage.ToString();
+        LocalizationManager.Language = savedLanguage;
+        _curLabel.SetText(savedLanguage);
+
+        InitLanguageList();  // Khởi tạo lại danh sách ngôn ngữ
+    }
+
+    // Khởi tạo danh sách ngôn ngữ cho dropdown
+    private void InitLanguageList()
+    {
         List<string> languages = new List<string>();
         foreach (Language language in Enum.GetValues(typeof(Language)))
         {
@@ -71,12 +75,11 @@ public class SetLanguageDropdown : MonoBehaviour, IPointerClickHandler
         dropdown.ClearOptions();
         dropdown.AddOptions(languages);
 
-        dropdown.value = languages.IndexOf(currentLanguage);
-        _curLabel.SetText(currentLanguage);
-        dropdown.onValueChanged.RemoveListener(OnValueChanged);
-        dropdown.onValueChanged.AddListener(OnValueChanged);
+        // Đặt giá trị dropdown tương ứng với ngôn ngữ hiện tại
+        dropdown.value = languages.IndexOf(LocalizationManager.Language);
     }
 
+    // Khi nhấn vào dropdown, làm mới danh sách ngôn ngữ
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
         InitLanguageList();

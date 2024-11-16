@@ -1,4 +1,4 @@
-using Assets.SimpleLocalization.Scripts;
+﻿using Assets.SimpleLocalization.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

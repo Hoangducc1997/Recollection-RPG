@@ -1,45 +1,30 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerAction : MonoBehaviour
 {
-    [SerializeField] private CharaterStats[] characterStats; // Thông số nhân vật
-    [SerializeField] private Joystick joystick; // Joystick cho di chuyển
-    [SerializeField] private WeaponManager weaponManager; // Quản lý vũ khí
-    [SerializeField] private string enemyTag = "Enemy"; // Tag cho kẻ thù
+    [SerializeField] private WeaponManager weaponManager; // Weapon manager
+    [SerializeField] private string enemyTag = "Enemy"; // Tag for enemies
 
-    private Animator animator; // Animator cho GamePlay
-    private Vector2 movement;
-    private bool isFacingRight = true;
-    private int currentLevel;
+    private Animator animator;
     private float lastAttackTime;
-    private bool isAttacking; // Biến trạng thái tấn công
-    private bool isRunning; // Biến trạng thái chạy
+    private bool isAttacking;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        currentLevel = 1;
     }
 
     void Update()
     {
-        PlayerMove(new Vector2(joystick.Direction.x, joystick.Direction.y));
-        FlipCharacter();
-
-        // Cập nhật trạng thái di chuyển
-        isRunning = movement.magnitude > 0.2f; // Kiểm tra xem có đang di chuyển hay không
-        animator.SetBool("isRunning", isRunning); // Cập nhật animator
-
-        // Chuyển đổi vũ khí với các phím số
-        if (!isAttacking) // Chỉ cho phép chuyển đổi vũ khí nếu không đang tấn công
+        // Switch weapons with number keys if not attacking
+        if (!isAttacking)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1)) SwitchWeapon(0);
             if (Input.GetKeyDown(KeyCode.Alpha2)) SwitchWeapon(1);
-            // Thêm các phím số khác nếu cần
         }
 
-        // Tự động tấn công nếu có kẻ thù trong phạm vi tấn công và không đang tấn công
+        // Auto-attack enemies within range if not attacking
         if (!isAttacking)
         {
             float weaponRange = weaponManager.GetCurrentWeapon()?.rangeAtk ?? 0;
@@ -47,55 +32,14 @@ public class Player : MonoBehaviour
 
             if (enemiesInRange.Length > 0)
             {
-                Attack(); // Gọi hàm tấn công khi có kẻ thù trong phạm vi
+                Attack(); // Attack when enemies are within range
             }
         }
     }
 
-
-    void FixedUpdate()
-    {
-        if (movement != Vector2.zero)
-        {
-            float moveSpeed = characterStats[currentLevel - 1].moveSpeed;
-            transform.position += (Vector3)(movement * moveSpeed * Time.fixedDeltaTime);
-        }
-    }
-
-    public void PlayerMove(Vector2 newJoystickPosition)
-    {
-        movement.x = newJoystickPosition.x;
-        movement.y = newJoystickPosition.y;
-
-        if (movement.magnitude < 0.2f)
-        {
-            movement = Vector2.zero; // Dừng di chuyển khi không có tác động
-        }
-    }
-
-    private void FlipCharacter()
-    {
-        if (movement.x < 0 && isFacingRight)
-        {
-            Flip();
-        }
-        else if (movement.x > 0 && !isFacingRight)
-        {
-            Flip();
-        }
-    }
-
-    private void Flip()
-    {
-        isFacingRight = !isFacingRight;
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
-    }
-
     public void SwitchWeapon(int weaponIndex)
     {
-        weaponManager.SwitchWeapon(weaponIndex); // Đổi vũ khí hiện tại
+        weaponManager.SwitchWeapon(weaponIndex); // Switch current weapon
     }
 
     private void Attack()
@@ -112,7 +56,7 @@ public class Player : MonoBehaviour
 
                 foreach (GameObject target in enemies)
                 {
-                    // Kiểm tra nếu đối tượng là Boss
+                    // Check if the target is a Boss
                     BossBarManager bossBarManager = target.GetComponent<BossBarManager>();
                     if (bossBarManager != null)
                     {
@@ -121,7 +65,7 @@ public class Player : MonoBehaviour
                     }
                     else
                     {
-                        // Nếu không phải Boss, kiểm tra nếu là Enemy
+                        // If not a Boss, check if it's an Enemy
                         EnemyHealth enemyHealth = target.GetComponent<EnemyHealth>();
                         if (enemyHealth != null)
                         {
@@ -136,8 +80,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-
-
 
     private GameObject[] FindEnemiesInRange(float range)
     {
@@ -163,18 +105,15 @@ public class Player : MonoBehaviour
         Debug.Log("Attack reset. isAttacking: " + isAttacking);
     }
 
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Weapon currentWeapon = weaponManager.GetCurrentWeapon();
-        float rangeToDraw = currentWeapon != null ? currentWeapon.rangeAtk : 0; // Default to 0 if no weapon
+        float rangeToDraw = currentWeapon != null ? currentWeapon.rangeAtk : 0;
 
-        // Thêm kiểm tra để đảm bảo giá trị rangeToDraw không bằng 0
         if (rangeToDraw > 0)
         {
             Gizmos.DrawWireSphere(transform.position, rangeToDraw);
         }
     }
-
 }

@@ -9,8 +9,10 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float distanceAttack;
     [SerializeField] private int damageEnemyAttack;
     [SerializeField] private float attackCooldown = 1f; // Thời gian giữa các lần tấn công
-    private PlayerBarManager playerBarManager;
+
+    private PlayerHealthManager playerHeathManager;
     private float lastAttackTime;
+
 
     private void Start()
     {
@@ -24,8 +26,8 @@ public class EnemyManager : MonoBehaviour
             return;
         }
 
-        playerBarManager = player.GetComponent<PlayerBarManager>();
-        if (playerBarManager == null)
+        playerHeathManager = player.GetComponent<PlayerHealthManager>();
+        if (playerHeathManager == null)
         {
             Debug.LogWarning("GamePlay does not have a PlayerBarManager component. Health-related functions will be disabled.");
         }
@@ -35,7 +37,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
-        if (player != null && playerBarManager != null)
+        if (player != null && playerHeathManager != null)
         {
             // Tính khoảng cách và hướng từ enemy đến player
             Vector2 direction = player.transform.position - transform.position;
@@ -55,7 +57,7 @@ public class EnemyManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f); // Đợi một khoảng thời gian để animation attack bắt đầu
 
-        if (playerBarManager != null)
+        if (playerHeathManager != null)
         {
             EnemyAttack();
         }
@@ -67,9 +69,9 @@ public class EnemyManager : MonoBehaviour
 
     public void EnemyAttack()
     {
-        if (playerBarManager != null)
+        if (playerHeathManager != null)
         {
-            playerBarManager.TakeDamage(damageEnemyAttack);
+            playerHeathManager.TakeDamage(damageEnemyAttack);
         }
     }
 }

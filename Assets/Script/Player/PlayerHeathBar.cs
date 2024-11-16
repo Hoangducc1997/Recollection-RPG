@@ -8,8 +8,6 @@ public class PlayerBar : MonoBehaviour
 {
     [SerializeField] Image fillHealthBar;
     [SerializeField] TextMeshProUGUI valueTextHealth;
-    [SerializeField] Image fillExpBar;
-    [SerializeField] TextMeshProUGUI valueTextExp;
 
     public void UpdateHealthBar(int currentValueHealth, int maxValueHealth)
     {
@@ -18,11 +16,5 @@ public class PlayerBar : MonoBehaviour
         {
             valueTextHealth.text = currentValueHealth.ToString() + " / " + maxValueHealth.ToString();
         }
-    }
-
-    public void UpdateExpBar(int currentExp, int maxExp)
-    {
-        fillExpBar.fillAmount = (float)currentExp / maxExp;
-        valueTextExp.text = currentExp.ToString() + " / " + maxExp.ToString();
     }
 }

@@ -10,7 +10,7 @@ public class Boss : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Kiểm tra nếu đối tượng va chạm là Player
+        // Kiểm tra nếu đối tượng va chạm là PlayerMovement
         if (collision.CompareTag("Player"))
         {
             // Spawn bossPrefab tại vị trí spawnPoint
