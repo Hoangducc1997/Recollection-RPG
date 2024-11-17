@@ -10,11 +10,13 @@ public class BossBarManager : MonoBehaviour
     [SerializeField] int maxHealth;
     int currentHealth;
     public BossBar healthBar;
-
+    [SerializeField] private int expForPlayer; // Điểm kinh nghiệm cho Player
+    private PlayerExpManager playerExpManager; // Tham chiếu PlayerExpManager
     public void Start()
     {
         animator = GetComponent<Animator>();
-
+        // Tìm và tham chiếu PlayerExpManager trong scene
+        playerExpManager = FindObjectOfType<PlayerExpManager>();
         currentHealth = maxHealth;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
@@ -35,6 +37,15 @@ public class BossBarManager : MonoBehaviour
         {
             isDead = true; // Đánh dấu boss đã chết
             Debug.Log("BossDeath");
+            // Tăng điểm kinh nghiệm cho Player nếu PlayerExpManager đã được tham chiếu
+            if (playerExpManager != null)
+            {
+                playerExpManager.AddExp(expForPlayer);
+            }
+            else
+            {
+                Debug.LogWarning("Không thể thêm EXP: PlayerExpManager không tồn tại.");
+            }
             LevelManager levelManager = FindObjectOfType<LevelManager>();
             if (levelManager != null)
             {
@@ -54,7 +65,7 @@ public class BossBarManager : MonoBehaviour
     {
         animator.SetBool("isDeath", true);
         yield return new WaitForSeconds(3f);
-
+        
         Destroy(gameObject);
     }
 

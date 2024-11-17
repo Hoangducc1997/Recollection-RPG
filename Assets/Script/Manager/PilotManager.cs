@@ -8,8 +8,8 @@ public class ScrollingText : MonoBehaviour
     [SerializeField] private Text uiText; // Reference to the Text UI component
     [SerializeField] private float revealSpeed = 0.1f; // Time interval to reveal each character
     [SerializeField] private Button revealAllButton; // Reference to the Button UI component
-    [SerializeField] private GameObject panelPilotText;
-    [SerializeField] private GameObject buttonNextScene;
+    [SerializeField] private UnityEngine.GameObject panelPilotText;
+    [SerializeField] private UnityEngine.GameObject buttonNextScene;
 
     private string fullText; // The full text to display
     private int currentCharIndex = 0; // Tracks the current character to reveal

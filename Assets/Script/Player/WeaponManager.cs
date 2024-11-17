@@ -3,43 +3,51 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    public List<Weapon> ownedWeapons = new List<Weapon>();
-    private int currentWeaponIndex = 0;
+    [SerializeField] private List<GameObject> weaponChoose = new List<GameObject>(); // Danh sách các vũ khí
+    private int currentWeaponIndex = 0; // Vũ khí hiện tại
 
-    // Lấy vũ khí hiện tại
-    public Weapon GetCurrentWeapon()
+    public void AddWeapon(GameObject newWeapon)
     {
-        if (ownedWeapons.Count == 0) return null; // Trả về null nếu không có vũ khí
-        return ownedWeapons[currentWeaponIndex];
-    }
-
-    // Thêm vũ khí mới
-    public void AddWeapon(Weapon newWeapon)
-    {
-        if (!ownedWeapons.Contains(newWeapon))
+        if (!weaponChoose.Contains(newWeapon))
         {
-            ownedWeapons.Add(newWeapon);
-            Debug.Log("Added weapon: " + newWeapon.weaponName);
+            weaponChoose.Add(newWeapon);
+            newWeapon.SetActive(false); // Vũ khí mới được thêm vào nhưng tắt đi để không kích hoạt ngay
+            Debug.Log($"Added weapon: {newWeapon.name}");
         }
     }
 
-    // Chuyển đổi vũ khí
     public void SwitchWeapon(int index)
     {
-        if (index >= 0 && index < ownedWeapons.Count)
+        if (index >= 0 && index < weaponChoose.Count)
         {
             currentWeaponIndex = index;
-            Debug.Log("Switched to weapon: " + GetCurrentWeapon().weaponName);
+
+            // Kích hoạt vũ khí được chọn, vô hiệu hóa các vũ khí khác
+            for (int i = 0; i < weaponChoose.Count; i++)
+            {
+                weaponChoose[i].SetActive(i == currentWeaponIndex);
+            }
+
+            Debug.Log($"Switched to weapon: {weaponChoose[currentWeaponIndex].name}");
+        }
+        else
+        {
+            Debug.LogWarning("Invalid weapon index: " + index);
         }
     }
 
-    // Chọn vũ khí ngẫu nhiên
-    public void SwitchToRandomWeapon()
+    public WeaponStats GetCurrentWeapon()
     {
-        if (ownedWeapons.Count > 0)
+        if (weaponChoose.Count > 0 && currentWeaponIndex >= 0 && currentWeaponIndex < weaponChoose.Count)
         {
-            currentWeaponIndex = Random.Range(0, ownedWeapons.Count);
-            Debug.Log("Switched to random weapon: " + GetCurrentWeapon().weaponName);
+            // Lấy WeaponStats từ vũ khí hiện tại
+            Weapon weapon = weaponChoose[currentWeaponIndex].GetComponent<Weapon>();
+            if (weapon != null)
+            {
+                return weapon.weaponStats;
+            }
         }
+        Debug.LogWarning("No valid current weapon found!");
+        return null;
     }
 }

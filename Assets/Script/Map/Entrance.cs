@@ -21,7 +21,7 @@ public class Entrance : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerMovement"))
+        if (collision.CompareTag("Player"))
         {       
             // Activate the Rain Effect
             ActivateObject();

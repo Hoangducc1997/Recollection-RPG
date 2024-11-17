@@ -7,10 +7,10 @@ public class GeneralBasic : MonoBehaviour {
 	public GameObject prefabAvatar;
 
 	void Start () {
-		// Setup
-		GameObject avatarRotate = GameObject.Find("AvatarRotate");
-		GameObject avatarScale = GameObject.Find("AvatarScale");
-		GameObject avatarMove = GameObject.Find("AvatarMove");
+        // Setup
+        GameObject avatarRotate = GameObject.Find("AvatarRotate");
+        GameObject avatarScale = GameObject.Find("AvatarScale");
+        GameObject avatarMove = GameObject.Find("AvatarMove");
 
 		// Rotate Example
 		LeanTween.rotateAround( avatarRotate, Vector3.forward, 360f, 5f);
@@ -39,12 +39,12 @@ public class GeneralBasic : MonoBehaviour {
 	void advancedExamples(){
 		LeanTween.delayedCall(gameObject, 14f, ()=>{
 			for(int i=0; i < 10; i++){
-				// Instantiate Container
-				GameObject rotator = new GameObject("rotator"+i);
+                // Instantiate Container
+                GameObject rotator = new GameObject("rotator"+i);
 				rotator.transform.position = new Vector3(10.2f,2.85f,0f);
 
-				// Instantiate Avatar
-				GameObject dude = (GameObject)GameObject.Instantiate(prefabAvatar, Vector3.zero, prefabAvatar.transform.rotation );
+                // Instantiate Avatar
+                GameObject dude = (GameObject)GameObject.Instantiate(prefabAvatar, Vector3.zero, prefabAvatar.transform.rotation );
 				dude.transform.parent = rotator.transform;
 				dude.transform.localPosition = new Vector3(0f,1.5f,2.5f*i);
 

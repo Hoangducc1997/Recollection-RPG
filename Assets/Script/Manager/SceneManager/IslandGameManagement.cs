@@ -12,7 +12,7 @@ public class IslandGameManagement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerMovement"))
+        if (collision.CompareTag("Player"))
         {
             // Wait for a while to let the door open animation complete before switching scenes
             StartCoroutine(WaitAndLoadScene());

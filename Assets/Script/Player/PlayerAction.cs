@@ -1,14 +1,15 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
 {
-    [SerializeField] private WeaponManager weaponManager; // Weapon manager
-    [SerializeField] private string enemyTag = "Enemy"; // Tag for enemies
+    [SerializeField] private WeaponManager weaponManager; // Quản lý vũ khí của người chơi
+    [SerializeField] private string enemyTag = "Enemy";   // Tag của kẻ địch
+    [SerializeField] private LayerMask enemyLayer;        // Layer của kẻ địch
 
     private Animator animator;
-    private float lastAttackTime;
-    private bool isAttacking;
+    private float lastAttackTime;  // Thời gian tấn công lần cuối
+    private bool isAttacking;      // Trạng thái đang tấn công
 
     void Start()
     {
@@ -17,98 +18,81 @@ public class PlayerAction : MonoBehaviour
 
     void Update()
     {
-        // Switch weapons with number keys if not attacking
         if (!isAttacking)
         {
+            // Đổi vũ khí bằng phím số
             if (Input.GetKeyDown(KeyCode.Alpha1)) SwitchWeapon(0);
             if (Input.GetKeyDown(KeyCode.Alpha2)) SwitchWeapon(1);
-        }
 
-        // Auto-attack enemies within range if not attacking
-        if (!isAttacking)
-        {
-            float weaponRange = weaponManager.GetCurrentWeapon()?.rangeAtk ?? 0;
-            GameObject[] enemiesInRange = FindEnemiesInRange(weaponRange);
-
-            if (enemiesInRange.Length > 0)
+            // Tấn công tự động nếu có kẻ địch trong phạm vi
+            WeaponStats currentWeapon = weaponManager.GetCurrentWeapon();
+            if (currentWeapon != null)
             {
-                Attack(); // Attack when enemies are within range
+                Collider2D[] enemiesInRange = FindEnemiesInRange(currentWeapon.rangeAtk);
+                if (enemiesInRange.Length > 0)
+                {
+                    Attack(enemiesInRange); // Tấn công nếu tìm thấy kẻ địch
+                }
             }
         }
     }
 
     public void SwitchWeapon(int weaponIndex)
     {
-        weaponManager.SwitchWeapon(weaponIndex); // Switch current weapon
+        weaponManager.SwitchWeapon(weaponIndex); // Chuyển đổi vũ khí
     }
 
-    private void Attack()
+    private void Attack(Collider2D[] enemies)
     {
-        Weapon currentWeapon = weaponManager.GetCurrentWeapon();
-        if (currentWeapon != null)
+        WeaponStats currentWeapon = weaponManager.GetCurrentWeapon();
+        if (currentWeapon != null && Time.time >= lastAttackTime + currentWeapon.cooldownTime)
         {
-            GameObject[] enemies = FindEnemiesInRange(currentWeapon.rangeAtk);
+            isAttacking = true;
+            animator.SetBool("isAttacking", true);
 
-            if (enemies.Length > 0 && Time.time >= lastAttackTime + currentWeapon.cooldownTime)
+            foreach (Collider2D enemy in enemies)
             {
-                isAttacking = true;
-                animator.SetBool("isAttacking", true);
-
-                foreach (GameObject target in enemies)
+                // Gây sát thương cho boss hoặc kẻ địch thường
+                BossBarManager boss = enemy.GetComponent<BossBarManager>();
+                if (boss != null)
                 {
-                    // Check if the target is a Boss
-                    BossBarManager bossBarManager = target.GetComponent<BossBarManager>();
-                    if (bossBarManager != null)
+                    boss.TakeDamage(currentWeapon.damage);
+                    Debug.Log($"Attacked boss: {enemy.name}, Damage: {currentWeapon.damage}");
+                }
+                else
+                {
+                    EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+                    if (enemyHealth != null)
                     {
-                        bossBarManager.TakeDamage(currentWeapon.damage);
-                        Debug.Log("Attacked boss: " + target.name + " dealing " + currentWeapon.damage + " damage.");
-                    }
-                    else
-                    {
-                        // If not a Boss, check if it's an Enemy
-                        EnemyHealth enemyHealth = target.GetComponent<EnemyHealth>();
-                        if (enemyHealth != null)
-                        {
-                            enemyHealth.TakeDamage(currentWeapon.damage);
-                            Debug.Log("Attacked enemy: " + target.name + " dealing " + currentWeapon.damage + " damage.");
-                        }
+                        enemyHealth.TakeDamage(currentWeapon.damage);
+                        Debug.Log($"Attacked enemy: {enemy.name}, Damage: {currentWeapon.damage}");
                     }
                 }
-
-                lastAttackTime = Time.time;
-                Invoke("ResetAttack", currentWeapon.attackDuration);
             }
+
+            lastAttackTime = Time.time;
+            Invoke(nameof(ResetAttack), currentWeapon.attackDuration);
         }
     }
 
-    private GameObject[] FindEnemiesInRange(float range)
+    private Collider2D[] FindEnemiesInRange(float range)
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
-        List<GameObject> enemiesInRange = new List<GameObject>();
-
-        foreach (GameObject enemy in enemies)
-        {
-            float distance = Vector2.Distance(transform.position, enemy.transform.position);
-            if (distance <= range)
-            {
-                enemiesInRange.Add(enemy);
-            }
-        }
-
-        return enemiesInRange.ToArray();
+        // Tìm tất cả các đối tượng trong phạm vi sử dụng Physics2D
+        return Physics2D.OverlapCircleAll(transform.position, range, enemyLayer);
     }
 
     private void ResetAttack()
     {
         isAttacking = false;
         animator.SetBool("isAttacking", false);
-        Debug.Log("Attack reset. isAttacking: " + isAttacking);
+        Debug.Log("Attack reset.");
     }
 
     private void OnDrawGizmosSelected()
     {
+        // Hiển thị phạm vi tấn công của vũ khí hiện tại trong Editor
         Gizmos.color = Color.red;
-        Weapon currentWeapon = weaponManager.GetCurrentWeapon();
+        WeaponStats currentWeapon = weaponManager.GetCurrentWeapon();
         float rangeToDraw = currentWeapon != null ? currentWeapon.rangeAtk : 0;
 
         if (rangeToDraw > 0)

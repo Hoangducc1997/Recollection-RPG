@@ -76,10 +76,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a13379d4379183c45aaec3b12af8d1a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownedWeapons:
-  - weaponName: Sword_1
-    attackClip: {fileID: 7400000, guid: 58d32e0867aa8314293c744c0ed57d1d, type: 2}
-    damage: 10
-    rangeAtk: 1
-    cooldownTime: 1
-    attackDuration: 3
+  weaponChoose:
+  - weaponName: 
+    weaponChoose: {fileID: 0}
+    damage: 0
+    rangeAtk: 0
+    cooldownTime: 0
+    attackDuration: 0

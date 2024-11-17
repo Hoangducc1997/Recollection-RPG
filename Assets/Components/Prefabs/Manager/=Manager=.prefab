@@ -692,6 +692,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponManager: {fileID: 8151076590445800679}
   enemyTag: Enemy
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &434886188451907554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,7 +721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41cf8ca9476b3fe49b7b40981d16a6fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minExp: 0
   maxExp: 100
   expBar: {fileID: 0}
 --- !u!114 &4130934131426007336
@@ -781,6 +783,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5926752374857471956, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
+      propertyPath: weaponChoose.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926752374857471956, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
+      propertyPath: weaponChoose.Array.data[0]
+      value: 
+      objectReference: {fileID: 8389728453500955246}
     - target: {fileID: 7246839302799671502, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
       propertyPath: m_Name
       value: WeaponManager
@@ -788,7 +798,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6282574844504199517, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3181874719139503217}
   m_SourcePrefab: {fileID: 100100000, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
 --- !u!4 &3286852044138628733 stripped
 Transform:
@@ -806,3 +819,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a13379d4379183c45aaec3b12af8d1a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8389728453500955246 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6282574844504199517, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
+  m_PrefabInstance: {fileID: 2548611994887600947}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3181874719139503217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8389728453500955246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc526a4f9925b1498198535274d3543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponStats:
+    weaponName: Sword1
+    weaponAnim: {fileID: 7400000, guid: 58d32e0867aa8314293c744c0ed57d1d, type: 2}
+    damage: 10
+    rangeAtk: 1
+    cooldownTime: 2
+    attackDuration: 1

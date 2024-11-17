@@ -2,7 +2,7 @@
 
 public class BossBase : MonoBehaviour
 {
-    protected GameObject player;
+    protected UnityEngine.GameObject player;
     protected PlayerHealthManager playerBarManager;
 
     [SerializeField] protected int damageBossAttack;      // Sát thương của boss
@@ -10,7 +10,7 @@ public class BossBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        player = UnityEngine.GameObject.FindWithTag("Player");
 
         if (player != null)
         {
