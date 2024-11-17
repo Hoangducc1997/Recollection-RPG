@@ -3,51 +3,66 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> weaponChoose = new List<GameObject>(); // Danh sách các vũ khí
-    private int currentWeaponIndex = 0; // Vũ khí hiện tại
+    [SerializeField] private List<GameObject> weaponChoose = new List<GameObject>();
+
+    private int currentWeaponIndex = 0;
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public void AddWeapon(GameObject newWeapon)
     {
         if (!weaponChoose.Contains(newWeapon))
         {
             weaponChoose.Add(newWeapon);
-            newWeapon.SetActive(false); // Vũ khí mới được thêm vào nhưng tắt đi để không kích hoạt ngay
-            Debug.Log($"Added weapon: {newWeapon.name}");
+            newWeapon.SetActive(false); // Tắt vũ khí ban đầu khi thêm vào danh sách
         }
     }
 
-    public void SwitchWeapon(int index)
+
+    public void SwitchWeapon(int weaponIndex)
     {
-        if (index >= 0 && index < weaponChoose.Count)
-        {
-            currentWeaponIndex = index;
+        // Kiểm tra index hợp lệ
+        if (weaponIndex < 0 || weaponIndex >= weaponChoose.Count) return;
 
-            // Kích hoạt vũ khí được chọn, vô hiệu hóa các vũ khí khác
-            for (int i = 0; i < weaponChoose.Count; i++)
-            {
-                weaponChoose[i].SetActive(i == currentWeaponIndex);
-            }
+        // Vô hiệu hóa vũ khí hiện tại
+        weaponChoose[currentWeaponIndex].SetActive(false);
 
-            Debug.Log($"Switched to weapon: {weaponChoose[currentWeaponIndex].name}");
-        }
-        else
+        // Kích hoạt vũ khí mới
+        currentWeaponIndex = weaponIndex;
+        ActivateWeapon(currentWeaponIndex);
+    }
+
+    private void ActivateWeapon(int weaponIndex)
+    {
+        if (weaponIndex < 0 || weaponIndex >= weaponChoose.Count) return;
+
+        GameObject selectedWeapon = weaponChoose[weaponIndex];
+        selectedWeapon.SetActive(true);
+
+        Weapon currentWeapon = selectedWeapon.GetComponent<Weapon>();
+        if (currentWeapon != null && animator != null)
         {
-            Debug.LogWarning("Invalid weapon index: " + index);
+            int animationIndex = currentWeapon.GetAnimationIndex();
+            Debug.Log("Current Weapon Animation Index: " + animationIndex);  // Kiểm tra giá trị animationIndex
+            animator.SetInteger("isWeaponType", animationIndex); // Đảm bảo rằng SetInteger nhận đúng giá trị
         }
     }
 
-    public WeaponStats GetCurrentWeapon()
+
+
+
+    public Weapon GetCurrentWeapon()
     {
         if (weaponChoose.Count > 0 && currentWeaponIndex >= 0 && currentWeaponIndex < weaponChoose.Count)
         {
-            // Lấy WeaponStats từ vũ khí hiện tại
-            Weapon weapon = weaponChoose[currentWeaponIndex].GetComponent<Weapon>();
-            if (weapon != null)
-            {
-                return weapon.weaponStats;
-            }
+            Weapon weaponComponent = weaponChoose[currentWeaponIndex].GetComponent<Weapon>();
+            return weaponComponent; // Trả về đối tượng Weapon thay vì WeaponStats
         }
-        Debug.LogWarning("No valid current weapon found!");
         return null;
     }
+
 }
