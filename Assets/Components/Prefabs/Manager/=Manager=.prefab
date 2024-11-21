@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 3756293160502814483}
   - component: {fileID: 8250193242533143918}
   m_Layer: 0
-  m_Name: GameLevelManager
+  m_Name: PlayerLevelManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2986191849663918788}
-  levelUpWeapons: []
+  levelUpWeapons:
+  - {fileID: 8389728453500955246}
+  - {fileID: 4703513491172513038}
 --- !u!1 &6065404996672404234
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,6 +746,7 @@ MonoBehaviour:
     expThreshold: 250
   expBar: {fileID: 0}
   levelManager: {fileID: 8250193242533143918}
+  levelUIText: {fileID: 0}
 --- !u!114 &4130934131426007336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,3 +845,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a13379d4379183c45aaec3b12af8d1a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8389728453500955246 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6282574844504199517, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
+  m_PrefabInstance: {fileID: 2548611994887600947}
+  m_PrefabAsset: {fileID: 0}
