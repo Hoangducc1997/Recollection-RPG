@@ -8,6 +8,9 @@ public class WeaponChangeManager : MonoBehaviour
     // Các button của vũ khí
     [SerializeField] private Button weapon1Button;
     [SerializeField] private Button weapon2Button;
+    [SerializeField] private Button weapon3Button;
+    [SerializeField] private Button weapon4Button;
+    [SerializeField] private RectTransform backgroundBox;
     // Thêm các button cho các vũ khí khác nếu cần
 
     private Animator playerAnimator;  // Khai báo animator của Player
@@ -17,7 +20,7 @@ public class WeaponChangeManager : MonoBehaviour
         // Gán sự kiện khi nhấn vào các nút
         weapon1Button.onClick.AddListener(() => SwitchWeapon(0)); // Khi nhấn nút 1, sẽ truyền giá trị 0
         weapon2Button.onClick.AddListener(() => SwitchWeapon(1)); // Khi nhấn nút 2, sẽ truyền giá trị 1
-
+        backgroundBox.LeanScale(Vector3.one, 0.5f).setEaseInOutExpo();
         // Lấy Animator từ đối tượng Player (hoặc tên đối tượng của bạn nếu cần)
         playerAnimator = GameObject.FindWithTag("Player").GetComponent<Animator>(); // Lấy Animator từ đối tượng có tag "Player"
 
@@ -51,5 +54,5 @@ public class WeaponChangeManager : MonoBehaviour
             }
         }
     }
-
+    //backgroundBox.LeanScale(Vector3.zero, 0.5f).setEaseInOutExpo(); // Ẩn hộp thoại
 }

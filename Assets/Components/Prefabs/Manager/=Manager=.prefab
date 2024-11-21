@@ -187,6 +187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3756293160502814483}
+  - component: {fileID: 8250193242533143918}
   m_Layer: 0
   m_Name: GameLevelManager
   m_TagString: Untagged
@@ -209,6 +210,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8813211948709516032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8250193242533143918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5541683398814421815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 063d10c9173b3e74a9aa00f06f857012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2986191849663918788}
+  levelUpWeapons: []
 --- !u!1 &6065404996672404234
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +706,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponManager: {fileID: 8151076590445800679}
-  enemyTag: Enemy
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -721,8 +735,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41cf8ca9476b3fe49b7b40981d16a6fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxExp: 100
+  levels:
+  - level: 1
+    expThreshold: 100
+  - level: 2
+    expThreshold: 150
+  - level: 3
+    expThreshold: 250
   expBar: {fileID: 0}
+  levelManager: {fileID: 8250193242533143918}
 --- !u!114 &4130934131426007336
 MonoBehaviour:
   m_ObjectHideFlags: 0
