@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,9 +9,10 @@ public class SettingManager : MonoBehaviour
     [Header("Frame Settings")]
     public float TargetFrameRate = 60.0f;
 
-    [Header("Sound Settings")]
+    [Header("Saved Settings")]
     public SettingSaveData SettingSaveData;
-    void Awake()
+
+    private void Awake()
     {
         if (Instance != null)
         {
@@ -20,8 +21,12 @@ public class SettingManager : MonoBehaviour
         }
 
         Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        // Tải dữ liệu cài đặt
         LoadSettingSaveData();
     }
+
     public void SaveSettingSaveData()
     {
         PlayerPrefs.SetFloat("MusicVolume", SettingSaveData.MusicVolume);
@@ -39,31 +44,26 @@ public class SettingManager : MonoBehaviour
         {
             SettingSaveData = new SettingSaveData();
         }
-        SettingSaveData.MusicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);  // Default volume = 1.0
-        SettingSaveData.VfxVolume = PlayerPrefs.GetFloat("VfxVolume", 1.0f);      // Default volume = 1.0
-        SettingSaveData.GameLanguage = (Language)PlayerPrefs.GetInt("GameLanguage", 0); // Default is English (index 0)
-        SettingSaveData.GameQuality = (GameQuality)PlayerPrefs.GetInt("GameQuality", 0); // Default is English (index 0)
 
-        SetGraphic();
+        SettingSaveData.MusicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+        SettingSaveData.VfxVolume = PlayerPrefs.GetFloat("VfxVolume", 1.0f);
+        SettingSaveData.GameLanguage = (Language)PlayerPrefs.GetInt("GameLanguage", 0);
+        SettingSaveData.GameQuality = (GameQuality)PlayerPrefs.GetInt("GameQuality", 0);
+
+        ApplyGraphicsSettings();
     }
 
-    public void SetGraphic()
+    private void ApplyGraphicsSettings()
     {
         if (SettingSaveData != null)
         {
-            if (SettingSaveData.GameQuality == GameQuality.Low)
-            {
-                TargetFrameRate = 30f;
-            }
-            else
-            {
-                TargetFrameRate = 60f;
-            }
+            TargetFrameRate = SettingSaveData.GameQuality == GameQuality.Low ? 30f : 60f;
             Application.targetFrameRate = (int)TargetFrameRate;
         }
     }
 }
 
+[System.Serializable]
 public class SettingSaveData
 {
     public float MusicVolume;
@@ -78,9 +78,8 @@ public enum Language
     Vietnamese
 }
 
-
 public enum GameQuality
 {
     High,
-    Low,
+    Low
 }

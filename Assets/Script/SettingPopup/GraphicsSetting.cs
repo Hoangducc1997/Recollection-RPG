@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,15 +56,29 @@ public class GraphicsSetting : MonoBehaviour
     {
         switch (settingLevel)
         {
-            case 0:
-                
+            case 0: // Low
+                Debug.Log("Setting graphics to Low.");
+                // Ví dụ: giảm các hiệu ứng
+                QualitySettings.shadowResolution = ShadowResolution.Low;
+                QualitySettings.antiAliasing = 0;
                 break;
-            case 1:
+
+            case 1: // Medium
+                Debug.Log("Setting graphics to Medium.");
+                // Cài đặt trung bình
+                QualitySettings.shadowResolution = ShadowResolution.Medium;
+                QualitySettings.antiAliasing = 2;
                 break;
-            case 2:
+
+            case 2: // High
+                Debug.Log("Setting graphics to High.");
+                // Cài đặt cao
+                QualitySettings.shadowResolution = ShadowResolution.High;
+                QualitySettings.antiAliasing = 4;
                 break;
         }
     }
+
 
     public void SaveSetting()
     {

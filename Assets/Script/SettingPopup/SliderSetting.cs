@@ -1,70 +1,67 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SliderSetting : MonoBehaviour
 {
-    [SerializeField] protected Slider _slider;
-    [SerializeField] Image _icon;
-    [SerializeField] Sprite _spriteOn, _spriteOff;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+    [SerializeField] private Button musicToggleButton;
+    [SerializeField] private Button sfxToggleButton;
 
-    protected bool _isMute = true;
-    protected float _defaultValueWhenOn = 0.5f;
+    [SerializeField] private Sprite musicOnIcon;
+    [SerializeField] private Sprite musicOffIcon;
+    [SerializeField] private Sprite sfxOnIcon;
+    [SerializeField] private Sprite sfxOffIcon;
 
-    private void OnEnable()
+    private void Start()
     {
-        LoadDataFromSetting();
+        // Gán giá trị ban đầu
+        musicSlider.value = MusicSettings.Instance.MusicVolume;
+        sfxSlider.value = MusicSettings.Instance.SFXVolume;
+        UpdateButtonIcons();
+
+        // Thêm sự kiện cho slider
+        musicSlider.onValueChanged.AddListener(OnMusicSliderChanged);
+        sfxSlider.onValueChanged.AddListener(OnSFXSliderChanged);
+
+        // Thêm sự kiện cho nút tắt/mở
+        musicToggleButton.onClick.AddListener(ToggleMusicMute);
+        sfxToggleButton.onClick.AddListener(ToggleSFXMute);
     }
 
-    protected virtual void LoadDataFromSetting() { }
-
-    public virtual void SaveSetting() { }
-
-    public virtual void RevertSetting()
+    private void OnMusicSliderChanged(float value)
     {
-        LoadDataFromSetting();
+        MusicSettings.Instance.SetMusicVolume(value);
+        AudioManager.Instance.GetMusicAudioSource().volume = value;
+        UpdateButtonIcons();
     }
 
-
-    protected void HandleSlider(float value)
+    private void OnSFXSliderChanged(float value)
     {
-        _slider.value = value;
-
-        if (value == 0)
-        {
-            _isMute = true;
-            _icon.sprite = _spriteOff;
-        }
-        else
-        {
-            _isMute = false;
-            _icon.sprite = _spriteOn;
-        }
-
-        HandleOutPutVolume(_slider.value);
+        MusicSettings.Instance.SetSFXVolume(value);
+        AudioManager.Instance.GetVFXAudioSource().volume = value;
+        UpdateButtonIcons();
     }
 
-    protected virtual void HandleOutPutVolume(float value) { }
-
-    public void OnValueSliderChanged(float value)
+    private void ToggleMusicMute()
     {
-        if (value == 0)
-        {
-            _isMute = true;
-            _icon.sprite = _spriteOff;
-        }
-        else
-        {
-            _isMute = false;
-            _icon.sprite = _spriteOn;
-        }
-
-        HandleOutPutVolume(value);
+        MusicSettings.Instance.ToggleMusicMute();
+        musicSlider.value = MusicSettings.Instance.MusicVolume;
+        AudioManager.Instance.GetMusicAudioSource().volume = MusicSettings.Instance.MusicVolume;
+        UpdateButtonIcons();
     }
 
-    public float GetSliderValue()
+    private void ToggleSFXMute()
     {
-        return _slider.value;
+        MusicSettings.Instance.ToggleSFXMute();
+        sfxSlider.value = MusicSettings.Instance.SFXVolume;
+        AudioManager.Instance.GetVFXAudioSource().volume = MusicSettings.Instance.SFXVolume;
+        UpdateButtonIcons();
+    }
+
+    private void UpdateButtonIcons()
+    {
+        musicToggleButton.image.sprite = MusicSettings.Instance.IsMusicMuted ? musicOffIcon : musicOnIcon;
+        sfxToggleButton.image.sprite = MusicSettings.Instance.IsSFXMuted ? sfxOffIcon : sfxOnIcon;
     }
 }

@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7688047215527555749}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7112965007050604722}
+        m_TargetAssemblyTypeName: SettingPopup, Assembly-CSharp
+        m_MethodName: OnClickOK
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &549915514827901090
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,10 +411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c41b3cb4f19ee45bcb14faac20f548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _curLabel: {fileID: 8928826322044709386}
-  listIconLanguages: []
+  currentLabel: {fileID: 0}
   dropdown: {fileID: 6644141425354806007}
-  _graphicSetting: {fileID: 1393480006482794754}
 --- !u!1 &736439594976421185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,6 +1780,7 @@ GameObject:
   - component: {fileID: 1609202728279581804}
   - component: {fileID: 4286013402076073193}
   - component: {fileID: 8184633198578833895}
+  - component: {fileID: 8187577788472473050}
   m_Layer: 5
   m_Name: Music
   m_TagString: Untagged
@@ -1836,10 +1847,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dddd5d930bf1134b8869dae36fb0080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 6998688945449012116}
-  _icon: {fileID: 4815351144327486546}
-  _spriteOn: {fileID: -1343108296, guid: 7ee91b10e8cc68248a9a5d3f4091ed18, type: 3}
-  _spriteOff: {fileID: -1150206943, guid: def60529281799649b2f449a221a2475, type: 3}
+--- !u!114 &8187577788472473050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3229574364541886844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790d4ed735df2ee4b840d57474431a87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSlider: {fileID: 6998688945449012116}
+  sfxSlider: {fileID: 6137551350135921540}
+  musicToggleButton: {fileID: 231289866455981659}
+  sfxToggleButton: {fileID: 4272500368312982764}
+  musicOnIcon: {fileID: 0}
+  musicOffIcon: {fileID: 0}
+  sfxOnIcon: {fileID: 0}
+  sfxOffIcon: {fileID: 0}
 --- !u!1 &3265631524933746992
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,7 +2011,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7672089509087031712}
   - component: {fileID: 9012570392071984483}
-  - component: {fileID: 6880848631120601141}
   m_Layer: 5
   m_Name: SoundSetting
   m_TagString: Untagged
@@ -2039,22 +2065,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &6880848631120601141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3291107001477963486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6bace26e4ff1a0489a5bd973955ca39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _slider: {fileID: 6137551350135921540}
-  _icon: {fileID: 3419097071058915793}
-  _spriteOn: {fileID: -1343108296, guid: 7ee91b10e8cc68248a9a5d3f4091ed18, type: 3}
-  _spriteOff: {fileID: -241689761, guid: def60529281799649b2f449a221a2475, type: 3}
 --- !u!1 &3403893205159145672
 GameObject:
   m_ObjectHideFlags: 0
@@ -2248,7 +2258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4999538326185769329}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: SaveSetting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2738,7 +2748,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4815351144327486546}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8184633198578833895}
+        m_TargetAssemblyTypeName: SliderSetting, Assembly-CSharp
+        m_MethodName: OnValueSliderChanged
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5119332341708557783
 GameObject:
   m_ObjectHideFlags: 0
@@ -3575,7 +3597,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _popupName: 3
   musicSettings: {fileID: 8184633198578833895}
-  VfxSetting: {fileID: 6880848631120601141}
   graphicsSetting: {fileID: 1393480006482794754}
   setLanguageDropdown: {fileID: 1454459135440071000}
 --- !u!1 &6968033303031848285
@@ -3878,10 +3899,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8184633198578833895}
+        m_TargetAssemblyTypeName: SliderSetting, Assembly-CSharp
+        m_MethodName: OnValueSliderChanged
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7132956952256778115
 GameObject:
   m_ObjectHideFlags: 0

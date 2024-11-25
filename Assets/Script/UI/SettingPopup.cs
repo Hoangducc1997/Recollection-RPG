@@ -1,21 +1,15 @@
-﻿using Assets.SimpleLocalization.Scripts;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class SettingPopup : UIPopup
 {
-    [SerializeField] MusicSettings musicSettings;
-    [SerializeField] VfxSetting VfxSetting;
-    [SerializeField] GraphicsSetting graphicsSetting;
-    [SerializeField] SetLanguageDropdown setLanguageDropdown;
-
+    [SerializeField] private MusicSettings musicSettings;
+    [SerializeField] private GraphicsSetting graphicsSetting;
+    [SerializeField] private SetLanguageDropdown setLanguageDropdown;
 
     public override void OnShown(object parament = null)
     {
         base.OnShown(parament);
+        LoadSetting(); // Khôi phục cài đặt
         ShowSettingContent(true);
     }
 
@@ -26,59 +20,55 @@ public class SettingPopup : UIPopup
             graphicsSetting.InitData();
         }
     }
+
     public override bool OnBackClick()
     {
         return base.OnBackClick();
     }
-    #region Click Method
 
     public void OnClickBackButton()
     {
         UIManager.Instance.HidePopup(PopupName.Setting);
-        
     }
-    #endregion
-
 
     public void OnClickOK()
     {
         Debug.unityLogger.logEnabled = true;
 
         SaveSetting();
-
         UIManager.Instance.HidePopup(PopupName.Setting);
     }
 
-    void SaveSetting()
+    private void SaveSetting()
     {
-        // 0 is low 1 is medium 2 is high by default
+        var settingManager = SettingManager.Instance;
 
-        switch (graphicsSetting.CurrentSettingLevel)
-        {
+        // Lưu cài đặt đồ họa
+        settingManager.SettingSaveData.GameQuality = (GameQuality)graphicsSetting.CurrentSettingLevel;
 
-            case 0:
-                Application.targetFrameRate = 30;
-                break;
-            case 1:
-                Application.targetFrameRate = 60;
+        // Lưu cài đặt âm nhạc
+        settingManager.SettingSaveData.MusicVolume = musicSettings.GetCurrentMusicVolume();
+        settingManager.SettingSaveData.VfxVolume = musicSettings.GetCurrentVfxVolume();
 
-                break;
-            case 2:
-                Application.targetFrameRate = 60;
-                break;
-            default:
-                break;
-        }
-        QualitySettings.lodBias = 1f;
-        
+        // Lưu cài đặt ngôn ngữ
+        settingManager.SettingSaveData.GameLanguage = setLanguageDropdown.GetCurrentLanguage();
+
+        // Lưu tất cả vào PlayerPrefs
+        settingManager.SaveSettingSaveData();
     }
 
-    void RevertSetting()
+    private void LoadSetting()
     {
-        graphicsSetting.RevertGraphicsSetting();
-        setLanguageDropdown.RevertLanguage();
-        musicSettings.RevertSetting();
-    }
+        var settingManager = SettingManager.Instance;
 
+        if (settingManager == null) return;
+
+        settingManager.LoadSettingSaveData();
+
+        // Cập nhật UI theo giá trị đã lưu
+        graphicsSetting.InitData();
+        musicSettings.SetMusicVolume(settingManager.SettingSaveData.MusicVolume);
+        musicSettings.SetVfxVolume(settingManager.SettingSaveData.VfxVolume);
+        setLanguageDropdown.SetCurrentLanguage(settingManager.SettingSaveData.GameLanguage);
+    }
 }
-
