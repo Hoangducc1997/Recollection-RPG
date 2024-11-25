@@ -22,7 +22,6 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-
     public void SwitchWeapon(int weaponIndex)
     {
         // Kiểm tra index hợp lệ

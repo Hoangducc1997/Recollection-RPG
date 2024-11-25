@@ -730,6 +730,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7062730565765262253, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c2284438b1eb45e488cb680a741dc630, type: 2}
+    - target: {fileID: 7062730565765262253, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7344409309873324905, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
       propertyPath: m_Name
       value: UIManager
