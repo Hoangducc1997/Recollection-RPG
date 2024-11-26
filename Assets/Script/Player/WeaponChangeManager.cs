@@ -8,8 +8,8 @@ public class WeaponChangeManager : MonoBehaviour
     // Các button của vũ khí
     [SerializeField] private Button weapon1Button;
     [SerializeField] private Button weapon2Button;
-    [SerializeField] private Button weapon3Button;
-    [SerializeField] private Button weapon4Button;
+    //[SerializeField] private Button weapon3Button;
+    //[SerializeField] private Button weapon4Button;
     [SerializeField] private RectTransform backgroundBox;
     // Thêm các button cho các vũ khí khác nếu cần
 
