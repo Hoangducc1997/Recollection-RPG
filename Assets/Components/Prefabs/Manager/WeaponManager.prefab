@@ -213,6 +213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1364773185702301048}
+  - component: {fileID: 8189263825420224340}
   m_Layer: 0
   m_Name: Magic
   m_TagString: Untagged
@@ -239,6 +240,20 @@ Transform:
   - {fileID: 3962409819057976599}
   m_Father: {fileID: 1063768283841658190}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8189263825420224340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2864461815602977704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c889dee1858edc141a6a42a6a14dc4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponLevels:
+  - {fileID: 7477945036877290223}
 --- !u!1 &4039263810845787825
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +263,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2693995585623737175}
+  - component: {fileID: 5696911881522394378}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -274,6 +290,20 @@ Transform:
   - {fileID: 6645290509995803080}
   m_Father: {fileID: 1063768283841658190}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5696911881522394378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4039263810845787825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c889dee1858edc141a6a42a6a14dc4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponLevels:
+  - {fileID: 6282574844504199517}
 --- !u!1 &4068420442297201044
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,6 +313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3269685618591159572}
+  - component: {fileID: 8569157950862851472}
   m_Layer: 0
   m_Name: Bow
   m_TagString: Untagged
@@ -309,6 +340,20 @@ Transform:
   - {fileID: 4286311958684615814}
   m_Father: {fileID: 1063768283841658190}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8569157950862851472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4068420442297201044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c889dee1858edc141a6a42a6a14dc4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponLevels:
+  - {fileID: 594487753513687227}
 --- !u!1 &6282574844504199517
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +504,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponChoose:
-  - {fileID: 0}
+  - {fileID: 4039263810845787825}
+  - {fileID: 4068420442297201044}
+  - {fileID: 2864461815602977704}
 --- !u!1 &7477945036877290223
 GameObject:
   m_ObjectHideFlags: 0

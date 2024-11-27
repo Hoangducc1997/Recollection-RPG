@@ -7,6 +7,8 @@ public class PlayerLevelManager : MonoBehaviour
 
     private int currentLevel = 1; // Mặc định là cấp độ 1
 
+
+    //Lên cấp 2 người chơi chọn 1 trong 2 nếu chọn 1 sẽ tăng tốc chạy, chọn 2 sẽ nâng kiếm lên 1 lv
     public void LevelUp()
     {
         currentLevel++;

@@ -3,65 +3,58 @@ using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
 {
-    [SerializeField] private WeaponManager weaponManager;
+    [SerializeField] private WeaponLevelManager weaponLevelManager; // Thay thế WeaponManager
     [SerializeField] private LayerMask enemyLayer;
 
-    private Animator animator;
-    private int currentLevel = 1;
     private float lastAttackTime;
     private bool isAttacking;
-
-    void Start()
-    {
-        animator = GetComponent<Animator>();
-    }
 
     void Update()
     {
         if (!isAttacking)
         {
-            // Lấy Weapon từ WeaponManager
-            Weapon currentWeapon = weaponManager.GetCurrentWeapon();
-            if (currentWeapon != null && Time.time >= lastAttackTime + currentWeapon.weaponStats.cooldownTime)
+            GameObject currentWeaponGO = weaponLevelManager.GetCurrentWeapon();
+            if (currentWeaponGO != null)
             {
-                Collider2D[] enemiesInRange = FindEnemiesInRange(currentWeapon.weaponStats.rangeAtk);
-                if (enemiesInRange.Length > 0)
+                Weapon currentWeapon = currentWeaponGO.GetComponent<Weapon>();
+                if (currentWeapon != null && Time.time >= lastAttackTime + currentWeapon.GetCooldownTime())
                 {
-                    Attack(enemiesInRange);
+                    Collider2D[] enemiesInRange = FindEnemiesInRange(currentWeapon.GetRange());
+                    if (enemiesInRange.Length > 0)
+                    {
+                        Attack(enemiesInRange, currentWeapon);
+                    }
                 }
             }
         }
     }
 
-    private void Attack(Collider2D[] enemies)
+    private void Attack(Collider2D[] enemies, Weapon currentWeapon)
     {
-        Weapon currentWeapon = weaponManager.GetCurrentWeapon();
-        if (currentWeapon != null && Time.time >= lastAttackTime + currentWeapon.weaponStats.cooldownTime)
-        {
-            isAttacking = true;
-            animator.SetBool("isAttacking", true);
+        if (currentWeapon == null) return;
 
-            // Tạo các hành động tấn công đối với kẻ địch trong phạm vi
-            foreach (Collider2D enemy in enemies)
+        isAttacking = true;
+
+        // Tạo các hành động tấn công đối với kẻ địch trong phạm vi
+        foreach (Collider2D enemy in enemies)
+        {
+            BossBarManager boss = enemy.GetComponent<BossBarManager>();
+            if (boss != null)
             {
-                BossBarManager boss = enemy.GetComponent<BossBarManager>();
-                if (boss != null)
+                boss.TakeDamage(currentWeapon.GetDamage());
+            }
+            else
+            {
+                EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+                if (enemyHealth != null)
                 {
-                    boss.TakeDamage(currentWeapon.weaponStats.damage);
-                }
-                else
-                {
-                    EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
-                    if (enemyHealth != null)
-                    {
-                        enemyHealth.TakeDamage(currentWeapon.weaponStats.damage);
-                    }
+                    enemyHealth.TakeDamage(currentWeapon.GetDamage());
                 }
             }
-
-            lastAttackTime = Time.time;
-            StartCoroutine(ResetAttackCoroutine(currentWeapon.weaponStats.attackDuration));
         }
+
+        lastAttackTime = Time.time;
+        StartCoroutine(ResetAttackCoroutine(currentWeapon.GetAttackDuration()));
     }
 
     private Collider2D[] FindEnemiesInRange(float range)
@@ -72,7 +65,6 @@ public class PlayerAction : MonoBehaviour
     private void ResetAttack()
     {
         isAttacking = false;
-        animator.SetBool("isAttacking", false);
     }
 
     private IEnumerator ResetAttackCoroutine(float duration)

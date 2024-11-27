@@ -832,6 +832,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5580407297996217041, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: nextSceneName
+      value: IntroPilot
+      objectReference: {fileID: 0}
     - target: {fileID: 5640286322878243125, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
       propertyPath: m_SizeDelta.x
       value: 180
