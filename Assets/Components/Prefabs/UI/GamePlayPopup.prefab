@@ -483,9 +483,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponManager: {fileID: 0}
+  chooseWeaponButton: {fileID: 3217894922753374496}
   weapon1Button: {fileID: 1074019627960457579}
   weapon2Button: {fileID: 7886525502756665873}
   weapon3Button: {fileID: 7081923949986638464}
+  weaponObj: {fileID: 3781638966806334401}
 --- !u!1 &1981003131492239783
 GameObject:
   m_ObjectHideFlags: 0

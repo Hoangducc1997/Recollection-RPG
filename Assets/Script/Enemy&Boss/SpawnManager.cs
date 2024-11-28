@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +10,7 @@ public class EnemySpawnInfo
     public int enemyCount;
     public float enemyTimeSpawn;
     public Text enemyCountInputs;
+    public Text enemyCountTotalInputs;
 }
 
 public class SpawnManager : MonoBehaviour
@@ -19,17 +19,21 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
 
     private int[] remainingEnemyCounts;
+    private int totalEnemies; // Tổng số lượng enemy
 
     private void Start()
     {
         remainingEnemyCounts = new int[enemySpawners.Length];
+        totalEnemies = 0;
 
         for (int i = 0; i < enemySpawners.Length; i++)
         {
             remainingEnemyCounts[i] = enemySpawners[i].enemyCount;
+            totalEnemies += enemySpawners[i].enemyCount; // Cộng dồn tổng số lượng enemy
             UpdateEnemyCountText(i); // Cập nhật Text với tên và số lượng
         }
 
+        UpdateTotalEnemyCountText(); // Hiển thị tổng số lượng enemy
         StartCoroutine(SpawnEnemies());
     }
 
@@ -59,7 +63,9 @@ public class SpawnManager : MonoBehaviour
     public void EnemyDefeated(int enemyTypeIndex)
     {
         remainingEnemyCounts[enemyTypeIndex]--;
+        totalEnemies--; // Giảm tổng số lượng enemy còn lại
         UpdateEnemyCountText(enemyTypeIndex);
+        UpdateTotalEnemyCountText(); // Cập nhật lại tổng số lượng enemy
 
         // Kiểm tra nếu tất cả enemy đã bị tiêu diệt
         if (AreAllEnemiesDefeated())
@@ -67,7 +73,7 @@ public class SpawnManager : MonoBehaviour
             GamePlayPopup gamePlayPopup = FindObjectOfType<GamePlayPopup>();
             if (gamePlayPopup != null)
             {
-                gamePlayPopup.ShowFindBossText(); 
+                gamePlayPopup.ShowFindBossText();
             }
             LevelManager levelManager = FindObjectOfType<LevelManager>();
             if (levelManager != null)
@@ -77,21 +83,27 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-
     public bool AreAllEnemiesDefeated()
     {
-        foreach (int count in remainingEnemyCounts)
-        {
-            if (count > 0)
-            {
-                return false; // Vẫn còn enemy
-            }
-        }
-        return true; // Không còn enemy nào
+        return totalEnemies <= 0; // Kiểm tra nếu tổng số lượng enemy là 0
     }
 
     private void UpdateEnemyCountText(int enemyIndex)
     {
-        enemySpawners[enemyIndex].enemyCountInputs.text = $"{enemySpawners[enemyIndex].enemyName}: {Mathf.Max(0, remainingEnemyCounts[enemyIndex])}";
+        enemySpawners[enemyIndex].enemyCountInputs.text = $"{enemySpawners[enemyIndex].enemyName}:{Mathf.Max(0, remainingEnemyCounts[enemyIndex])}";
     }
+
+    private void UpdateTotalEnemyCountText()
+    {
+        foreach (var enemyInfo in enemySpawners)
+        {
+            if (enemyInfo.enemyCountTotalInputs != null)
+            {
+                // Hiển thị tên enemy và tổng số lượng toàn bộ enemy đã spawn
+                enemyInfo.enemyCountTotalInputs.text = $"Total {enemyInfo.enemyName}:{Mathf.Max(0, totalEnemies)}";
+            }
+        }
+    }
+
+
 }
