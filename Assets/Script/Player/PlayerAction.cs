@@ -1,75 +1,85 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
 {
-    [SerializeField] private WeaponLevelManager weaponLevelManager; // Thay thế WeaponManager
-    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private WeaponLevel weaponLevel; // Gắn WeaponLevel trong Inspector
+    [SerializeField] private Animator playerAnimator;
 
     private float lastAttackTime;
-    private bool isAttacking;
+
+    [SerializeField] private WeaponLevelManager weaponLevelManager; // Thay thế WeaponLevel bằng WeaponLevelManager
 
     void Update()
     {
-        if (!isAttacking)
+        WeaponMeleeStats currentWeaponStats = weaponLevelManager?.GetCurrentWeaponStats();
+
+        if (currentWeaponStats != null && !playerAnimator.GetBool("isAttacking"))
         {
-            GameObject currentWeaponGO = weaponLevelManager.GetCurrentWeapon();
-            if (currentWeaponGO != null)
+            if (Time.time >= lastAttackTime + currentWeaponStats.cooldownTime)
             {
-                Weapon currentWeapon = currentWeaponGO.GetComponent<Weapon>();
-                if (currentWeapon != null && Time.time >= lastAttackTime + currentWeapon.GetCooldownTime())
+                Collider2D[] enemiesInRange = FindEnemiesInRange(currentWeaponStats.rangeAtk);
+
+                if (enemiesInRange.Length > 0)
                 {
-                    Collider2D[] enemiesInRange = FindEnemiesInRange(currentWeapon.GetRange());
-                    if (enemiesInRange.Length > 0)
-                    {
-                        Attack(enemiesInRange, currentWeapon);
-                    }
+                    Attack(enemiesInRange, currentWeaponStats);
                 }
             }
         }
     }
 
-    private void Attack(Collider2D[] enemies, Weapon currentWeapon)
+    private void Attack(Collider2D[] enemies, WeaponMeleeStats currentWeapon)
     {
-        if (currentWeapon == null) return;
+        playerAnimator.SetBool("isAttacking", true);
+        playerAnimator.SetInteger("isWeaponType", currentWeapon.animationIndex);
 
-        isAttacking = true;
-
-        // Tạo các hành động tấn công đối với kẻ địch trong phạm vi
-        foreach (Collider2D enemy in enemies)
+        foreach (Collider2D enemyCollider in enemies)
         {
-            BossBarManager boss = enemy.GetComponent<BossBarManager>();
-            if (boss != null)
+            GameObject enemy = enemyCollider.gameObject;
+
+            BossBarManager bossBarManager = enemy.GetComponent<BossBarManager>();
+            if (bossBarManager != null)
             {
-                boss.TakeDamage(currentWeapon.GetDamage());
+                bossBarManager.TakeDamage(currentWeapon.damage);
             }
             else
             {
                 EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
                 if (enemyHealth != null)
                 {
-                    enemyHealth.TakeDamage(currentWeapon.GetDamage());
+                    enemyHealth.TakeDamage(currentWeapon.damage);
                 }
             }
         }
 
         lastAttackTime = Time.time;
-        StartCoroutine(ResetAttackCoroutine(currentWeapon.GetAttackDuration()));
+        StartCoroutine(ResetAttackCoroutine(currentWeapon.attackDuration));
     }
 
     private Collider2D[] FindEnemiesInRange(float range)
     {
-        return Physics2D.OverlapCircleAll(transform.position, range, enemyLayer);
-    }
+        List<Collider2D> enemiesInRange = new List<Collider2D>();
+        EnemyHealth[] allEnemies = FindObjectsOfType<EnemyHealth>();
+        foreach (EnemyHealth enemy in allEnemies)
+        {
+            float distance = Vector2.Distance(transform.position, enemy.transform.position);
+            if (distance <= range)
+            {
+                Collider2D collider = enemy.GetComponent<Collider2D>();
+                if (collider != null)
+                {
+                    enemiesInRange.Add(collider);
+                }
+            }
+        }
 
-    private void ResetAttack()
-    {
-        isAttacking = false;
+        return enemiesInRange.ToArray();
     }
 
     private IEnumerator ResetAttackCoroutine(float duration)
     {
         yield return new WaitForSeconds(duration);
-        ResetAttack();
+        playerAnimator.SetBool("isAttacking", false);
     }
 }

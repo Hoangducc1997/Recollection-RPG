@@ -63,7 +63,6 @@ public class SpawnManager : MonoBehaviour
     public void EnemyDefeated(int enemyTypeIndex)
     {
         remainingEnemyCounts[enemyTypeIndex]--;
-        totalEnemies--; // Giảm tổng số lượng enemy còn lại
         UpdateEnemyCountText(enemyTypeIndex);
         UpdateTotalEnemyCountText(); // Cập nhật lại tổng số lượng enemy
 

@@ -3,27 +3,30 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> weaponChoose = new List<GameObject>();
+    [SerializeField] public List<GameObject> weaponChoose = new List<GameObject>();
 
     private int currentWeaponIndex = 0;
 
     public void SwitchWeapon(int weaponIndex)
     {
-        // Kiểm tra index hợp lệ
-        if (weaponIndex < 0 || weaponIndex >= weaponChoose.Count) return;
+        if (weaponIndex < 0 || weaponIndex >= weaponChoose.Count)
+        {
+            Debug.LogError("weaponIndex không hợp lệ!");
+            return;
+        }
 
-        // Tắt tất cả các GameObject trong danh sách
+        // Tắt tất cả vũ khí
         foreach (var weapon in weaponChoose)
         {
             if (weapon != null)
                 weapon.SetActive(false);
         }
 
-        // Bật GameObject tương ứng với weaponIndex
+        // Bật vũ khí được chọn
         if (weaponChoose[weaponIndex] != null)
-        {
             weaponChoose[weaponIndex].SetActive(true);
-            currentWeaponIndex = weaponIndex;
-        }
     }
+
+
+
 }

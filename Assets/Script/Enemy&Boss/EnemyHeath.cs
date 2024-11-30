@@ -30,6 +30,8 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (currentHealth <= 0) return; // Tránh gọi lại nếu đã chết
+
         currentHealth -= damage;
 
         if (currentHealth > 0)
@@ -37,11 +39,12 @@ public class EnemyHealth : MonoBehaviour
             animator.SetBool("isHurt", true);
             StartCoroutine(ResetHurtAnimation());
         }
-        else if (currentHealth <= 0)
+        else
         {
             Die();
         }
     }
+
 
     private IEnumerator ResetHurtAnimation()
     {
