@@ -23,6 +23,16 @@ public class WeaponChangeManager : MonoBehaviour
         weapon2Button.onClick.AddListener(() => SelectWeapon(1, "Bow"));
         weapon3Button.onClick.AddListener(() => SelectWeapon(2, "Magic"));
     }
+    public void PickUpWeapon(int weaponIndex)
+    {
+        if (weaponManager == null)
+        {
+            Debug.LogError("WeaponManager chưa được gán!");
+            return;
+        }
+
+        weaponManager.PickUpWeapon(weaponIndex); // Gọi hàm nhặt vũ khí trong WeaponManager
+    }
 
     private void ToggleWeaponChoose()
     {
