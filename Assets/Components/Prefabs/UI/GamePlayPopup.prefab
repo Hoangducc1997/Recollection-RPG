@@ -196,7 +196,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8756438540645938521}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7646893287599410822}
+        m_TargetAssemblyTypeName: SkillButtonManager, Assembly-CSharp
+        m_MethodName: IncreaseSpeed
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &725180335091156600
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +296,7 @@ GameObject:
   - component: {fileID: 6945504294259560951}
   - component: {fileID: 3819963243059149343}
   - component: {fileID: 7355551702857075537}
+  - component: {fileID: 8437173903768783345}
   m_Layer: 5
   m_Name: Level3Increase
   m_TagString: Untagged
@@ -350,6 +363,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8437173903768783345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963117777325214998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af65a2584d88a3f41b27920214a4d622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 11400000, guid: a66ba5ab54d342b4f9e56fbc25d8f82b, type: 2}
+  skillPanelManager: {fileID: 8676768163968718969}
 --- !u!1 &1800826568223491485
 GameObject:
   m_ObjectHideFlags: 0
@@ -2269,7 +2296,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7995247401619601827}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8437173903768783345}
+        m_TargetAssemblyTypeName: SkillButtonManager, Assembly-CSharp
+        m_MethodName: IncreaseSpeed
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5414482057862945621
 GameObject:
   m_ObjectHideFlags: 0
@@ -2357,6 +2396,7 @@ GameObject:
   - component: {fileID: 4852332010998567545}
   - component: {fileID: 5842190803612867489}
   - component: {fileID: 6005024494007951807}
+  - component: {fileID: 7646893287599410822}
   m_Layer: 5
   m_Name: Level2Increase
   m_TagString: Untagged
@@ -2423,6 +2463,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7646893287599410822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438580238577474469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af65a2584d88a3f41b27920214a4d622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 11400000, guid: a66ba5ab54d342b4f9e56fbc25d8f82b, type: 2}
+  skillPanelManager: {fileID: 8676768163968718969}
 --- !u!1 &5590446480168061665
 GameObject:
   m_ObjectHideFlags: 0

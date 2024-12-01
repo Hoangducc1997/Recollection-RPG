@@ -2,24 +2,31 @@
 
 public class SkillButtonManager : MonoBehaviour
 {
-    private int playerSpeedLevel = 0; // Cấp độ hiện tại của kỹ năng tốc độ
-    private int weaponLevel = 0; // Cấp độ hiện tại của kỹ năng vũ khí
+    public PlayerStats playerStats; // Tham chiếu đến PlayerStats
+    public SkillPanelManager skillPanelManager; // Tham chiếu đến SkillPanelManager
+    private int currentLevel; // Lưu cấp độ hiện tại
 
-    public PlayerMovement playerMovement; // Tham chiếu đến script quản lý nhân vật
-    public PlayerAction playerAction;
-    public WeaponManager weaponManager; // Tham chiếu đến script quản lý vũ khí
-
-    public void IncreaseSpeed()
+    void Start()
     {
-        playerSpeedLevel++;
-       // playerMovement.SetSpeed(playerSpeedLevel); // Gọi hàm thay đổi tốc độ nhân vật
-        Debug.Log($"Speed Level Upgraded to: {playerSpeedLevel}");
+        currentLevel = playerStats.GetCurrentLevel(); // Lấy cấp độ hiện tại từ PlayerStats
     }
+
+    public void IncreaseSpeed(int level)
+    {
+        playerStats.IncreaseSpeedByLevel(level); // Gọi phương thức với cấp độ cụ thể
+        Debug.Log($"Speed upgraded at Level {level}. New Speed: {playerStats.GetMoveSpeed()}");
+        CloseSkillPanel(); // Đóng bảng kỹ năng
+    }
+
 
     public void UpgradeWeapon()
     {
-        weaponLevel++;
-        //weaponManager.UpgradeWeaponLevel(weaponLevel); // Gọi hàm nâng cấp vũ khí
-        Debug.Log($"Weapon Level Upgraded to: {weaponLevel}");
+        Debug.Log($"Weapon upgraded at Level {currentLevel}");
+        CloseSkillPanel(); // Đóng bảng kỹ năng
+    }
+
+    private void CloseSkillPanel()
+    {
+        skillPanelManager.ResumeGame();
     }
 }

@@ -2,39 +2,43 @@
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private CharaterStats[] characterStats; // Character stats
-    [SerializeField] private Joystick joystick; // Joystick for movement
+    [SerializeField] private Joystick joystick;
+    [SerializeField] private PlayerStats playerStats; // Tham chiếu đến PlayerStats
 
     private Animator animator;
     private Vector2 movement;
     private bool isFacingRight = true;
     private bool isRunning;
-    private int currentLevel;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        currentLevel = 1;
     }
-
     void Update()
     {
-        PlayerMove(new Vector2(joystick.Direction.x, joystick.Direction.y));
-        FlipCharacter();
+        if (joystick != null)
+        {
+            PlayerMove(new Vector2(joystick.Direction.x, joystick.Direction.y));
+            FlipCharacter();
 
-        // Update running state
-        isRunning = movement.magnitude > 0.2f;
-        animator.SetBool("isRunning", isRunning);
+            isRunning = movement.magnitude > 0.2f;
+            animator.SetBool("isRunning", isRunning);
+        }
+        else
+        {
+            Debug.LogWarning("Joystick is not assigned or active!");
+        }
     }
+
 
     void FixedUpdate()
     {
         if (movement != Vector2.zero)
         {
-            float moveSpeed = characterStats[currentLevel - 1].moveSpeed;
-            transform.position += (Vector3)(movement * moveSpeed * Time.fixedDeltaTime);
+            transform.position += (Vector3)(movement * playerStats.GetMoveSpeed() * Time.fixedDeltaTime);
         }
     }
+
 
     public void PlayerMove(Vector2 newJoystickPosition)
     {
