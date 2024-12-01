@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    public GameObject bossAppear;
-    public GameObject bossPrefab;
+    public UnityEngine.GameObject bossAppear;
+    public UnityEngine.GameObject bossPrefab;
     public Transform spawnPoint; // Vị trí spawn cho bossPrefab
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Kiểm tra nếu đối tượng va chạm là Player
+        // Kiểm tra nếu đối tượng va chạm là PlayerMovement
         if (collision.CompareTag("Player"))
         {
             // Spawn bossPrefab tại vị trí spawnPoint

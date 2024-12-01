@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GamePlayPopup : UIPopup
 {
-    public GameObject findBossText;
+    public UnityEngine.GameObject findBossText;
 
     public float displayDuration = 3f; // Thời gian hiển thị (đơn vị: giây)
 

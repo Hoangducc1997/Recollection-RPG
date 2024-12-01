@@ -37,27 +37,30 @@ public class AudioManager : MonoBehaviour
     }
 
     public void RunBackgroundMusic(string sceneName)
+{
+    if (_isPause)
     {
-        if (_isPause)
-        {
-            _backgroundAudio.UnPause();
-            _isPause = false;
-            return;
-        }
-
-        AudioClip sceneClip = GetAudioClipByScene(sceneName);
-        if (sceneClip != null)
-        {
-            // Kiểm tra nếu nhạc hiện tại đã giống với nhạc của scene mới
-            if (_backgroundAudio.clip == sceneClip && _backgroundAudio.isPlaying)
-            {
-                return; // Không đổi nhạc nếu nhạc đã đúng
-            }
-
-            _backgroundAudio.clip = sceneClip;
-            _backgroundAudio.Play();
-        }
+        _backgroundAudio.UnPause();
+        _isPause = false;
+        return;
     }
+
+    AudioClip sceneClip = GetAudioClipByScene(sceneName);
+    if (sceneClip != null)
+    {
+        // Kiểm tra nếu nhạc hiện tại đã giống với nhạc của scene mới
+        if (_backgroundAudio.clip == sceneClip && _backgroundAudio.isPlaying)
+        {
+            return; // Không đổi nhạc nếu nhạc đã đúng
+        }
+
+        float currentVolume = _backgroundAudio.volume; // Lưu volume hiện tại
+        _backgroundAudio.clip = sceneClip;
+        _backgroundAudio.volume = currentVolume; // Phục hồi volume
+        _backgroundAudio.Play();
+    }
+}
+
 
 
     AudioClip GetAudioClipByScene(string sceneName)

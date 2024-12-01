@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3699656049215534042}
   - component: {fileID: 5339072278145175067}
   - component: {fileID: 372705712091708802}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Boar
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -214,6 +214,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   timeForAnimDeath: 1
+  expForPlayer: 5
+  enemySpawner: {fileID: 0}
+  enemyTypeIndex: 0
 --- !u!114 &3699656049215534042
 MonoBehaviour:
   m_ObjectHideFlags: 0

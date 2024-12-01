@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6745654246403809569}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HeathBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 200990135087906343}
   - component: {fileID: 211878250925718143}
   - component: {fileID: 6372001900852796507}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Frame H Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 2227621474386140446}
   - component: {fileID: 5966879487015530158}
   - component: {fileID: 6902725299315341148}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: CanvasLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6125511638046104970}
   - component: {fileID: 7447415738125635019}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: BossInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 7018015009251541427}
   - component: {fileID: 2374470980505900058}
   - component: {fileID: 5269441159781285965}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Boss_Elder Earth Fiend
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -483,6 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthBar: {fileID: 7447415738125635019}
+  expForPlayer: 50
 --- !u!114 &7018015009251541427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,7 +578,7 @@ GameObject:
   - component: {fileID: 2453568394499721738}
   - component: {fileID: 3747515164308051420}
   - component: {fileID: 768822531015125761}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text H Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -711,7 +712,7 @@ GameObject:
   - component: {fileID: 4441264558372227710}
   - component: {fileID: 1070220175096706694}
   - component: {fileID: 1245145456877523358}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill H Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -787,7 +788,7 @@ GameObject:
   - component: {fileID: 2444851164031081777}
   - component: {fileID: 592889602484047530}
   - component: {fileID: 895663604530176420}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: BossName
   m_TagString: Untagged
   m_Icon: {fileID: 0}

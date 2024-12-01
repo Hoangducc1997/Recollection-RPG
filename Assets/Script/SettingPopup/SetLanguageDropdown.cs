@@ -1,83 +1,136 @@
-using Assets.SimpleLocalization.Scripts;
-using System;
-using System.Collections;
+﻿using Assets.SimpleLocalization.Scripts;
 using System.Collections.Generic;
+using System;
 using TMPro;
-using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering;
+using UnityEngine;
+using System.Linq;
+
 
 public class SetLanguageDropdown : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private TextMeshProUGUI _curLabel;
-    [SerializeField] private List<Sprite> listIconLanguages = new List<Sprite>();
+    [SerializeField] private TextMeshProUGUI currentLabel;
     [SerializeField] private TMP_Dropdown dropdown;
-    [SerializeField] GraphicsSetting _graphicSetting;
-    string currentLanguage = "";
-    bool isOpen = false;
 
-    void OnEnable()
+    private string currentLanguage = "";
+
+    private void Awake()
     {
-        //var dropdown = GetComponent<Dropdown>();
-        currentLanguage = SettingManager.Instance.SettingSaveData.GameLanguage.ToString();
+        if (dropdown == null)
+        {
+            Debug.LogError("Dropdown component is not assigned!");
+        }
 
+        if (currentLabel == null)
+        {
+            Debug.LogError("Current Label component is not assigned!");
+        }
+    }
+
+    private void OnEnable()
+    {
         if (dropdown == null) dropdown = GetComponent<TMP_Dropdown>();
 
-        Init();
-        _curLabel.SetText(currentLanguage);
+        // Get the language from the saved data
+        currentLanguage = SettingManager.Instance.SettingSaveData.GameLanguage.ToString();
 
-        // Fill the dropdown elements
+        // Ensure the default language if no valid value is found
+        if (!Enum.IsDefined(typeof(Language), currentLanguage))
+        {
+            currentLanguage = Language.English.ToString(); // Default language
+        }
+
+        // Update the localization system
+        LocalizationManager.Language = currentLanguage;
+
         InitLanguageList();
+        currentLabel.SetText(currentLanguage);
 
         dropdown.onValueChanged.RemoveListener(OnValueChanged);
         dropdown.onValueChanged.AddListener(OnValueChanged);
     }
 
-    void Init()
+    private Dictionary<string, string> languageMapping = new Dictionary<string, string>
     {
-        currentLanguage = SettingManager.Instance.SettingSaveData.GameLanguage.ToString();
+        { "English", "English" },
+        { "Tiếng Việt", "Vietnamese" }
+    };
+
+    public void OnValueChanged(int index)
+    {
+        // Get the display string from the Dropdown
+        string selectedDisplayName = dropdown.options[index].text;
+
+        // Map the display string to a valid value for LocalizationManager
+        if (languageMapping.TryGetValue(selectedDisplayName, out string mappedLanguage))
+        {
+            LocalizationManager.Language = mappedLanguage;
+
+            // Update the current label
+            currentLabel.SetText(selectedDisplayName);
+
+            // Save the setting
+            SettingManager.Instance.SettingSaveData.GameLanguage =
+                (Language)Enum.Parse(typeof(Language), mappedLanguage);
+
+            SettingManager.Instance.SaveSettingSaveData();
+        }
+        else
+        {
+            Debug.LogError($"Language mapping not found for: {selectedDisplayName}");
+        }
     }
 
-    void OnValueChanged(int index)
+    // New method to get the current language
+    public string GetCurrentLanguage()
     {
-        if (index < 0)
+        return currentLanguage;
+    }
+
+    public void SetCurrentLanguage(Language language)
+    {
+        currentLanguage = language.ToString();
+        SettingManager.Instance.SettingSaveData.GameLanguage = language;
+        LocalizationManager.Language = currentLanguage;
+
+        currentLabel.SetText(currentLanguage);
+        InitLanguageList(); // Update the dropdown list
+    }
+
+    private void InitLanguageList()
+    {
+        List<string> displayNames = new List<string>();
+
+        foreach (var pair in languageMapping)
         {
-            index = 0;
-            dropdown.value = index;
+            displayNames.Add(pair.Key); // Display friendly names like "English", "Tiếng Việt"
         }
-        currentLanguage = dropdown.options[index].text;
-        //LocalizationManager.CurrentLanguage = dropdown.options[index].text;
-        _curLabel.SetText(dropdown.options[index].text);
-        _graphicSetting.InitData();
+
+        dropdown.ClearOptions();
+        dropdown.AddOptions(displayNames);
+
+        // Set the current value in the dropdown
+        string currentDisplayName = languageMapping.FirstOrDefault(x => x.Value == currentLanguage).Key;
+        dropdown.value = displayNames.IndexOf(currentDisplayName);
     }
 
     public void RevertLanguage()
     {
-        // = SettingManager.Instance.SettingSaveData.GameLanguage.ToString();
-    }
-
-    private void InitLanguageList()
-
-    {
+        // Revert to previous language
         currentLanguage = SettingManager.Instance.SettingSaveData.GameLanguage.ToString();
-        _curLabel.SetText(currentLanguage);
 
-        List<string> languages = new List<string>();
-        foreach (Language language in Enum.GetValues(typeof(Language)))
+        if (!Enum.IsDefined(typeof(Language), currentLanguage))
         {
-            languages.Add(language.ToString());
+            currentLanguage = Language.English.ToString(); // Default language
         }
 
-        dropdown.ClearOptions();
-        dropdown.AddOptions(languages);
+        LocalizationManager.Language = currentLanguage;
 
-        dropdown.value = languages.IndexOf(currentLanguage);
-        _curLabel.SetText(currentLanguage);
-        dropdown.onValueChanged.RemoveListener(OnValueChanged);
-        dropdown.onValueChanged.AddListener(OnValueChanged);
+        currentLabel.SetText(currentLanguage);
+        InitLanguageList(); // Sync with dropdown
     }
 
-    void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
         InitLanguageList();
     }

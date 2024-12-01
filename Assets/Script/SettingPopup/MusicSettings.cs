@@ -1,24 +1,65 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicSettings : SliderSetting
+public class MusicSettings : MonoBehaviour
 {
-    protected override void LoadDataFromSetting()
+    public static MusicSettings Instance { get; private set; }
+
+    public float MusicVolume { get; private set; } = 0.5f;
+    public float SFXVolume { get; private set; } = 0.5f;
+
+    public bool IsMusicMuted { get; private set; } = false;
+    public bool IsSFXMuted { get; private set; } = false;
+
+    private void Awake()
     {
-        base.LoadDataFromSetting();
-        HandleSlider(SettingManager.Instance.SettingSaveData.MusicVolume);
-    }
-    protected override void HandleOutPutVolume(float value)
-    {
-        HandleSlider(value);
-        AudioManager.Instance.GetMusicAudioSource().volume = value;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    public override void RevertSetting()
+    public float GetCurrentMusicVolume()
     {
-        base.RevertSetting();
+        return MusicVolume;
+    }
 
-        AudioManager.Instance.GetMusicAudioSource().volume = SettingManager.Instance.SettingSaveData.MusicVolume;
+    public float GetCurrentVfxVolume()
+    {
+        return SFXVolume;
+    }
+
+    public void SetVfxVolume(float value)
+    {
+        SFXVolume = value;
+        IsSFXMuted = SFXVolume == 0; // Cập nhật trạng thái mute
+    }
+
+    public void SetMusicVolume(float value)
+    {
+        MusicVolume = value;
+        IsMusicMuted = MusicVolume == 0;
+    }
+
+    public void SetSFXVolume(float value)
+    {
+        SFXVolume = value;
+        IsSFXMuted = SFXVolume == 0;
+    }
+
+    public void ToggleMusicMute()
+    {
+        IsMusicMuted = !IsMusicMuted;
+        MusicVolume = IsMusicMuted ? 0 : 0.5f; // Default volume khi bật lại
+    }
+
+    public void ToggleSFXMute()
+    {
+        IsSFXMuted = !IsSFXMuted;
+        SFXVolume = IsSFXMuted ? 0 : 0.5f;
     }
 }

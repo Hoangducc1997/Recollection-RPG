@@ -1,84 +1,100 @@
-using Assets.SimpleLocalization.Scripts;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using System.Linq;
+using System;
 
 public class SettingPopup : UIPopup
 {
-    [SerializeField] MusicSettings musicSettings;
-    [SerializeField] VfxSetting VfxSetting;
-    [SerializeField] GraphicsSetting graphicsSetting;
-    [SerializeField] SetLanguageDropdown setLanguageDropdown;
+    [SerializeField] private MusicSettings musicSettings;
+    [SerializeField] private GraphicsSetting graphicsSetting;
 
-
-    public override void OnShown(object parament = null)
+    public override void OnShown(object parameter = null)
     {
-        base.OnShown(parament);
+        base.OnShown(parameter);
+        LoadSetting(); // Restore settings when the popup is shown
         ShowSettingContent(true);
     }
 
+    /// <summary>
+    /// Displays or hides the setting content.
+    /// </summary>
+    /// <param name="isShow">True to show, false to hide.</param>
     public void ShowSettingContent(bool isShow)
     {
         if (isShow)
         {
-            graphicsSetting.InitData();
+            graphicsSetting?.InitData();
         }
     }
+
+    /// <summary>
+    /// Handles back button click logic.
+    /// </summary>
     public override bool OnBackClick()
     {
         return base.OnBackClick();
     }
-    #region Click Method
 
+    /// <summary>
+    /// Closes the popup when back button is clicked.
+    /// </summary>
     public void OnClickBackButton()
     {
-        UIManager.Instance.HidePopup(PopupName.Setting);
-        
+        UIManager.Instance?.HidePopup(PopupName.Setting);
     }
-    #endregion
 
-
+    /// <summary>
+    /// Saves settings and closes the popup when OK button is clicked.
+    /// </summary>
     public void OnClickOK()
     {
         Debug.unityLogger.logEnabled = true;
-
         SaveSetting();
-
-        UIManager.Instance.HidePopup(PopupName.Setting);
+        UIManager.Instance?.HidePopup(PopupName.Setting);
     }
 
-    void SaveSetting()
+    /// <summary>
+    /// Saves all current settings to the setting manager and PlayerPrefs.
+    /// </summary>
+    private void SaveSetting()
     {
-        // 0 is low 1 is medium 2 is high by default
+        var settingManager = SettingManager.Instance;
 
-        switch (graphicsSetting.CurrentSettingLevel)
+        if (settingManager == null)
         {
-
-            case 0:
-                Application.targetFrameRate = 30;
-                break;
-            case 1:
-                Application.targetFrameRate = 60;
-
-                break;
-            case 2:
-                Application.targetFrameRate = 60;
-                break;
-            default:
-                break;
+            Debug.LogError("SettingManager instance is null.");
+            return;
         }
-        QualitySettings.lodBias = 1f;
-        
+
+        // Save graphics settings
+        settingManager.SettingSaveData.GameQuality = (GameQuality)graphicsSetting.CurrentSettingLevel;
+
+        // Save music and VFX settings
+        settingManager.SettingSaveData.MusicVolume = musicSettings.GetCurrentMusicVolume();
+        settingManager.SettingSaveData.VfxVolume = musicSettings.GetCurrentVfxVolume();
+
+        // Save all settings to PlayerPrefs
+        settingManager.SaveSettingSaveData();
     }
 
-    void RevertSetting()
+
+    /// <summary>
+    /// Loads settings from the setting manager and updates the UI components accordingly.
+    /// </summary>
+    private void LoadSetting()
     {
-        graphicsSetting.RevertGraphicsSetting();
-        setLanguageDropdown.RevertLanguage();
-        musicSettings.RevertSetting();
+        var settingManager = SettingManager.Instance;
+
+        if (settingManager == null)
+        {
+            Debug.LogError("SettingManager instance is null.");
+            return;
+        }
+
+        settingManager.LoadSettingSaveData();
+
+        // Update the UI with loaded settings
+        graphicsSetting?.InitData();
+        musicSettings?.SetMusicVolume(settingManager.SettingSaveData.MusicVolume);
+        musicSettings?.SetVfxVolume(settingManager.SettingSaveData.VfxVolume);
     }
-
 }
-

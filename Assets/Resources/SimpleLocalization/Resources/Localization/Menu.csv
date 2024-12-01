@@ -1,6 +1,10 @@
-Key,English,German,Russian
-Menu.Example.Title,Menu,Menü,Меню
-Menu.Example.NewGame,New game,Neues Spiel,Новая игра
-Menu.Example.Continue,Continue,Fortsetzen,Продолжить
-Menu.Example.Settings,Settings,Einstellungen,Настройки
-Menu.Example.Review,Write a review,Eine Rezension schreiben,Написать отзыв
+Key,Vietnamese,English
+MainMenu.Setting,CÀI ĐẶT,SETTING
+MainMenu.MusicSetting,NHẠC,MUSIC
+MainMenu.SoundSetting,ÂM THANH,SOUND
+MainMenu.QualitySetting,CHẤT LƯỢNG ,GAME QUALITY
+MainMenu.QualitySettingLow,THẤP,LOW
+MainMenu.QualitySettingMedium,TRUNG BÌNH,MEDIUM
+MainMenu.QualitySettingHigh,CAO,HIGH
+MainMenu.LanguageSetting,NGÔN NGỮ,LANGUAGE
+MainMenu.SaveSetting,LƯU,SAVE

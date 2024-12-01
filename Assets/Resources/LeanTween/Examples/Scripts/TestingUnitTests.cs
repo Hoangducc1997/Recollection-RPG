@@ -8,7 +8,7 @@ namespace DentedPixel.LTExamples
 
     public class TestingUnitTests : MonoBehaviour
     {
-
+            
         public GameObject cube1;
         public GameObject cube2;
         public GameObject cube3;

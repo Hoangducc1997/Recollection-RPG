@@ -69,7 +69,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public GameObject GetPopupByName(PopupName popupName)
+    public UnityEngine.GameObject GetPopupByName(PopupName popupName)
     {
         foreach(var popup in _UIPopupList)
         {

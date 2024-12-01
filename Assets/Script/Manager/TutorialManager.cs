@@ -4,8 +4,8 @@ using UnityEngine;
 public class TutorialManager : MonoBehaviour
 {
     
-    [SerializeField] private GameObject tutorialPanel;
-    [SerializeField] private GameObject touchSkipTutorial;
+    [SerializeField] private UnityEngine.GameObject tutorialPanel;
+    [SerializeField] private UnityEngine.GameObject touchSkipTutorial;
 
     private void Start()
     {

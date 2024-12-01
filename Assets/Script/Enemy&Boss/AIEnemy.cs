@@ -18,7 +18,7 @@ public class AIEnemy : MonoBehaviour
         animator = GetComponent<Animator>();
         bossBarManager = GetComponent<BossBarManager>(); // Gán script BossBarManager
 
-        // Tìm đối tượng Player bằng tag
+        // Tìm đối tượng PlayerMovement bằng tag
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
         {
@@ -26,7 +26,7 @@ public class AIEnemy : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Player not found. Ensure Player has the 'Player' tag.");
+            Debug.LogWarning("PlayerMovement not found. Ensure PlayerMovement has the 'PlayerMovement' tag.");
         }
     }
 

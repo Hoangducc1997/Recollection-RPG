@@ -31,7 +31,7 @@ public class MenuGamePopup : UIPopup
     #endregion
 
 
-
+        
     public void OnClickSetting()
     {
         UIManager.Instance.ShowPopup(PopupName.Setting);

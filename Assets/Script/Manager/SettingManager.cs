@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,22 +7,25 @@ public class SettingManager : MonoBehaviour
 {
     public static SettingManager Instance { get; private set; }
 
+    public SettingSaveData SettingSaveData { get; private set; }
+
     [Header("Frame Settings")]
     public float TargetFrameRate = 60.0f;
 
-    [Header("Sound Settings")]
-    public SettingSaveData SettingSaveData;
-    void Awake()
+
+    private void Awake()
     {
-        if (Instance != null)
+        if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Ensure only one instance exists
             return;
         }
 
         Instance = this;
-        LoadSettingSaveData();
+        DontDestroyOnLoad(gameObject); // Optional: Keep instance across scenes
+        InitializeSettings();
     }
+
     public void SaveSettingSaveData()
     {
         PlayerPrefs.SetFloat("MusicVolume", SettingSaveData.MusicVolume);
@@ -33,37 +37,83 @@ public class SettingManager : MonoBehaviour
         Debug.Log("Settings Saved!");
     }
 
+    private void InitializeSettings()
+    {
+        SettingSaveData = new SettingSaveData();
+        LoadSettingSaveData();
+    }
+
     public void LoadSettingSaveData()
     {
         if (SettingSaveData == null)
         {
             SettingSaveData = new SettingSaveData();
         }
-        SettingSaveData.MusicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);  // Default volume = 1.0
-        SettingSaveData.VfxVolume = PlayerPrefs.GetFloat("VfxVolume", 1.0f);      // Default volume = 1.0
-        SettingSaveData.GameLanguage = (Language)PlayerPrefs.GetInt("GameLanguage", 0); // Default is English (index 0)
-        SettingSaveData.GameQuality = (GameQuality)PlayerPrefs.GetInt("GameQuality", 0); // Default is English (index 0)
 
-        SetGraphic();
+        SettingSaveData.MusicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+        SettingSaveData.VfxVolume = PlayerPrefs.GetFloat("VfxVolume", 1.0f);
+
+        // Kiểm tra giá trị hợp lệ cho GameLanguage
+        int languageValue = PlayerPrefs.GetInt("GameLanguage", 0);
+        if (Enum.IsDefined(typeof(Language), languageValue))
+        {
+            SettingSaveData.GameLanguage = (Language)languageValue;
+        }
+        else
+        {
+            SettingSaveData.GameLanguage = Language.English; // Giá trị mặc định
+            Debug.LogWarning("Invalid GameLanguage value. Resetting to English.");
+        }
+
+        // Kiểm tra giá trị hợp lệ cho GameQuality
+        int qualityValue = PlayerPrefs.GetInt("GameQuality", 0);
+        if (Enum.IsDefined(typeof(GameQuality), qualityValue))
+        {
+            SettingSaveData.GameQuality = (GameQuality)qualityValue;
+        }
+        else
+        {
+            SettingSaveData.GameQuality = GameQuality.Medium; // Giá trị mặc định
+            Debug.LogWarning("Invalid GameQuality value. Resetting to Medium.");
+        }
+
+        ApplyGraphicsSettings();
     }
 
-    public void SetGraphic()
+
+    private void ApplyGraphicsSettings()
     {
         if (SettingSaveData != null)
         {
-            if (SettingSaveData.GameQuality == GameQuality.Low)
-            {
-                TargetFrameRate = 30f;
-            }
-            else
-            {
-                TargetFrameRate = 60f;
-            }
+            TargetFrameRate = SettingSaveData.GameQuality == GameQuality.Low ? 30f : 60f;
             Application.targetFrameRate = (int)TargetFrameRate;
+
+            // Áp dụng cài đặt đồ họa
+            switch (SettingSaveData.GameQuality)
+            {
+                case GameQuality.Low:
+                    QualitySettings.shadowResolution = ShadowResolution.Low;
+                    QualitySettings.antiAliasing = 0;
+                    break;
+
+                case GameQuality.Medium:
+                    QualitySettings.shadowResolution = ShadowResolution.Medium;
+                    QualitySettings.antiAliasing = 2;
+                    break;
+
+                case GameQuality.High:
+                    QualitySettings.shadowResolution = ShadowResolution.High;
+                    QualitySettings.antiAliasing = 4;
+                    break;
+            }
+
+            Debug.Log($"Graphics settings applied: {SettingSaveData.GameQuality}");
         }
     }
+
 }
 
+[System.Serializable]
 public class SettingSaveData
 {
     public float MusicVolume;
@@ -80,6 +130,7 @@ public enum Language
 
 public enum GameQuality
 {
-    High,
     Low,
+    Medium,
+    High
 }

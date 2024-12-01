@@ -18,7 +18,7 @@ public class PlayerPositionReset : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Đặt vị trí của Player về (0, 0, 0) mỗi khi cảnh mới được tải
+        // Đặt vị trí của PlayerMovement về (0, 0, 0) mỗi khi cảnh mới được tải
         transform.position = Vector3.zero;
     }
 }

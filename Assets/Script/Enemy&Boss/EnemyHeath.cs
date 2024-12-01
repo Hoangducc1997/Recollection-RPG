@@ -7,18 +7,31 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 100;
     private int currentHealth;
     [SerializeField] private float timeForAnimDeath = 1f;
-
+    [SerializeField] private int expForPlayer; // Điểm kinh nghiệm cho Player
     public SpawnManager enemySpawner;
     public int enemyTypeIndex;
+
+    private PlayerExpManager playerExpManager; // Tham chiếu PlayerExpManager
 
     void Start()
     {
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
+
+        // Tìm và tham chiếu PlayerExpManager trong scene
+        playerExpManager = FindObjectOfType<PlayerExpManager>();
+
+        // Debug để đảm bảo đã tìm thấy PlayerExpManager
+        if (playerExpManager == null)
+        {
+            Debug.LogError("PlayerExpManager chưa được gắn trong scene!");
+        }
     }
 
     public void TakeDamage(int damage)
     {
+        if (currentHealth <= 0) return; // Tránh gọi lại nếu đã chết
+
         currentHealth -= damage;
 
         if (currentHealth > 0)
@@ -26,11 +39,12 @@ public class EnemyHealth : MonoBehaviour
             animator.SetBool("isHurt", true);
             StartCoroutine(ResetHurtAnimation());
         }
-        else if (currentHealth <= 0)
+        else
         {
             Die();
         }
     }
+
 
     private IEnumerator ResetHurtAnimation()
     {
@@ -48,8 +62,20 @@ public class EnemyHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(timeForAnimDeath);
 
-        enemySpawner.EnemyDefeated(enemyTypeIndex); // Thông báo số lượng enemy đã giảm
+        // Tăng điểm kinh nghiệm cho Player nếu PlayerExpManager đã được tham chiếu
+        if (playerExpManager != null)
+        {
+            playerExpManager.AddExp(expForPlayer);
+        }
+        else
+        {
+            Debug.LogWarning("Không thể thêm EXP: PlayerExpManager không tồn tại.");
+        }
+
+        // Thông báo Enemy đã bị tiêu diệt
+        enemySpawner.EnemyDefeated(enemyTypeIndex);
 
         Destroy(gameObject);
     }
 }
+    

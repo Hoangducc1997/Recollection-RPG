@@ -12,15 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63817d93022759543b57e795c78efe11, type: 3}
   m_Name: LocalizationSettings
   m_EditorClassIdentifier: 
-  TableId: 1RvKY3VE_y5FPhEECCa5dv4F7REJ7rBtGzQg9Z_B_DE4
+  TableId: 1UVi4je_uG7UuwDsbY18CiCEGXa7MNJ2yGCI4W7IlZSY
   Sheets:
-  - Name: Menu
+  - Name: Intro
     Id: 0
+    TextAsset: {fileID: 4900000, guid: 7139db2251302234099ff73b57099419, type: 3}
+  - Name: Menu
+    Id: 1721203983
     TextAsset: {fileID: 4900000, guid: cf55c05861a4d264a855e6349bef560e, type: 3}
-  - Name: Settings
-    Id: 331980525
-    TextAsset: {fileID: 4900000, guid: 9e915f09744b99e4eb2d3ded7f443ddc, type: 3}
-  - Name: Tests
-    Id: 1674352817
-    TextAsset: {fileID: 4900000, guid: 78955087f9a816a49851f5f94193f224, type: 3}
+  - Name: Pilot
+    Id: 258473932
+    TextAsset: {fileID: 4900000, guid: 61b31a098fed6dd4eb94314174e724a6, type: 3}
+  - Name: Island
+    Id: 1222706732
+    TextAsset: {fileID: 4900000, guid: 932b895935fcf1846b1e4a7174ca7a99, type: 3}
+  - Name: Map
+    Id: 1450822807
+    TextAsset: {fileID: 4900000, guid: 7698459fba008284082109400ab20062, type: 3}
   SaveFolder: {fileID: 102900000, guid: c392831e85f928548b8494fefd912562, type: 3}
