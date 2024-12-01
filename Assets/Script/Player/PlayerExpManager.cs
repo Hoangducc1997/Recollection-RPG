@@ -17,8 +17,9 @@ public class PlayerExpManager : MonoBehaviour
 
     public PlayerExpBar expBar; // Tham chiếu tới thanh exp
     public PlayerLevelManager levelManager; // Tham chiếu tới quản lý cấp độ
-    public TMP_Text levelUIText; 
-
+    public TMP_Text levelUIText;
+    [SerializeField] private SkillPanelManager skillPanelManager;
+        
     void Start()
     {
         InitializeExp();
@@ -50,7 +51,7 @@ public class PlayerExpManager : MonoBehaviour
     {
         Debug.Log($"Level Up! New Level: {levels[currentLevelIndex].level}");
 
-        if (currentLevelIndex < levels.Length - 1) // Kiểm tra nếu còn cấp độ tiếp theo
+        if (currentLevelIndex < levels.Length - 1)
         {
             currentLevelIndex++;
             levelManager.LevelUp(); // Gọi chức năng lên cấp từ PlayerLevelManager
@@ -60,8 +61,10 @@ public class PlayerExpManager : MonoBehaviour
             Debug.Log("Đã đạt cấp độ tối đa!");
         }
 
-        UpdateLevelText(); // Cập nhật UI Text khi lên cấp
-        expBar.UpdateExpBar(currentExp, levels[currentLevelIndex].expThreshold); // Cập nhật thanh exp
+        skillPanelManager.UpdateSkillPanel(currentLevelIndex); // Cập nhật hiển thị các panel kỹ năng
+
+        UpdateLevelText();
+        expBar.UpdateExpBar(currentExp, levels[currentLevelIndex].expThreshold);
     }
 
     private void UpdateLevelText()

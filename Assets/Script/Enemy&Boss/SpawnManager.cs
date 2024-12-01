@@ -5,12 +5,12 @@ using UnityEngine.UI;
 [System.Serializable]
 public class EnemySpawnInfo
 {
-    public string enemyName; // Tên của enemy
+    public string enemyName;
     public GameObject enemyPrefab;
-    public int enemyCount;
-    public float enemyTimeSpawn;
-    public Text enemyCountInputs;
-    public Text enemyCountTotalInputs;
+    public int enemyCount; // Tổng số lượng kẻ địch sẽ spawn
+    public float enemyTimeSpawn; // Thời gian giữa mỗi lần spawn
+    public Text enemyCountInputs; // UI để hiển thị số lượng đã spawn
+    public Text enemyCountTotalInputs; // UI để hiển thị tổng số lượng sẽ spawn
 }
 
 public class SpawnManager : MonoBehaviour
@@ -18,55 +18,60 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private EnemySpawnInfo[] enemySpawners;
     [SerializeField] private Transform[] spawnPoints;
 
-    private int[] remainingEnemyCounts;
-    private int totalEnemies; // Tổng số lượng enemy
+    private int[] currentSpawnedCounts; // Số lượng kẻ địch đã spawn hiện tại
+    private int[] remainingEnemyCounts; // Số lượng kẻ địch còn lại để spawn
 
     private void Start()
     {
+        currentSpawnedCounts = new int[enemySpawners.Length];
         remainingEnemyCounts = new int[enemySpawners.Length];
-        totalEnemies = 0;
 
         for (int i = 0; i < enemySpawners.Length; i++)
         {
-            remainingEnemyCounts[i] = enemySpawners[i].enemyCount;
-            totalEnemies += enemySpawners[i].enemyCount; // Cộng dồn tổng số lượng enemy
-            UpdateEnemyCountText(i); // Cập nhật Text với tên và số lượng
+            currentSpawnedCounts[i] = 0; // Bắt đầu số lượng đã spawn là 0
+            remainingEnemyCounts[i] = enemySpawners[i].enemyCount; // Khởi tạo số lượng kẻ địch cần spawn
+            UpdateEnemyCountText(i); // Cập nhật UI số lượng đã spawn
+            UpdateTotalEnemyCountText(i); // Hiển thị tổng số lượng sẽ spawn
         }
 
-        UpdateTotalEnemyCountText(); // Hiển thị tổng số lượng enemy
         StartCoroutine(SpawnEnemies());
     }
 
     private IEnumerator SpawnEnemies()
     {
-        foreach (var enemyInfo in enemySpawners)
+        for (int i = 0; i < enemySpawners.Length; i++)
         {
-            for (int i = 0; i < enemyInfo.enemyCount; i++)
+            for (int j = 0; j < enemySpawners[i].enemyCount; j++)
             {
-                yield return new WaitForSeconds(enemyInfo.enemyTimeSpawn);
+                yield return new WaitForSeconds(enemySpawners[i].enemyTimeSpawn);
 
                 int spawnIndex = Random.Range(0, spawnPoints.Length);
                 Transform spawnPoint = spawnPoints[spawnIndex];
 
-                GameObject spawnedEnemy = Instantiate(enemyInfo.enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+                GameObject spawnedEnemy = Instantiate(enemySpawners[i].enemyPrefab, spawnPoint.position, spawnPoint.rotation);
 
                 EnemyHealth enemyHealth = spawnedEnemy.GetComponent<EnemyHealth>();
                 if (enemyHealth != null)
                 {
                     enemyHealth.enemySpawner = this;
-                    enemyHealth.enemyTypeIndex = System.Array.IndexOf(enemySpawners, enemyInfo);
+                    enemyHealth.enemyTypeIndex = i;
                 }
+
+                // Cập nhật số lượng kẻ địch đã spawn
+                currentSpawnedCounts[i]++;
+                remainingEnemyCounts[i]--;
+                UpdateEnemyCountText(i);
             }
         }
     }
 
     public void EnemyDefeated(int enemyTypeIndex)
     {
-        remainingEnemyCounts[enemyTypeIndex]--;
+        // Khi kẻ địch bị tiêu diệt, giảm số lượng đã spawn
+        currentSpawnedCounts[enemyTypeIndex]--;
         UpdateEnemyCountText(enemyTypeIndex);
-        UpdateTotalEnemyCountText(); // Cập nhật lại tổng số lượng enemy
 
-        // Kiểm tra nếu tất cả enemy đã bị tiêu diệt
+        // Kiểm tra nếu tất cả kẻ địch đã bị tiêu diệt
         if (AreAllEnemiesDefeated())
         {
             GamePlayPopup gamePlayPopup = FindObjectOfType<GamePlayPopup>();
@@ -74,6 +79,7 @@ public class SpawnManager : MonoBehaviour
             {
                 gamePlayPopup.ShowFindBossText();
             }
+
             LevelManager levelManager = FindObjectOfType<LevelManager>();
             if (levelManager != null)
             {
@@ -84,25 +90,31 @@ public class SpawnManager : MonoBehaviour
 
     public bool AreAllEnemiesDefeated()
     {
-        return totalEnemies <= 0; // Kiểm tra nếu tổng số lượng enemy là 0
+        foreach (int count in currentSpawnedCounts)
+        {
+            if (count > 0)
+            {
+                return false; // Vẫn còn ít nhất một kẻ địch chưa bị tiêu diệt
+            }
+        }
+        return true; // Tất cả kẻ địch đã bị tiêu diệt
     }
 
     private void UpdateEnemyCountText(int enemyIndex)
     {
-        enemySpawners[enemyIndex].enemyCountInputs.text = $"{enemySpawners[enemyIndex].enemyName}:{Mathf.Max(0, remainingEnemyCounts[enemyIndex])}";
-    }
-
-    private void UpdateTotalEnemyCountText()
-    {
-        foreach (var enemyInfo in enemySpawners)
+        if (enemySpawners[enemyIndex].enemyCountInputs != null)
         {
-            if (enemyInfo.enemyCountTotalInputs != null)
-            {
-                // Hiển thị tên enemy và tổng số lượng toàn bộ enemy đã spawn
-                enemyInfo.enemyCountTotalInputs.text = $"Total {enemyInfo.enemyName}:{Mathf.Max(0, totalEnemies)}";
-            }
+            enemySpawners[enemyIndex].enemyCountInputs.text =
+                $"{enemySpawners[enemyIndex].enemyName}: {Mathf.Max(0, currentSpawnedCounts[enemyIndex])}";
         }
     }
 
-
+    private void UpdateTotalEnemyCountText(int enemyIndex)
+    {
+        if (enemySpawners[enemyIndex].enemyCountTotalInputs != null)
+        {
+            enemySpawners[enemyIndex].enemyCountTotalInputs.text =
+                $"{enemySpawners[enemyIndex].enemyName} Total: {enemySpawners[enemyIndex].enemyCount}";
+        }
+    }
 }
