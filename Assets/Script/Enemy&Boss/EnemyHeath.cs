@@ -4,24 +4,29 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     private Animator animator;
+
+    [Header("Health Settings")]
     [SerializeField] private int maxHealth = 100;
     private int currentHealth;
+
+    [Header("Death Settings")]
     [SerializeField] private float timeForAnimDeath = 1f;
+
+    [Header("Player Experience")]
     [SerializeField] private int expForPlayer; // Điểm kinh nghiệm cho Player
+    private PlayerExpManager playerExpManager;
+
+    [Header("Spawner Settings")]
     public SpawnManager enemySpawner;
     public int enemyTypeIndex;
-
-    private PlayerExpManager playerExpManager; // Tham chiếu PlayerExpManager
 
     void Start()
     {
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
 
-        // Tìm và tham chiếu PlayerExpManager trong scene
+        // Tìm PlayerExpManager trong scene
         playerExpManager = FindObjectOfType<PlayerExpManager>();
-
-        // Debug để đảm bảo đã tìm thấy PlayerExpManager
         if (playerExpManager == null)
         {
             Debug.LogError("PlayerExpManager chưa được gắn trong scene!");
@@ -30,14 +35,14 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (currentHealth <= 0) return; // Tránh gọi lại nếu đã chết
+        if (currentHealth <= 0) return; // Đã chết, không nhận thêm sát thương
 
         currentHealth -= damage;
+        Debug.Log($"Enemy nhận {damage} sát thương. Máu còn lại: {currentHealth}");
 
         if (currentHealth > 0)
         {
-            animator.SetBool("isHurt", true);
-            StartCoroutine(ResetHurtAnimation());
+            TriggerHurtAnimation();
         }
         else
         {
@@ -45,16 +50,32 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+    private void TriggerHurtAnimation()
+    {
+        if (animator != null)
+        {
+            animator.SetBool("isHurt", true);
+            StartCoroutine(ResetHurtAnimation());
+        }
+    }
 
     private IEnumerator ResetHurtAnimation()
     {
+        // Đợi đến khi animation "isHurt" chạy xong
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        animator.SetBool("isHurt", false);
+        if (animator != null)
+        {
+            animator.SetBool("isHurt", false);
+        }
     }
 
-    void Die()
+    private void Die()
     {
-        animator.SetBool("isDeath", true);
+        if (animator != null)
+        {
+            animator.SetBool("isDeath", true);
+        }
+        Debug.Log("Enemy đã chết");
         StartCoroutine(WaitForDeathAnimation());
     }
 
@@ -62,20 +83,25 @@ public class EnemyHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(timeForAnimDeath);
 
-        // Tăng điểm kinh nghiệm cho Player nếu PlayerExpManager đã được tham chiếu
         if (playerExpManager != null)
         {
             playerExpManager.AddExp(expForPlayer);
+            Debug.Log($"Player nhận {expForPlayer} EXP.");
         }
         else
         {
             Debug.LogWarning("Không thể thêm EXP: PlayerExpManager không tồn tại.");
         }
 
-        // Thông báo Enemy đã bị tiêu diệt
-        enemySpawner.EnemyDefeated(enemyTypeIndex);
+        if (enemySpawner != null)
+        {
+            enemySpawner.EnemyDefeated(enemyTypeIndex);
+        }
+        else
+        {
+            Debug.LogWarning("EnemySpawner chưa được gắn.");
+        }
 
         Destroy(gameObject);
     }
 }
-    

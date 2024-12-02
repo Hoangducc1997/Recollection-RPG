@@ -197,9 +197,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905236867731c4248ad961194ce5edd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceAttack: 1
-  damageEnemyAttack: 2
+  damageEnemyAttack: 0
   attackCooldown: 5
+  distanceAttack: 1
 --- !u!114 &7549112748728249901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   timeForAnimDeath: 1
-  expForPlayer: 5
+  expForPlayer: 10
   enemySpawner: {fileID: 0}
   enemyTypeIndex: 0
 --- !u!114 &3699656049215534042

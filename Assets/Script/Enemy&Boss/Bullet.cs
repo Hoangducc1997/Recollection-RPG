@@ -1,47 +1,66 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Bullet : BossBase
+public class Bullet : MonoBehaviour
 {
-    private Animator animator;
-    public float speed = 5f;
-    private Vector2 target;
+    protected Animator animator;
+    public float speed = 5f; // Tốc độ viên đạn
+    private Vector2 direction; // Hướng di chuyển của đạn
+    protected PlayerHealthManager playerHealthManager;
 
-    protected override void Start()
+    [SerializeField] protected int bulletDamage = 1;  // Sát thương của viên đạn (có thể điều chỉnh trong Inspector)
+
+    void Start()
     {
         animator = GetComponent<Animator>();
-        base.Start();
-        // Hủy viên đạn sau 10 giây
-        Destroy(gameObject, 8f);
+        Destroy(gameObject, 8f); // Tự hủy sau 8 giây nếu không chạm mục tiêu
     }
 
-    public void SetTarget(Vector2 targetPosition)
+    // Thiết lập hướng di chuyển cho viên đạn
+    public void SetDirection(Vector2 targetPosition)
     {
-        target = (targetPosition - (Vector2)transform.position).normalized;
-        float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        direction = (targetPosition - (Vector2)transform.position).normalized; // Hướng từ viên đạn đến mục tiêu
     }
 
     void Update()
     {
-        transform.position += (Vector3)target * speed * Time.deltaTime;
+        if (direction != Vector2.zero)
+        {
+            // Di chuyển viên đạn
+            transform.position += (Vector3)direction * speed * Time.deltaTime;
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    // Va chạm với Player
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && playerBarManager != null)
+        if (collision.CompareTag("Player"))
         {
+            // Gây sát thương
+            playerHealthManager = collision.GetComponent<PlayerHealthManager>();
+            if (playerHealthManager != null)
+            {
+                playerHealthManager.TakeDamage(bulletDamage);  // Sử dụng giá trị bulletDamage
+            }
+
+            // Dừng di chuyển của viên đạn
+            speed = 0f;  // Dừng di chuyển ngay lập tức
+
+            // Kích hoạt explosion ngay lập tức
             animator.SetTrigger("Explosion");
-            playerBarManager.TakeDamage(10); // Gây sát thương cho player
             StartCoroutine(DestroyAfterAnimation());
         }
     }
 
-    private IEnumerator DestroyAfterAnimation()
+    // Hủy viên đạn sau khi hoàn tất animation
+    protected IEnumerator DestroyAfterAnimation()
     {
-        // Đợi cho đến khi animation kết thúc trước khi hủy viên đạn
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        if (animator != null)
+        {
+            // Chờ đợi cho đến khi animation kết thúc
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        }
+        // Hủy viên đạn sau khi animation hoàn tất
         Destroy(gameObject);
     }
-
 }
