@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5690791521543089411}
   - component: {fileID: 3724463488335809587}
   - component: {fileID: 4744498822192409798}
+  - component: {fileID: 4011534178883204836}
   m_Layer: 0
   m_Name: GiantFlyBullet
   m_TagString: Untagged
@@ -136,3 +137,24 @@ MonoBehaviour:
   speed: 6
   bulletDamage: 2
   stunDuration: 0.5
+--- !u!95 &4011534178883204836
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8481146432629821022}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dae69aa86d41f3b49809a713f26c6b67, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8678180966858551386}
   - component: {fileID: 7892674688683445432}
+  - component: {fileID: 8222181217075178844}
   - component: {fileID: 7701917897459577507}
   - component: {fileID: 4694413911768131652}
   - component: {fileID: 6387986287063221811}
@@ -92,6 +93,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8222181217075178844
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4647132411187873280}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a1b8c8a1133a4bd40b6b865db7303596, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &7701917897459577507
 Rigidbody2D:
   serializedVersion: 4
@@ -198,7 +220,7 @@ MonoBehaviour:
   distanceAttack: 10
   minDistanceToPlayer: 3.6
   moveSpeed: 3
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 8481146432629821022, guid: ca5cd31aad9c0374c929c623910388d7, type: 3}
   shootingPoint: {fileID: 3036006369574614889}
 --- !u!114 &4686257941573886216
 MonoBehaviour:
@@ -212,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f1b574a6cd6164ebb6ca292756722e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 2
 --- !u!114 &6233079704528382570
 MonoBehaviour:
   m_ObjectHideFlags: 0

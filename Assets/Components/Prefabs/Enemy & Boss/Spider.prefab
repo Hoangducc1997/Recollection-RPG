@@ -218,7 +218,7 @@ MonoBehaviour:
   damageEnemyAttack: 5
   attackCooldown: 3
   distanceAttack: 8.1
-  minDistanceToPlayer: 4.5
+  minDistanceToPlayer: 3.9
   moveSpeed: 1.5
   bulletPrefab: {fileID: 8821319634057034934, guid: 5b545237725d64f4c9400d4f36de117c, type: 3}
   shootingPoint: {fileID: 5466838554476570090}
