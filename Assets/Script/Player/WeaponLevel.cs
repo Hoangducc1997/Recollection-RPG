@@ -2,10 +2,16 @@
 
 public class WeaponLevel : MonoBehaviour
 {
-    [SerializeField] private string currentWeaponType = "Sword";
-    [SerializeField] private int currentLevel = 1;
+    [SerializeField] private WeaponMeleeDatabase weaponDatabase; // Database chứa thông tin vũ khí
+    [SerializeField] private string currentWeaponType = "Sword"; // Loại vũ khí hiện tại
+    [SerializeField] private int currentLevel = 1; // Cấp độ vũ khí hiện tại
 
-    private WeaponMeleeStats currentWeaponStats; // Lưu trữ thông tin vũ khí từ WeaponLevelManager
+    private WeaponMeleeStats currentWeaponStats; // Thông tin vũ khí hiện tại
+
+    private void Start()
+    {
+        UpdateCurrentWeaponStats();
+    }
 
     public void SetCurrentWeaponStats(WeaponMeleeStats stats)
     {
@@ -17,30 +23,22 @@ public class WeaponLevel : MonoBehaviour
         return currentWeaponStats;
     }
 
-    public string GetWeaponType()
-    {
-        return currentWeaponType;
-    }
+    public string GetWeaponType() => currentWeaponType;
 
-    public int GetWeaponLevel()
-    {
-        return currentLevel;
-    }
+    public int GetWeaponLevel() => currentLevel;
 
-    // Thêm phương thức SetWeaponLevel
     public void SetWeaponLevel(int level)
     {
         if (level <= 0)
         {
-            Debug.LogWarning("Cấp độ không hợp lệ! Giữ nguyên cấp độ hiện tại.");
+            Debug.LogWarning("Cấp độ không hợp lệ!");
             return;
         }
 
         currentLevel = level;
-        Debug.Log($"Cấp độ vũ khí được đặt thành {currentLevel}");
+        UpdateCurrentWeaponStats();
     }
 
-    // Nếu cần, thêm SetWeaponType để đồng nhất với WeaponChangeManager
     public void SetWeaponType(string weaponType)
     {
         if (string.IsNullOrEmpty(weaponType))
@@ -50,6 +48,22 @@ public class WeaponLevel : MonoBehaviour
         }
 
         currentWeaponType = weaponType;
-        Debug.Log($"Loại vũ khí được đặt thành {currentWeaponType}");
+        UpdateCurrentWeaponStats();
+    }
+
+    private void UpdateCurrentWeaponStats()
+    {
+        // Tìm thông tin vũ khí dựa trên loại và cấp độ
+        currentWeaponStats = weaponDatabase.weapons.Find(w =>
+            w.weaponName == currentWeaponType && w.level == currentLevel);
+
+        if (currentWeaponStats != null)
+        {
+            Debug.Log($"Vũ khí hiện tại: {currentWeaponStats.weaponName}, cấp {currentWeaponStats.level}");
+        }
+        else
+        {
+            Debug.LogWarning($"Không tìm thấy thông tin cho vũ khí '{currentWeaponType}' cấp {currentLevel}!");
+        }
     }
 }

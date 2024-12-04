@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb5d6052819b6104489483fdd80ce2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageEnemyAttack: 5
+  damageEnemyAttack: 2
   attackCooldown: 2
   distanceAttack: 10
   minDistanceToPlayer: 3.6

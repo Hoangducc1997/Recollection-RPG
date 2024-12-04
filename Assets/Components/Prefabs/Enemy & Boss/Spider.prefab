@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 15
   m_Sprite: {fileID: 1454035108, guid: 2a94aa61f01b8e1438f4ed62eb0d2ae1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb5d6052819b6104489483fdd80ce2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageEnemyAttack: 5
+  damageEnemyAttack: 1
   attackCooldown: 3
   distanceAttack: 8.1
   minDistanceToPlayer: 3.9

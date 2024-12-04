@@ -178,6 +178,37 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
+--- !u!1 &4894665306100342934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2383334974853668309}
+  m_Layer: 0
+  m_Name: ShotPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2383334974853668309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4894665306100342934}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4107313595379135709}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5541683398814421815
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063d10c9173b3e74a9aa00f06f857012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2986191849663918788}
   levelUpWeapons:
   - {fileID: 1968112704507805058}
 --- !u!1 &6065404996672404234
@@ -530,6 +560,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2383334974853668309}
   - {fileID: 3286852044138628733}
   m_Father: {fileID: 8813211948709516032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -690,10 +721,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bba4250e101354fbe3bce9050ff911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterStats:
-  - moveSpeed: 3
-  - moveSpeed: 10
   joystick: {fileID: 0}
+  playerStats: {fileID: 0}
 --- !u!114 &3431123154571321382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,7 +735,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9185c7514bdb3445bfee7f0ed5e8f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponLevelManager: {fileID: 7805022064578596409}
+  weaponLevelManager: {fileID: 0}
+  shootPoint: {fileID: 2383334974853668309}
+  arrowPrefab: {fileID: 3406338057238139975, guid: 6582f5650b02a1f4f99baf5e19d9f3f4, type: 3}
   playerAnimator: {fileID: 6093526842696714867}
 --- !u!114 &434886188451907554
 MonoBehaviour:
@@ -744,6 +775,7 @@ MonoBehaviour:
   expBar: {fileID: 0}
   levelManager: {fileID: 8250193242533143918}
   levelUIText: {fileID: 0}
+  skillPanelManager: {fileID: 0}
 --- !u!114 &4130934131426007336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -929,14 +961,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1063768283841658190, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
   m_PrefabInstance: {fileID: 2548611994887600947}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7805022064578596409 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5696911881522394378, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
-  m_PrefabInstance: {fileID: 2548611994887600947}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968112704507805058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c889dee1858edc141a6a42a6a14dc4d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

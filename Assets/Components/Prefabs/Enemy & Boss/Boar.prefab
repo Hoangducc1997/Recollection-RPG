@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 15
   m_Sprite: {fileID: -849180730, guid: 6c6bc2cfefcdb744182e632aef8af329, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   timeForAnimDeath: 1
-  expForPlayer: 10
+  expForPlayer: 50
   enemySpawner: {fileID: 0}
   enemyTypeIndex: 0
 --- !u!114 &3699656049215534042

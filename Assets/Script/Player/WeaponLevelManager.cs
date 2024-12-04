@@ -3,20 +3,60 @@ using UnityEngine;
 
 public class WeaponLevelManager : MonoBehaviour
 {
-    [SerializeField] private WeaponMeleeDatabase weaponDatabase; // CSDL chứa danh sách vũ khí
     [SerializeField] private List<GameObject> weaponLevelChoose = new List<GameObject>();
-    [SerializeField] private WeaponLevel weaponLevel; // Gắn trực tiếp trong Inspector
-    private WeaponMeleeStats currentWeaponStats;      // Thông tin vũ khí hiện tại
+    [SerializeField] private List<WeaponLevel> weaponLevels = new List<WeaponLevel>(); // Cận chiến
+    [SerializeField] private List<WeaponRangedStats> rangedWeaponLevels = new List<WeaponRangedStats>(); // Tầm xa
     private int currentWeaponIndex = 0;
 
     private void Start()
     {
-        UpdateCurrentWeaponStats(); // Khởi tạo vũ khí ban đầu
+        SwitchWeapon(currentWeaponIndex);
+    }
+
+    public object GetCurrentWeaponStats()
+    {
+        if (currentWeaponIndex < weaponLevels.Count)
+        {
+            return weaponLevels[currentWeaponIndex]?.GetCurrentWeaponStats();
+        }
+        else if (currentWeaponIndex < weaponLevels.Count + rangedWeaponLevels.Count)
+        {
+            int rangedIndex = currentWeaponIndex - weaponLevels.Count;
+            return rangedWeaponLevels[rangedIndex];
+        }
+        return null;
+    }
+    public void SetWeaponType(string weaponType)
+    {
+        if (currentWeaponIndex < weaponLevels.Count)
+        {
+            weaponLevels[currentWeaponIndex]?.SetWeaponType(weaponType);
+        }
+        else if (currentWeaponIndex < weaponLevels.Count + rangedWeaponLevels.Count)
+        {
+            int rangedIndex = currentWeaponIndex - weaponLevels.Count;
+            // Cập nhật loại vũ khí tầm xa nếu cần
+            Debug.Log($"Set weapon type for ranged weapon: {weaponType}");
+        }
+    }
+
+    public void SetWeaponLevel(int level)
+    {
+        if (currentWeaponIndex < weaponLevels.Count)
+        {
+            weaponLevels[currentWeaponIndex]?.SetWeaponLevel(level);
+        }
+        else if (currentWeaponIndex < weaponLevels.Count + rangedWeaponLevels.Count)
+        {
+            int rangedIndex = currentWeaponIndex - weaponLevels.Count;
+            // Cập nhật level cho vũ khí tầm xa nếu cần
+            Debug.Log($"Set level for ranged weapon: {level}");
+        }
     }
 
     public void SwitchWeapon(int weaponIndex)
     {
-        if (weaponIndex < 0 || weaponIndex >= weaponLevelChoose.Count)
+        if (weaponIndex < 0 || weaponIndex >= weaponLevelChoose.Count + rangedWeaponLevels.Count)
         {
             Debug.LogError("weaponIndex không hợp lệ!");
             return;
@@ -29,74 +69,16 @@ public class WeaponLevelManager : MonoBehaviour
                 weapon.SetActive(false);
         }
 
-        // Bật vũ khí được chọn
-        if (weaponLevelChoose[weaponIndex] != null)
+        // Xử lý vũ khí cận chiến
+        if (weaponIndex < weaponLevelChoose.Count && weaponLevelChoose[weaponIndex] != null)
+        {
             weaponLevelChoose[weaponIndex].SetActive(true);
-
-        // Cập nhật loại vũ khí trong WeaponLevel
-        string weaponType = GetWeaponTypeFromIndex(weaponIndex);
-        weaponLevel?.SetWeaponType(weaponType);
-
-        // Cập nhật thông tin vũ khí
-        UpdateCurrentWeaponStats();
-    }
-
-    public void SetWeaponLevel(int level)
-    {
-        if (weaponLevel != null)
+        }
+        else if (weaponIndex >= weaponLevelChoose.Count)
         {
-            weaponLevel.SetWeaponLevel(level);
-            UpdateCurrentWeaponStats();
+            // Xử lý vũ khí tầm xa
+            Debug.Log("Switched to ranged weapon");
         }
     }
 
-    private void UpdateCurrentWeaponStats()
-    {
-        currentWeaponStats = weaponDatabase.weapons.Find(w =>
-            w.weaponName == weaponLevel.GetWeaponType() && w.level == weaponLevel.GetWeaponLevel());
-
-        if (currentWeaponStats != null)
-        {
-            weaponLevel.SetCurrentWeaponStats(currentWeaponStats); // Cập nhật vào WeaponLevel
-            Debug.Log($"Vũ khí hiện tại: {currentWeaponStats.weaponName}, cấp {currentWeaponStats.level}");
-        }
-        else
-        {
-            Debug.LogWarning($"Không tìm thấy vũ khí '{weaponLevel.GetWeaponType()}' cấp {weaponLevel.GetWeaponLevel()}!");
-            SetDefaultWeapon();
-        }
-    }
-
-
-    private void SetDefaultWeapon()
-    {
-        // Đặt vũ khí mặc định
-        currentWeaponStats = weaponDatabase.weapons.Find(w => w.weaponName == "Sword" && w.level == 1);
-        if (currentWeaponStats != null)
-        {
-            weaponLevel.SetWeaponType("Sword");
-            weaponLevel.SetWeaponLevel(1);
-            Debug.Log("Đã đặt vũ khí mặc định: Sword cấp 1.");
-        }
-        else
-        {
-            Debug.LogError("Không thể đặt vũ khí mặc định! Hãy kiểm tra WeaponDatabase.");
-        }
-    }
-
-    private string GetWeaponTypeFromIndex(int index)
-    {
-        switch (index)
-        {
-            case 0: return "Sword";
-            case 1: return "Bow";
-            case 2: return "Magic";
-            default: return null;
-        }
-    }
-
-    public WeaponMeleeStats GetCurrentWeaponStats()
-    {
-        return currentWeaponStats;
-    }
 }

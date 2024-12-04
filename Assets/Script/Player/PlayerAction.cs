@@ -4,82 +4,86 @@ using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
 {
-    [SerializeField] private WeaponLevel weaponLevel; // Gắn WeaponLevel trong Inspector
+    [SerializeField] private WeaponLevelManager weaponLevelManager;
+    [SerializeField] private Transform shootPoint; // Điểm bắn tên
+    [SerializeField] private GameObject arrowPrefab; // Prefab mũi tên
     [SerializeField] private Animator playerAnimator;
 
     private float lastAttackTime;
 
-    [SerializeField] private WeaponLevelManager weaponLevelManager; // Thay thế WeaponLevel bằng WeaponLevelManager
-
     void Update()
     {
-        WeaponMeleeStats currentWeaponStats = weaponLevelManager?.GetCurrentWeaponStats();
+        object currentWeaponStats = weaponLevelManager?.GetCurrentWeaponStats();
 
-        if (currentWeaponStats != null && !playerAnimator.GetBool("isAttacking"))
+        if (currentWeaponStats is WeaponMeleeStats meleeStats && !playerAnimator.GetBool("isAttacking"))
         {
-            if (Time.time >= lastAttackTime + currentWeaponStats.cooldownTime)
-            {
-                Collider2D[] enemiesInRange = FindEnemiesInRange(currentWeaponStats.rangeAtk);
+            HandleMeleeAttack(meleeStats);
+        }
+        else if (currentWeaponStats is WeaponRangedStats rangedStats)
+        {
+            HandleRangedAttack(rangedStats);
+        }
+    }
 
-                if (enemiesInRange.Length > 0)
-                {
-                    Attack(enemiesInRange, currentWeaponStats);
-                }
+    private void HandleMeleeAttack(WeaponMeleeStats meleeStats)
+    {
+        if (Time.time >= lastAttackTime + meleeStats.cooldownTime)
+        {
+            Collider2D[] enemiesInRange = FindEnemiesInRange(meleeStats.rangeAtk);
+            if (enemiesInRange.Length > 0)
+            {
+                AttackMelee(enemiesInRange, meleeStats);
             }
         }
     }
 
-    private void Attack(Collider2D[] enemies, WeaponMeleeStats currentWeapon)
+    private void HandleRangedAttack(WeaponRangedStats rangedStats)
+    {
+        if (Time.time >= lastAttackTime + rangedStats.cooldownTime)
+        {
+            ShootArrow(rangedStats);
+        }
+    }
+
+    private void AttackMelee(Collider2D[] enemies, WeaponMeleeStats currentWeapon)
     {
         playerAnimator.SetBool("isAttacking", true);
         playerAnimator.SetInteger("isWeaponType", currentWeapon.animationIndex);
 
-        foreach (Collider2D enemyCollider in enemies)
+        foreach (Collider2D enemy in enemies)
         {
-            GameObject enemy = enemyCollider.gameObject;
-
-            BossBarManager bossBarManager = enemy.GetComponent<BossBarManager>();
-            if (bossBarManager != null)
-            {
-                bossBarManager.TakeDamage(currentWeapon.damage);
-            }
-            else
-            {
-                EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
-                if (enemyHealth != null)
-                {
-                    enemyHealth.TakeDamage(currentWeapon.damage);
-                }
-            }
+            var enemyHealth = enemy.GetComponent<EnemyHealth>();
+            enemyHealth?.TakeDamage(currentWeapon.damage);
         }
 
         lastAttackTime = Time.time;
         StartCoroutine(ResetAttackCoroutine(currentWeapon.attackDuration));
     }
 
-    private Collider2D[] FindEnemiesInRange(float range)
+    private void ShootArrow(WeaponRangedStats rangedStats)
     {
-        List<Collider2D> enemiesInRange = new List<Collider2D>();
-        EnemyHealth[] allEnemies = FindObjectsOfType<EnemyHealth>();
-        foreach (EnemyHealth enemy in allEnemies)
+        playerAnimator.SetTrigger("Shoot");
+        GameObject arrow = Instantiate(arrowPrefab, shootPoint.position, shootPoint.rotation);
+        Rigidbody2D rb = arrow.GetComponent<Rigidbody2D>();
+        rb.velocity = shootPoint.right * rangedStats.rangeAtk;
+
+        ArrowAndMagicFly arrowScript = arrow.GetComponent<ArrowAndMagicFly>();
+        if (arrowScript != null)
         {
-            float distance = Vector2.Distance(transform.position, enemy.transform.position);
-            if (distance <= range)
-            {
-                Collider2D collider = enemy.GetComponent<Collider2D>();
-                if (collider != null)
-                {
-                    enemiesInRange.Add(collider);
-                }
-            }
+            arrowScript.SetDamage(rangedStats.damage);
         }
 
-        return enemiesInRange.ToArray();
+        lastAttackTime = Time.time;
     }
 
     private IEnumerator ResetAttackCoroutine(float duration)
     {
         yield return new WaitForSeconds(duration);
         playerAnimator.SetBool("isAttacking", false);
+    }
+
+    private Collider2D[] FindEnemiesInRange(float range)
+    {
+        return Physics2D.OverlapCircleAll(transform.position, range, LayerMask.GetMask("Enemy"));
     }
 }
