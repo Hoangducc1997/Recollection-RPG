@@ -1,28 +1,39 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ArrowAndMagicFly : MonoBehaviour
 {
     private int damage;  // Sát thương của mũi tên
 
+    [Header("Thời gian hủy mũi tên sau khi bắn")]
+    [SerializeField] private float lifetime = 3f; // Thời gian tồn tại mũi tên
+
     public void SetDamage(int damageAmount)
     {
         damage = damageAmount;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void Start()
     {
-        // Kiểm tra xem mũi tên có va chạm với đối tượng có script EnemyHealth không
+        // Hủy mũi tên sau `lifetime` giây
+        Destroy(gameObject, lifetime);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (collision.gameObject.CompareTag("Enemy"))
         {
             EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(damage);  // Gọi hàm TakeDamage trên kẻ thù
+                enemyHealth.TakeDamage(damage);
             }
 
-            // Hủy mũi tên sau khi va chạm
+            BossBarManager bossBarManager = collision.gameObject.GetComponent<BossBarManager>();
+            if (bossBarManager != null)
+            {
+                bossBarManager.TakeDamage(damage);
+            }
+
             Destroy(gameObject);
         }
     }

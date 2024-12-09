@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: Bow1
   level: 1
   damage: 2
-  rangeAtk: 2
-  cooldownTime: 2
-  attackDuration: 2
+  rangeAtk: 10
+  cooldownTime: 10
+  attackDuration: 10
   animationIndex: 5
