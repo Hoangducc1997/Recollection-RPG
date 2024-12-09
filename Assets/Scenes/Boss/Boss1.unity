@@ -41528,6 +41528,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3431123154571321382, guid: 5c6d2a625ad428d418c361b8a3102c47, type: 3}
+      propertyPath: joystick
+      value: 
+      objectReference: {fileID: 1546697182}
+    - target: {fileID: 3431123154571321382, guid: 5c6d2a625ad428d418c361b8a3102c47, type: 3}
       propertyPath: magicPrefab
       value: 
       objectReference: {fileID: 3406338057238139975, guid: 6582f5650b02a1f4f99baf5e19d9f3f4, type: 3}
