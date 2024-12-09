@@ -1,31 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// PlayerAction.cs
+using System.Collections;
 using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
 {
-    [SerializeField] private WeaponLevelManager weaponLevelManager;
-    [SerializeField] private Transform shootPoint; // Điểm bắn tên
-    [SerializeField] private GameObject arrowPrefab; // Prefab mũi tên
+    [SerializeField] private WeaponLevelManager weaponLevelsManager;
+    [SerializeField] private Transform shootPoint;
+    [SerializeField] private GameObject arrowPrefab;
+    [SerializeField] private GameObject magicPrefab;
     [SerializeField] private Animator playerAnimator;
 
     private float lastAttackTime;
 
     void Update()
     {
-        object currentWeaponStats = weaponLevelManager?.GetCurrentWeaponStats();
+        WeaponStats currentWeaponStats = weaponLevelsManager?.GetCurrentWeaponStats();
 
-        if (currentWeaponStats is WeaponMeleeStats meleeStats && !playerAnimator.GetBool("isAttacking"))
+        if (currentWeaponStats == null)
         {
-            HandleMeleeAttack(meleeStats);
+            Debug.LogWarning("No weapon equipped.");
+            return;
         }
-        else if (currentWeaponStats is WeaponRangedStats rangedStats)
+
+        if (currentWeaponStats is WeaponSwordStats swordStats && !playerAnimator.GetBool("isAttacking"))
         {
-            HandleRangedAttack(rangedStats);
+            HandleMeleeAttack(swordStats);
+        }
+        else if (currentWeaponStats is WeaponBowStats bowStats)
+        {
+            HandleRangedAttack(bowStats);
+        }
+        else if (currentWeaponStats is WeaponMagicStats magicStats)
+        {
+            HandleMagicAttack(magicStats);
         }
     }
 
-    private void HandleMeleeAttack(WeaponMeleeStats meleeStats)
+    private void HandleMeleeAttack(WeaponSwordStats meleeStats)
     {
         if (Time.time >= lastAttackTime + meleeStats.cooldownTime)
         {
@@ -34,10 +45,14 @@ public class PlayerAction : MonoBehaviour
             {
                 AttackMelee(enemiesInRange, meleeStats);
             }
+            else
+            {
+                Debug.Log("No enemies in range for melee attack.");
+            }
         }
     }
 
-    private void HandleRangedAttack(WeaponRangedStats rangedStats)
+    private void HandleRangedAttack(WeaponBowStats rangedStats)
     {
         if (Time.time >= lastAttackTime + rangedStats.cooldownTime)
         {
@@ -45,32 +60,65 @@ public class PlayerAction : MonoBehaviour
         }
     }
 
-    private void AttackMelee(Collider2D[] enemies, WeaponMeleeStats currentWeapon)
+    private void HandleMagicAttack(WeaponMagicStats magicStats)
+    {
+        if (Time.time >= lastAttackTime + magicStats.cooldownTime)
+        {
+            CastMagic(magicStats);
+        }
+    }
+
+    private void AttackMelee(Collider2D[] enemies, WeaponSwordStats currentWeapon)
     {
         playerAnimator.SetBool("isAttacking", true);
         playerAnimator.SetInteger("isWeaponType", currentWeapon.animationIndex);
 
         foreach (Collider2D enemy in enemies)
         {
-            var enemyHealth = enemy.GetComponent<EnemyHealth>();
-            enemyHealth?.TakeDamage(currentWeapon.damage);
+            if (enemy.TryGetComponent(out EnemyHealth enemyHealth))
+            {
+                enemyHealth.TakeDamage(currentWeapon.damage);
+                Debug.Log($"Dealt {currentWeapon.damage} damage to {enemy.name}");
+            }
+            else
+            {
+                Debug.LogWarning($"{enemy.name} does not have EnemyHealth component.");
+            }
         }
 
         lastAttackTime = Time.time;
         StartCoroutine(ResetAttackCoroutine(currentWeapon.attackDuration));
     }
 
-    private void ShootArrow(WeaponRangedStats rangedStats)
+    private void ShootArrow(WeaponBowStats rangedStats)
     {
         playerAnimator.SetTrigger("Shoot");
+        playerAnimator.SetInteger("isWeaponType", rangedStats.animationIndex);
+
         GameObject arrow = Instantiate(arrowPrefab, shootPoint.position, shootPoint.rotation);
         Rigidbody2D rb = arrow.GetComponent<Rigidbody2D>();
         rb.velocity = shootPoint.right * rangedStats.rangeAtk;
 
-        ArrowAndMagicFly arrowScript = arrow.GetComponent<ArrowAndMagicFly>();
-        if (arrowScript != null)
+        if (arrow.TryGetComponent(out ArrowAndMagicFly arrowScript))
         {
             arrowScript.SetDamage(rangedStats.damage);
+        }
+
+        lastAttackTime = Time.time;
+    }
+
+    private void CastMagic(WeaponMagicStats magicStats)
+    {
+        playerAnimator.SetTrigger("CastMagic");
+        playerAnimator.SetInteger("isWeaponType", magicStats.animationIndex);
+
+        GameObject magic = Instantiate(magicPrefab, shootPoint.position, shootPoint.rotation);
+        Rigidbody2D rb = magic.GetComponent<Rigidbody2D>();
+        rb.velocity = shootPoint.right * magicStats.rangeAtk;
+
+        if (magic.TryGetComponent(out ArrowAndMagicFly magicScript))
+        {
+            magicScript.SetDamage(magicStats.damage);
         }
 
         lastAttackTime = Time.time;
@@ -84,6 +132,8 @@ public class PlayerAction : MonoBehaviour
 
     private Collider2D[] FindEnemiesInRange(float range)
     {
-        return Physics2D.OverlapCircleAll(transform.position, range, LayerMask.GetMask("Enemy"));
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, range, LayerMask.GetMask("Enemy"));
+        Debug.Log($"Found {enemies.Length} enemies within range {range}");
+        return enemies;
     }
 }

@@ -13,7 +13,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private float timeForAnimDeath = 1f;
 
     [Header("Player Experience")]
-    [SerializeField] private int expForPlayer; // Điểm kinh nghiệm cho Player
+    [SerializeField] private int expForPlayer;
     private PlayerExpManager playerExpManager;
 
     [Header("Spawner Settings")]
@@ -25,20 +25,19 @@ public class EnemyHealth : MonoBehaviour
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
 
-        // Tìm PlayerExpManager trong scene
         playerExpManager = FindObjectOfType<PlayerExpManager>();
         if (playerExpManager == null)
         {
-            Debug.LogError("PlayerExpManager chưa được gắn trong scene!");
+            Debug.LogError("PlayerExpManager not found in the scene!");
         }
     }
 
     public void TakeDamage(int damage)
     {
-        if (currentHealth <= 0) return; // Đã chết, không nhận thêm sát thương
+        if (currentHealth <= 0) return;
 
         currentHealth -= damage;
-        Debug.Log($"Enemy nhận {damage} sát thương. Máu còn lại: {currentHealth}");
+        Debug.Log($"Enemy took {damage} damage. Remaining health: {currentHealth}");
 
         if (currentHealth > 0)
         {
@@ -55,13 +54,13 @@ public class EnemyHealth : MonoBehaviour
         if (animator != null)
         {
             animator.SetBool("isHurt", true);
+            Debug.Log("Enemy is hurt.");
             StartCoroutine(ResetHurtAnimation());
         }
     }
 
     private IEnumerator ResetHurtAnimation()
     {
-        // Đợi đến khi animation "isHurt" chạy xong
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         if (animator != null)
         {
@@ -75,7 +74,7 @@ public class EnemyHealth : MonoBehaviour
         {
             animator.SetBool("isDeath", true);
         }
-        Debug.Log("Enemy đã chết");
+        Debug.Log("Enemy died.");
         StartCoroutine(WaitForDeathAnimation());
     }
 
@@ -86,11 +85,7 @@ public class EnemyHealth : MonoBehaviour
         if (playerExpManager != null)
         {
             playerExpManager.AddExp(expForPlayer);
-            Debug.Log($"Player nhận {expForPlayer} EXP.");
-        }
-        else
-        {
-            Debug.LogWarning("Không thể thêm EXP: PlayerExpManager không tồn tại.");
+            Debug.Log($"Player gained {expForPlayer} EXP.");
         }
 
         if (enemySpawner != null)
@@ -99,7 +94,7 @@ public class EnemyHealth : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("EnemySpawner chưa được gắn.");
+            Debug.LogWarning("EnemySpawner not assigned.");
         }
 
         Destroy(gameObject);

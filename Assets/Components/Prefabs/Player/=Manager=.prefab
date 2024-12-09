@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelUpWeapons:
-  - {fileID: 1968112704507805058}
+  - {fileID: 0}
 --- !u!1 &6065404996672404234
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,9 +735,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9185c7514bdb3445bfee7f0ed5e8f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponLevelManager: {fileID: 0}
+  weaponLevelsManager: {fileID: 0}
   shootPoint: {fileID: 2383334974853668309}
   arrowPrefab: {fileID: 3406338057238139975, guid: 6582f5650b02a1f4f99baf5e19d9f3f4, type: 3}
+  magicPrefab: {fileID: 0}
   playerAnimator: {fileID: 6093526842696714867}
 --- !u!114 &434886188451907554
 MonoBehaviour:
@@ -876,18 +877,6 @@ PrefabInstance:
       propertyPath: weaponChoose.Array.size
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 5926752374857471956, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
-      propertyPath: weaponChoose.Array.data[0]
-      value: 
-      objectReference: {fileID: 1968112704507805058}
-    - target: {fileID: 5926752374857471956, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
-      propertyPath: weaponChoose.Array.data[1]
-      value: 
-      objectReference: {fileID: 1957820971928570535}
-    - target: {fileID: 5926752374857471956, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
-      propertyPath: weaponChoose.Array.data[2]
-      value: 
-      objectReference: {fileID: 332951650345722011}
     - target: {fileID: 6562639120659837811, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
       propertyPath: weaponStats.animationIndex
       value: 1
@@ -907,6 +896,18 @@ PrefabInstance:
     - target: {fileID: 7494120566686174695, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7522527796182411112, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
+      propertyPath: weaponChoose.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7522527796182411112, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
+      propertyPath: weaponChoose.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7522527796182411112, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
+      propertyPath: weaponChoose.Array.data[2]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7568437499562390909, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
       propertyPath: m_IsActive
@@ -937,25 +938,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9133569560420551677, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
+    - {fileID: 919935264051455161, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
+    - {fileID: 4039263810845787825, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
+    - {fileID: 2019643465015550193, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
+    - {fileID: 7971923041473230633, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
+    - {fileID: 1345270724563385265, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
---- !u!1 &332951650345722011 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2864461815602977704, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
-  m_PrefabInstance: {fileID: 2548611994887600947}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1957820971928570535 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4068420442297201044, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
-  m_PrefabInstance: {fileID: 2548611994887600947}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1968112704507805058 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4039263810845787825, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
-  m_PrefabInstance: {fileID: 2548611994887600947}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3286852044138628733 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1063768283841658190, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}

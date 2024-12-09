@@ -1,84 +1,50 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WeaponLevelManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> weaponLevelChoose = new List<GameObject>();
-    [SerializeField] private List<WeaponLevel> weaponLevels = new List<WeaponLevel>(); // Cận chiến
-    [SerializeField] private List<WeaponRangedStats> rangedWeaponLevels = new List<WeaponRangedStats>(); // Tầm xa
-    private int currentWeaponIndex = 0;
+    [SerializeField] private WeaponSwordStats[] swordWeapons;
+    [SerializeField] private WeaponBowStats[] bowWeapons;
+    [SerializeField] private WeaponMagicStats[] magicWeapons;
 
-    private void Start()
+    private WeaponStats currentWeapon;
+
+    public void SwitchWeapon(int index, WeaponType weaponType)
     {
-        SwitchWeapon(currentWeaponIndex);
+        switch (weaponType)
+        {
+            case WeaponType.Sword:
+                if (index < swordWeapons.Length)
+                    currentWeapon = swordWeapons[index];
+                break;
+
+            case WeaponType.Bow:
+                if (index < bowWeapons.Length)
+                    currentWeapon = bowWeapons[index];
+                break;
+
+            case WeaponType.Magic:
+                if (index < magicWeapons.Length)
+                    currentWeapon = magicWeapons[index];
+                break;
+
+            default:
+                Debug.LogWarning("Invalid weapon type or index.");
+                return;
+        }
+
+        Debug.Log($"Switched to {weaponType} weapon: {currentWeapon.weaponName}");
     }
 
-    public object GetCurrentWeaponStats()
+    public WeaponStats GetCurrentWeaponStats()
     {
-        if (currentWeaponIndex < weaponLevels.Count)
-        {
-            return weaponLevels[currentWeaponIndex]?.GetCurrentWeaponStats();
-        }
-        else if (currentWeaponIndex < weaponLevels.Count + rangedWeaponLevels.Count)
-        {
-            int rangedIndex = currentWeaponIndex - weaponLevels.Count;
-            return rangedWeaponLevels[rangedIndex];
-        }
-        return null;
-    }
-    public void SetWeaponType(string weaponType)
-    {
-        if (currentWeaponIndex < weaponLevels.Count)
-        {
-            weaponLevels[currentWeaponIndex]?.SetWeaponType(weaponType);
-        }
-        else if (currentWeaponIndex < weaponLevels.Count + rangedWeaponLevels.Count)
-        {
-            int rangedIndex = currentWeaponIndex - weaponLevels.Count;
-            // Cập nhật loại vũ khí tầm xa nếu cần
-            Debug.Log($"Set weapon type for ranged weapon: {weaponType}");
-        }
+        return currentWeapon;
     }
 
-    public void SetWeaponLevel(int level)
+    public void PerformAttack()
     {
-        if (currentWeaponIndex < weaponLevels.Count)
-        {
-            weaponLevels[currentWeaponIndex]?.SetWeaponLevel(level);
-        }
-        else if (currentWeaponIndex < weaponLevels.Count + rangedWeaponLevels.Count)
-        {
-            int rangedIndex = currentWeaponIndex - weaponLevels.Count;
-            // Cập nhật level cho vũ khí tầm xa nếu cần
-            Debug.Log($"Set level for ranged weapon: {level}");
-        }
+        if (currentWeapon != null)
+            currentWeapon.Attack();
+        else
+            Debug.LogWarning("No weapon is currently selected.");
     }
-
-    public void SwitchWeapon(int weaponIndex)
-    {
-        if (weaponIndex < 0 || weaponIndex >= weaponLevelChoose.Count + rangedWeaponLevels.Count)
-        {
-            Debug.LogError("weaponIndex không hợp lệ!");
-            return;
-        }
-
-        // Tắt tất cả vũ khí
-        foreach (var weapon in weaponLevelChoose)
-        {
-            if (weapon != null)
-                weapon.SetActive(false);
-        }
-
-        // Xử lý vũ khí cận chiến
-        if (weaponIndex < weaponLevelChoose.Count && weaponLevelChoose[weaponIndex] != null)
-        {
-            weaponLevelChoose[weaponIndex].SetActive(true);
-        }
-        else if (weaponIndex >= weaponLevelChoose.Count)
-        {
-            // Xử lý vũ khí tầm xa
-            Debug.Log("Switched to ranged weapon");
-        }
-    }
-
 }

@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adc526a4f9925b1498198535274d3543, type: 3}
-  m_Name: Sword1
+  m_Script: {fileID: 11500000, guid: 93663a05b0f750f4282c4581cdb4491c, type: 3}
+  m_Name: Bow2
   m_EditorClassIdentifier: 
-  weapons:
-  - weaponName: Sword1
-    level: 1
-    damage: 5
-    rangeAtk: 1
-    cooldownTime: 1
-    attackDuration: 1
-    animationIndex: 1
+  weaponName: Bow2
+  level: 2
+  damage: 2
+  rangeAtk: 2
+  cooldownTime: 2
+  attackDuration: 2
+  animationIndex: 5
