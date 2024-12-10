@@ -11,6 +11,11 @@ public class WeaponChangeManager : MonoBehaviour
     [SerializeField] private GameObject weaponMenu;
     [SerializeField] private AudioSource weaponSwitchSound;
 
+    private Image chooseWeaponImage;
+    private Image weapon1Image;
+    private Image weapon2Image;
+    private Image weapon3Image;
+
     private bool isWeaponMenuActive;
 
     void Start()
@@ -23,10 +28,16 @@ public class WeaponChangeManager : MonoBehaviour
         }
 
         weaponMenu.SetActive(false);
+
+        chooseWeaponImage = chooseWeaponButton.GetComponent<Image>();
+        weapon1Image = weapon1Button.GetComponent<Image>();
+        weapon2Image = weapon2Button.GetComponent<Image>();
+        weapon3Image = weapon3Button.GetComponent<Image>();
+
         chooseWeaponButton.onClick.AddListener(ToggleWeaponMenu);
-        weapon1Button.onClick.AddListener(() => SelectWeapon(0, WeaponType.Sword));
-        weapon2Button.onClick.AddListener(() => SelectWeapon(1, WeaponType.Bow));
-        weapon3Button.onClick.AddListener(() => SelectWeapon(2, WeaponType.Magic));
+        weapon1Button.onClick.AddListener(() => SelectWeapon(0, WeaponType.Sword, weapon1Image.sprite));
+        weapon2Button.onClick.AddListener(() => SelectWeapon(1, WeaponType.Bow, weapon2Image.sprite));
+        weapon3Button.onClick.AddListener(() => SelectWeapon(2, WeaponType.Magic, weapon3Image.sprite));
     }
 
     private void ToggleWeaponMenu()
@@ -35,9 +46,16 @@ public class WeaponChangeManager : MonoBehaviour
         weaponMenu.SetActive(isWeaponMenuActive);
     }
 
-    private void SelectWeapon(int weaponIndex, WeaponType weaponType)
+    private void SelectWeapon(int weaponIndex, WeaponType weaponType, Sprite selectedWeaponSprite)
     {
         if (weaponSwitchSound != null) weaponSwitchSound.Play();
+
+        Debug.Log($"Switching to weapon index: {weaponIndex} with sprite: {selectedWeaponSprite}");
+        if (selectedWeaponSprite == null)
+        {
+            Debug.LogError("Selected weapon sprite is null! Check weapon button images.");
+            return;
+        }
 
         weaponLevelsManager.SwitchWeapon(weaponIndex, weaponType);
 
@@ -45,6 +63,9 @@ public class WeaponChangeManager : MonoBehaviour
         weaponMenu.SetActive(false);
 
         UpdateWeaponButtons(weaponIndex);
+
+        chooseWeaponImage.sprite = selectedWeaponSprite;
+        Debug.Log("Updated chooseWeaponButton image successfully!");
     }
 
     private void UpdateWeaponButtons(int activeWeaponIndex)

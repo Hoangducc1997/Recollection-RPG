@@ -52,6 +52,12 @@ public class PlayerAction : MonoBehaviour
         return false;
     }
 
+    private IEnumerator ResetAttackCoroutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        playerAnimator.SetBool("isAttacking", false);
+    }
+
     private void HandleMeleeAttack(WeaponSwordStats meleeStats)
     {
         if (Time.time >= lastAttackTime + meleeStats.cooldownTime)
@@ -88,11 +94,6 @@ public class PlayerAction : MonoBehaviour
         lastAttackTime = Time.time;
         StartCoroutine(ResetAttackCoroutine(currentWeapon.attackDuration));
     }
-    private IEnumerator ResetAttackCoroutine(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        playerAnimator.SetBool("isAttacking", false);
-    }
 
     private void HandleRangedAttack(WeaponBowStats rangedStats)
     {
@@ -112,6 +113,10 @@ public class PlayerAction : MonoBehaviour
 
     private void ShootArrow(WeaponBowStats rangedStats)
     {
+        // Kích hoạt animation bắn cung
+        playerAnimator.SetBool("isAttacking", true);
+        playerAnimator.SetInteger("isWeaponType", rangedStats.animationIndex);
+
         Transform nearestEnemy = FindNearestEnemy();
         if (nearestEnemy != null)
         {
@@ -130,16 +135,21 @@ public class PlayerAction : MonoBehaviour
             }
 
             lastAttackTime = Time.time;
+
+            // Reset animation sau thời gian bắn (đồng bộ với thời gian animation)
+            StartCoroutine(ResetAttackCoroutine(rangedStats.attackDuration));
         }
         else
         {
             Debug.Log("No enemies nearby to shoot.");
+            playerAnimator.SetBool("isAttacking", false); // Hủy animation nếu không có mục tiêu
         }
     }
 
     private void CastMagic(WeaponMagicStats magicStats)
     {
-        playerAnimator.SetTrigger("CastMagic");
+        // Kích hoạt animation cho phép thuật
+        playerAnimator.SetTrigger("isAttacking");
         playerAnimator.SetInteger("isWeaponType", magicStats.animationIndex);
 
         GameObject magic = Instantiate(magicPrefab, shootPoint.position, shootPoint.rotation);
@@ -152,7 +162,11 @@ public class PlayerAction : MonoBehaviour
         }
 
         lastAttackTime = Time.time;
+
+        // Reset animation sau thời gian cooldown
+        StartCoroutine(ResetAttackCoroutine(magicStats.attackDuration));
     }
+
 
     private Collider2D[] FindEnemiesInRange(float range)
     {
