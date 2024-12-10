@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1063768283841658190}
   - component: {fileID: 8877873121635830861}
+  - component: {fileID: 5591340246834166046}
   m_Layer: 0
   m_Name: WeaponManager
   m_TagString: Untagged
@@ -47,3 +48,16 @@ MonoBehaviour:
   swordWeapons: []
   bowWeapons: []
   magicWeapons: []
+--- !u!114 &5591340246834166046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7246839302799671502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39c650026fc5bc47989b50d204f695f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponLevelManager: {fileID: 8877873121635830861}
