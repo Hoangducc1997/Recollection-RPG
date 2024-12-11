@@ -16,6 +16,6 @@ MonoBehaviour:
   level: 1
   damage: 2
   rangeAtk: 10
-  cooldownTime: 10
-  attackDuration: 10
+  cooldownTime: 2
+  attackDuration: 2
   animationIndex: 5

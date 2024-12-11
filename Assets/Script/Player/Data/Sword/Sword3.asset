@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Sword1
   level: 3
-  damage: 1
+  damage: 10
   rangeAtk: 1
   cooldownTime: 1
   attackDuration: 1

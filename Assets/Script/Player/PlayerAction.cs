@@ -15,7 +15,7 @@ public class PlayerAction : MonoBehaviour
 
     private float lastAttackTime;
 
-    void Update()
+    private void Update()
     {
         WeaponStats currentWeaponStats = weaponLevelsManager?.GetCurrentWeaponStats();
 
@@ -39,6 +39,12 @@ public class PlayerAction : MonoBehaviour
         {
             if (!isMoving) HandleMagicAttack(magicStats);
         }
+
+        // Kiểm tra trạng thái tấn công nếu không còn tấn công nữa
+        if (!playerAnimator.GetBool("isAttacking") && Time.time >= lastAttackTime + currentWeaponStats.attackDuration)
+        {
+            playerAnimator.SetBool("isAttacking", false);
+        }
     }
 
     private bool CheckIsMoving()
@@ -55,39 +61,46 @@ public class PlayerAction : MonoBehaviour
     private IEnumerator ResetAttackCoroutine(float duration)
     {
         yield return new WaitForSeconds(duration);
-        playerAnimator.SetBool("isAttacking", false);
+        playerAnimator.SetBool("isAttacking", false); // Đặt lại trạng thái sau khi tấn công
     }
+
 
     private void HandleMeleeAttack(WeaponSwordStats meleeStats)
     {
         if (Time.time >= lastAttackTime + meleeStats.cooldownTime)
         {
-            Collider2D[] enemiesInRange = FindEnemiesInRange(meleeStats.rangeAtk);
-            if (enemiesInRange.Length > 0)
+            if (!playerAnimator.GetBool("isAttacking"))
             {
-                AttackMelee(enemiesInRange, meleeStats);
-            }
-            else
-            {
-                Debug.Log("No enemies in range for melee attack.");
+                Collider2D[] enemiesAndBossesInRange = FindEnemiesAndBossesInRange(meleeStats.rangeAtk);
+                if (enemiesAndBossesInRange.Length > 0)
+                {
+                    AttackMelee(enemiesAndBossesInRange, meleeStats);
+                }
             }
         }
     }
-    private void AttackMelee(Collider2D[] enemies, WeaponSwordStats currentWeapon)
+
+
+    private void AttackMelee(Collider2D[] targets, WeaponSwordStats currentWeapon)
     {
         playerAnimator.SetBool("isAttacking", true);
         playerAnimator.SetInteger("isWeaponType", currentWeapon.animationIndex);
 
-        foreach (Collider2D enemy in enemies)
+        foreach (Collider2D target in targets)
         {
-            if (enemy.TryGetComponent(out EnemyHealth enemyHealth))
+            if (target.TryGetComponent(out EnemyHealth enemyHealth))
             {
                 enemyHealth.TakeDamage(currentWeapon.damage);
-                Debug.Log($"Dealt {currentWeapon.damage} damage to {enemy.name}");
+                Debug.Log($"Dealt {currentWeapon.damage} damage to enemy {target.name}");
+            }
+            else if (target.TryGetComponent(out BossBarManager bossBarManager))
+            {
+                bossBarManager.TakeDamage(currentWeapon.damage);
+                Debug.Log($"Dealt {currentWeapon.damage} damage to boss {target.name}");
             }
             else
             {
-                Debug.LogWarning($"{enemy.name} does not have EnemyHealth component.");
+                Debug.LogWarning($"{target.name} does not have valid Health component.");
             }
         }
 
@@ -99,28 +112,37 @@ public class PlayerAction : MonoBehaviour
     {
         if (Time.time >= lastAttackTime + rangedStats.cooldownTime)
         {
-            ShootArrow(rangedStats);
+            Transform nearestTarget = FindNearestEnemyOrBoss();
+            if (nearestTarget != null)  // Nếu có mục tiêu trong phạm vi
+            {
+                ShootArrow(rangedStats);
+                lastAttackTime = Time.time; // Đặt lại thời gian tấn công
+                playerAnimator.SetTrigger("isAttacking");  // Kích hoạt animation tấn công
+            }
+            else
+            {
+                // Nếu không có mục tiêu trong phạm vi, đặt lại trạng thái tấn công
+                playerAnimator.SetBool("isAttacking", false);
+            }
         }
     }
+
 
     private void HandleMagicAttack(WeaponMagicStats magicStats)
     {
         if (Time.time >= lastAttackTime + magicStats.cooldownTime)
         {
             CastMagic(magicStats);
+            lastAttackTime = Time.time; // Đặt lại thời gian tấn công
         }
     }
 
     private void ShootArrow(WeaponBowStats rangedStats)
     {
-        // Kích hoạt animation bắn cung
-        playerAnimator.SetBool("isAttacking", true);
-        playerAnimator.SetInteger("isWeaponType", rangedStats.animationIndex);
-
-        Transform nearestEnemy = FindNearestEnemy();
-        if (nearestEnemy != null)
+        Transform nearestTarget = FindNearestEnemyOrBoss();
+        if (nearestTarget != null)
         {
-            Vector2 direction = (nearestEnemy.position - shootPoint.position).normalized;
+            Vector2 direction = (nearestTarget.position - shootPoint.position).normalized;
 
             GameObject arrow = Instantiate(arrowPrefab, shootPoint.position, Quaternion.identity);
             Rigidbody2D rb = arrow.GetComponent<Rigidbody2D>();
@@ -129,68 +151,80 @@ public class PlayerAction : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
 
+            // Kích hoạt animation tại đây
+            playerAnimator.SetInteger("isWeaponType", rangedStats.animationIndex);
+            playerAnimator.SetTrigger("isAttacking");
+
+            // Truyền damage và các thuộc tính khác vào mũi tên
             if (arrow.TryGetComponent(out ArrowAndMagicFly arrowScript))
             {
                 arrowScript.SetDamage(rangedStats.damage);
             }
 
             lastAttackTime = Time.time;
-
-            // Reset animation sau thời gian bắn (đồng bộ với thời gian animation)
-            StartCoroutine(ResetAttackCoroutine(rangedStats.attackDuration));
         }
         else
         {
-            Debug.Log("No enemies nearby to shoot.");
-            playerAnimator.SetBool("isAttacking", false); // Hủy animation nếu không có mục tiêu
+            Debug.Log("No targets nearby to shoot.");
         }
     }
+
 
     private void CastMagic(WeaponMagicStats magicStats)
     {
-        // Kích hoạt animation cho phép thuật
-        playerAnimator.SetTrigger("isAttacking");
-        playerAnimator.SetInteger("isWeaponType", magicStats.animationIndex);
-
-        GameObject magic = Instantiate(magicPrefab, shootPoint.position, shootPoint.rotation);
-        Rigidbody2D rb = magic.GetComponent<Rigidbody2D>();
-        rb.velocity = shootPoint.right * magicStats.rangeAtk;
-
-        if (magic.TryGetComponent(out ArrowAndMagicFly magicScript))
+        Transform nearestTarget = FindNearestEnemyOrBoss();
+        if (nearestTarget != null)
         {
-            magicScript.SetDamage(magicStats.damage);
+            Vector2 direction = (nearestTarget.position - shootPoint.position).normalized;
+
+            GameObject magic = Instantiate(magicPrefab, shootPoint.position, Quaternion.identity);
+            Rigidbody2D rb = magic.GetComponent<Rigidbody2D>();
+            rb.velocity = direction * magicStats.rangeAtk;
+
+            // Gán Animator và animationIndex cho ArrowAndMagicFly
+            if (magic.TryGetComponent(out ArrowAndMagicFly magicScript))
+            {
+                magicScript.SetDamage(magicStats.damage);
+                magicScript.SetPlayerAnimator(playerAnimator, magicStats.animationIndex);
+            }
+
+            lastAttackTime = Time.time;
         }
-
-        lastAttackTime = Time.time;
-
-        // Reset animation sau thời gian cooldown
-        StartCoroutine(ResetAttackCoroutine(magicStats.attackDuration));
+        else
+        {
+            Debug.Log("No targets nearby for magic.");
+        }
     }
 
 
-    private Collider2D[] FindEnemiesInRange(float range)
+    private Collider2D[] FindEnemiesAndBossesInRange(float range)
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, range, LayerMask.GetMask("Enemy"));
-        Debug.Log($"Found {enemies.Length} enemies within range {range}");
-        return enemies;
+        // Tìm cả Enemy và Boss bằng cách gộp LayerMask
+        LayerMask combinedMask = LayerMask.GetMask("Enemy", "Boss");
+        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, range, combinedMask);
+        return targets;
     }
 
-    private Transform FindNearestEnemy()
+
+    private Transform FindNearestEnemyOrBoss()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, 10f, LayerMask.GetMask("Enemy"));
-        Transform nearestEnemy = null;
+        LayerMask combinedMask = LayerMask.GetMask("Enemy", "Boss");
+        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, 10f, combinedMask);
+
+        Transform nearestTarget = null;
         float shortestDistance = Mathf.Infinity;
 
-        foreach (Collider2D enemy in enemies)
+        foreach (Collider2D target in targets)
         {
-            float distance = Vector2.Distance(transform.position, enemy.transform.position);
+            float distance = Vector2.Distance(transform.position, target.transform.position);
             if (distance < shortestDistance)
             {
                 shortestDistance = distance;
-                nearestEnemy = enemy.transform;
+                nearestTarget = target.transform;
             }
         }
 
-        return nearestEnemy;
+        return nearestTarget;
     }
+
 }

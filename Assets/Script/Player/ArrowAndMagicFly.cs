@@ -1,37 +1,34 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ArrowAndMagicFly : MonoBehaviour
 {
-    private int damage;  // Sát thương của mũi tên
+    private int damage;
+    private Animator playerAnimator;
+    private int animationIndex;
 
-    [Header("Thời gian hủy mũi tên sau khi bắn")]
-    [SerializeField] private float lifetime = 3f; // Thời gian tồn tại mũi tên
-
-    public void SetDamage(int damageAmount)
+    public void SetDamage(int damageValue)
     {
-        damage = damageAmount;
+        damage = damageValue;
     }
 
-    private void Start()
+    public void SetPlayerAnimator(Animator animator, int index)
     {
-        // Hủy mũi tên sau `lifetime` giây
-        Destroy(gameObject, lifetime);
+        playerAnimator = animator;
+        animationIndex = index;
     }
+
+    // Ví dụ: sử dụng playerAnimator và animationIndex trong logic của đạn/phép thuật
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") || collision.CompareTag("Boss"))
         {
-            EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
-            if (enemyHealth != null)
-            {
-                enemyHealth.TakeDamage(damage);
-            }
+            // Thêm logic gây sát thương ở đây
+            Debug.Log($"Hit {collision.name} for {damage} damage.");
 
-            BossBarManager bossBarManager = collision.gameObject.GetComponent<BossBarManager>();
-            if (bossBarManager != null)
+            // Có thể thêm logic sử dụng animation index nếu cần
+            if (playerAnimator != null)
             {
-                bossBarManager.TakeDamage(damage);
+                playerAnimator.SetInteger("isWeaponType", animationIndex);
             }
 
             Destroy(gameObject);

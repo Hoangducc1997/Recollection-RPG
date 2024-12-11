@@ -200,6 +200,10 @@ PrefabInstance:
       propertyPath: skillPanelManager
       value: 
       objectReference: {fileID: 1005575194}
+    - target: {fileID: 697012931891235106, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: weaponLevelManager
+      value: 
+      objectReference: {fileID: 1872944235}
     - target: {fileID: 749363891056284918, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -598,7 +602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4794855258025846254, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpgradeWeapon
+      value: UpgradeSword
       objectReference: {fileID: 0}
     - target: {fileID: 4794855258025846254, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

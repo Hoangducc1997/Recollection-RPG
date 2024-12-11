@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 
+// Main Weapon Manager
 public class WeaponLevelManager : MonoBehaviour
 {
-    [SerializeField] private WeaponSwordStats[] swordWeapons;
-    [SerializeField] private WeaponBowStats[] bowWeapons;
-    [SerializeField] private WeaponMagicStats[] magicWeapons;
+    [Header("Weapon Arrays")]
+    public WeaponSwordStats[] swordWeapons;
+    public WeaponBowStats[] bowWeapons;
+    public WeaponMagicStats[] magicWeapons;
 
-    private WeaponStats currentWeapon;
+    private WeaponStats currentWeapon; // Vũ khí đang được sử dụng
 
     private bool[] swordUnlocked; // Trạng thái mở khóa của kiếm
     private bool[] bowUnlocked; // Trạng thái mở khóa của cung
@@ -18,25 +20,41 @@ public class WeaponLevelManager : MonoBehaviour
         swordUnlocked = new bool[swordWeapons.Length];
         bowUnlocked = new bool[bowWeapons.Length];
         magicUnlocked = new bool[magicWeapons.Length];
+
+        // Giả định Level 1 đã được mở khóa mặc định
+        if (swordWeapons.Length > 0)
+            swordUnlocked[0] = true; // Mở khóa vũ khí đầu tiên
     }
 
+    /// <summary>
+    /// Mở khóa vũ khí theo chỉ số và loại
+    /// </summary>
     public void UnlockWeapon(int index, WeaponType weaponType)
     {
         switch (weaponType)
         {
             case WeaponType.Sword:
                 if (index < swordUnlocked.Length)
-                    swordUnlocked[index] = true; // Mở khóa kiếm
+                {
+                    swordUnlocked[index] = true;
+                    Debug.Log($"Sword {index} unlocked!");
+                }
                 break;
 
             case WeaponType.Bow:
                 if (index < bowUnlocked.Length)
-                    bowUnlocked[index] = true; // Mở khóa cung
+                {
+                    bowUnlocked[index] = true;
+                    Debug.Log($"Bow {index} unlocked!");
+                }
                 break;
 
             case WeaponType.Magic:
                 if (index < magicUnlocked.Length)
-                    magicUnlocked[index] = true; // Mở khóa phép
+                {
+                    magicUnlocked[index] = true;
+                    Debug.Log($"Magic {index} unlocked!");
+                }
                 break;
 
             default:
@@ -45,40 +63,59 @@ public class WeaponLevelManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Chọn vũ khí
+    /// </summary>
     public void SwitchWeapon(int index, WeaponType weaponType)
     {
+        Debug.Log($"Attempting to switch to {weaponType} at level {index}");
         switch (weaponType)
         {
             case WeaponType.Sword:
                 if (index < swordWeapons.Length && swordUnlocked[index])
+                {
                     currentWeapon = swordWeapons[index];
+                    Debug.Log($"Switched to sword: {currentWeapon.weaponName}");
+                }
                 else
-                    Debug.LogWarning("This sword weapon is locked!");
+                {
+                    Debug.LogWarning($"Sword {index} is locked or invalid.");
+                }
                 break;
 
             case WeaponType.Bow:
                 if (index < bowWeapons.Length && bowUnlocked[index])
+                {
                     currentWeapon = bowWeapons[index];
+                    Debug.Log($"Switched to bow: {currentWeapon.weaponName}");
+                }
                 else
-                    Debug.LogWarning("This bow weapon is locked!");
+                {
+                    Debug.LogWarning("Bow is locked or invalid index.");
+                }
                 break;
 
             case WeaponType.Magic:
                 if (index < magicWeapons.Length && magicUnlocked[index])
+                {
                     currentWeapon = magicWeapons[index];
+                    Debug.Log($"Switched to magic: {currentWeapon.weaponName}");
+                }
                 else
-                    Debug.LogWarning("This magic weapon is locked!");
+                {
+                    Debug.LogWarning("Magic is locked or invalid index.");
+                }
                 break;
 
             default:
-                Debug.LogWarning("Invalid weapon type or index.");
+                Debug.LogWarning("Invalid weapon type.");
                 break;
         }
-
-        if (currentWeapon != null)
-            Debug.Log($"Switched to {weaponType} weapon: {currentWeapon.weaponName}");
     }
 
+    /// <summary>
+    /// Trả về thông tin vũ khí đang sử dụng
+    /// </summary>
     public WeaponStats GetCurrentWeaponStats()
     {
         return currentWeapon;
