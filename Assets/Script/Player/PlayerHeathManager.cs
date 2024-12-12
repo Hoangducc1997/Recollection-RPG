@@ -39,6 +39,16 @@ public class PlayerHealthManager : MonoBehaviour
             StartCoroutine(RestartLevel());
         }
     }
+    public void IncreaseHealth(int amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth; // Giới hạn máu tối đa
+        }
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
+    }
+
 
     private IEnumerator HurtAnim()
     {

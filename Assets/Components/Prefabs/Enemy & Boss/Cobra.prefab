@@ -217,6 +217,11 @@ MonoBehaviour:
   expForPlayer: 40
   enemySpawner: {fileID: 0}
   enemyTypeIndex: 0
+  itemDrops:
+  - itemPrefab: {fileID: 3858064487098320177, guid: 64de109d69ff0b24c961bf79f6b8bf64, type: 3}
+    dropRate: 100
+  - itemPrefab: {fileID: 6589351444115238859, guid: 0964d7a3bb5cbf540886fd9a496401aa, type: 3}
+    dropRate: 100
 --- !u!114 &8244115686558920001
 MonoBehaviour:
   m_ObjectHideFlags: 0

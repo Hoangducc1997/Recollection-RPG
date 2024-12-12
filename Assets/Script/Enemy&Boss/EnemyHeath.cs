@@ -20,6 +20,10 @@ public class EnemyHealth : MonoBehaviour
     public SpawnManager enemySpawner;
     public int enemyTypeIndex;
 
+    [Header("Item Drop Settings")]
+    [SerializeField] private ItemDrop[] itemDrops; // Danh sách các item và tỷ lệ rơi
+
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -97,6 +101,21 @@ public class EnemyHealth : MonoBehaviour
             Debug.LogWarning("EnemySpawner not assigned.");
         }
 
+        DropItems(); // Gọi hàm để rơi item
+
         Destroy(gameObject);
+    }
+
+    private void DropItems()
+    {
+        foreach (var itemDrop in itemDrops)
+        {
+            float chance = Random.Range(0f, 100f);
+            if (chance <= itemDrop.dropRate)
+            {
+                Instantiate(itemDrop.itemPrefab, transform.position, Quaternion.identity);
+                Debug.Log($"Dropped item: {itemDrop.itemPrefab.name} with chance {itemDrop.dropRate}%.");
+            }
+        }
     }
 }
