@@ -22,16 +22,27 @@ public class ArrowAndMagicFly : MonoBehaviour
     {
         if (collision.CompareTag("Enemy") || collision.CompareTag("Boss"))
         {
-            // Thêm logic gây sát thương ở đây
+            // Kiểm tra có nhận sát thương không
             Debug.Log($"Hit {collision.name} for {damage} damage.");
 
-            // Có thể thêm logic sử dụng animation index nếu cần
+            // Sử dụng animation index nếu cần
             if (playerAnimator != null)
             {
                 playerAnimator.SetInteger("isWeaponType", animationIndex);
             }
 
-            Destroy(gameObject);
+            // Xử lý sát thương
+            if (collision.TryGetComponent(out EnemyHealth enemyHealth))
+            {
+                enemyHealth.TakeDamage(damage);  // Gọi hàm nhận sát thương
+            }
+            else if (collision.TryGetComponent(out BossBarManager bossHealth))
+            {
+                bossHealth.TakeDamage(damage);  // Gọi hàm nhận sát thương cho Boss
+            }
+
+            Destroy(gameObject); // Phá hủy mũi tên sau khi va chạm
         }
     }
+
 }
