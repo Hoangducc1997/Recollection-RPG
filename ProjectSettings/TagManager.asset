@@ -8,6 +8,7 @@ TagManager:
   - PlayerLevel1
   - BoundaryCamera
   - Enemy
+  - Wall
   layers:
   - Default
   - TransparentFX
