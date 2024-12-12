@@ -134,6 +134,35 @@ public class PlayerAction : MonoBehaviour
         {
             CastMagic(magicStats);
             lastAttackTime = Time.time; // Đặt lại thời gian tấn công
+            playerAnimator.SetTrigger("isAttacking");  // Kích hoạt animation tấn công
+        }
+    }
+    private void CastMagic(WeaponMagicStats magicStats)
+    {
+        Transform nearestTarget = FindNearestEnemyOrBoss();
+        if (nearestTarget != null)
+        {
+            Vector2 direction = (nearestTarget.position - shootPoint.position).normalized;
+
+            GameObject magic = Instantiate(magicPrefab, shootPoint.position, Quaternion.identity);
+            Rigidbody2D rb = magic.GetComponent<Rigidbody2D>();
+            rb.velocity = direction * magicStats.rangeAtk;
+
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            magic.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            // Gán Animator và animationIndex cho ArrowAndMagicFly (hoặc script tương tự)
+            if (magic.TryGetComponent(out ArrowAndMagicFly magicScript))
+            {
+                magicScript.SetDamage(magicStats.damage);
+                magicScript.SetPlayerAnimator(playerAnimator, magicStats.animationIndex);
+            }
+
+            lastAttackTime = Time.time;
+        }
+        else
+        {
+            Debug.Log("No targets nearby for magic.");
         }
     }
 
@@ -169,34 +198,6 @@ public class PlayerAction : MonoBehaviour
         }
     }
 
-
-    private void CastMagic(WeaponMagicStats magicStats)
-    {
-        Transform nearestTarget = FindNearestEnemyOrBoss();
-        if (nearestTarget != null)
-        {
-            Vector2 direction = (nearestTarget.position - shootPoint.position).normalized;
-
-            GameObject magic = Instantiate(magicPrefab, shootPoint.position, Quaternion.identity);
-            Rigidbody2D rb = magic.GetComponent<Rigidbody2D>();
-            rb.velocity = direction * magicStats.rangeAtk;
-
-            // Gán Animator và animationIndex cho ArrowAndMagicFly
-            if (magic.TryGetComponent(out ArrowAndMagicFly magicScript))
-            {
-                magicScript.SetDamage(magicStats.damage);
-                magicScript.SetPlayerAnimator(playerAnimator, magicStats.animationIndex);
-            }
-
-            lastAttackTime = Time.time;
-        }
-        else
-        {
-            Debug.Log("No targets nearby for magic.");
-        }
-    }
-
-
     private Collider2D[] FindEnemiesAndBossesInRange(float range)
     {
         // Tìm cả Enemy và Boss bằng cách gộp LayerMask
@@ -225,6 +226,22 @@ public class PlayerAction : MonoBehaviour
         }
 
         return nearestTarget;
+    }
+    public void UpdateWeaponPrefabs(WeaponStats currentWeapon)
+    {
+        if (currentWeapon is WeaponBowStats bowStats)
+        {
+            arrowPrefab = bowStats.ArrowPrefab;
+        }
+        else if (currentWeapon is WeaponMagicStats magicStats)
+        {
+            magicPrefab = magicStats.MagicPrefab;
+        }
+        else
+        {
+            arrowPrefab = null;
+            magicPrefab = null;
+        }
     }
 
 }

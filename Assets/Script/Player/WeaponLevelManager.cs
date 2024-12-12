@@ -9,6 +9,7 @@ public class WeaponLevelManager : MonoBehaviour
     public WeaponMagicStats[] magicWeapons;
 
     private WeaponStats currentWeapon; // Vũ khí đang được sử dụng
+    [SerializeField] private PlayerAction playerAction;
 
     private bool[] swordUnlocked; // Trạng thái mở khóa của kiếm
     private bool[] bowUnlocked; // Trạng thái mở khóa của cung
@@ -86,7 +87,8 @@ public class WeaponLevelManager : MonoBehaviour
             case WeaponType.Bow:
                 if (index < bowWeapons.Length && bowUnlocked[index])
                 {
-                    currentWeapon = bowWeapons[index];
+                    currentWeapon = bowWeapons[index]; // Gán vũ khí mới trước
+                    playerAction?.UpdateWeaponPrefabs(currentWeapon); // Sau đó cập nhật prefab
                     Debug.Log($"Switched to bow: {currentWeapon.weaponName}");
                 }
                 else
@@ -112,6 +114,7 @@ public class WeaponLevelManager : MonoBehaviour
                 break;
         }
     }
+
 
     /// <summary>
     /// Trả về thông tin vũ khí đang sử dụng
