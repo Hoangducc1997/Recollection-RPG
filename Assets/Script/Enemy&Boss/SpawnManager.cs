@@ -80,7 +80,7 @@ public class SpawnManager : MonoBehaviour
                 gamePlayPopup.ShowFindBossText();
             }
 
-            LevelManager levelManager = FindObjectOfType<LevelManager>();
+            LevelMapBossAfterManager levelManager = FindObjectOfType<LevelMapBossAfterManager>();
             if (levelManager != null)
             {
                 levelManager.AppearObjBoss();

@@ -22,9 +22,6 @@ public class ArrowAndMagicFly : MonoBehaviour
     {
         if (collision.CompareTag("Enemy") || collision.CompareTag("Boss"))
         {
-            // Kiểm tra có nhận sát thương không
-            Debug.Log($"Hit {collision.name} for {damage} damage.");
-
             // Sử dụng animation index nếu cần
             if (playerAnimator != null)
             {

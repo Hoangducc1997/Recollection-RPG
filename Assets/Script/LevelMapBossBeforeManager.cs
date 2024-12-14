@@ -1,12 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour
+public class LevelMapBossBeforeManager : MonoBehaviour
 {
     public GameObject nextScene;
-    public GameObject bossAppear;
 
     void Start()
     {
@@ -16,11 +15,7 @@ public class LevelManager : MonoBehaviour
     public void AppearObjNextScene()
     {
         nextScene.SetActive(true);
-        bossAppear.SetActive(false);
+        Debug.Log("Next scene object activated!");
     }
 
-    public void AppearObjBoss()
-    {
-        bossAppear.SetActive(true);
-    }
 }

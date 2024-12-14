@@ -18,9 +18,9 @@ GameObject:
   - component: {fileID: 4686257941573886216}
   - component: {fileID: 6233079704528382570}
   - component: {fileID: 857033868518604438}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GiantFly
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -198,11 +198,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5bbf89477363ad4ebaf6c566ea68cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 15
   timeForAnimDeath: 1
   expForPlayer: 20
   enemySpawner: {fileID: 0}
   enemyTypeIndex: 0
+  itemDrops: []
 --- !u!114 &3528416514598170418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +220,7 @@ MonoBehaviour:
   attackCooldown: 2
   distanceAttack: 10
   minDistanceToPlayer: 3.6
-  moveSpeed: 3
+  moveSpeed: 2
   bulletPrefab: {fileID: 8481146432629821022, guid: ca5cd31aad9c0374c929c623910388d7, type: 3}
   shootingPoint: {fileID: 3036006369574614889}
 --- !u!114 &4686257941573886216
@@ -314,7 +315,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3036006369574614889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Bow1
   level: 1
-  damage: 2
+  damage: 20
   rangeAtk: 10
   cooldownTime: 2
   attackDuration: 2

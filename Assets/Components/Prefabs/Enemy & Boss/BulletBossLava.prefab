@@ -134,7 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd19ed1a90c9234d8a48f19529974d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  damageBossAttack: 0
+  attackCooldown: 0
+  speed: 3
 --- !u!95 &846426770306323798
 Animator:
   serializedVersion: 5
