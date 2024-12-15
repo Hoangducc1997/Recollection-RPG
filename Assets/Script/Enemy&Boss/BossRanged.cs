@@ -52,7 +52,7 @@ public class BossRanged : BossBase
     void ShootAtPlayer()
     {
         GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
-        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        BulletBoss bulletScript = bullet.GetComponent<BulletBoss>();
         bulletScript.SetTarget(player.transform.position); // Gửi vị trí của player đến viên đạn
     }
 

@@ -1,102 +1,126 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+// Main Weapon Manager
 public class WeaponLevelManager : MonoBehaviour
 {
-    [SerializeField] private WeaponMeleeDatabase weaponDatabase; // CSDL chứa danh sách vũ khí
-    [SerializeField] private List<GameObject> weaponLevelChoose = new List<GameObject>();
-    [SerializeField] private WeaponLevel weaponLevel; // Gắn trực tiếp trong Inspector
-    private WeaponMeleeStats currentWeaponStats;      // Thông tin vũ khí hiện tại
-    private int currentWeaponIndex = 0;
+    [Header("Weapon Arrays")]
+    public WeaponSwordStats[] swordWeapons;
+    public WeaponBowStats[] bowWeapons;
+    public WeaponMagicStats[] magicWeapons;
+
+    private WeaponStats currentWeapon; // Vũ khí đang được sử dụng
+    [SerializeField] private PlayerAction playerAction;
+
+    private bool[] swordUnlocked; // Trạng thái mở khóa của kiếm
+    private bool[] bowUnlocked; // Trạng thái mở khóa của cung
+    private bool[] magicUnlocked; // Trạng thái mở khóa của phép thuật
 
     private void Start()
     {
-        UpdateCurrentWeaponStats(); // Khởi tạo vũ khí ban đầu
+        // Khởi tạo trạng thái mở khóa của tất cả vũ khí là false
+        swordUnlocked = new bool[swordWeapons.Length];
+        bowUnlocked = new bool[bowWeapons.Length];
+        magicUnlocked = new bool[magicWeapons.Length];
+
+        // Giả định Level 1 đã được mở khóa mặc định
+        if (swordWeapons.Length > 0)
+            swordUnlocked[0] = true; // Mở khóa vũ khí đầu tiên
     }
 
-    public void SwitchWeapon(int weaponIndex)
+    /// <summary>
+    /// Mở khóa vũ khí theo chỉ số và loại
+    /// </summary>
+    public void UnlockWeapon(int index, WeaponType weaponType)
     {
-        if (weaponIndex < 0 || weaponIndex >= weaponLevelChoose.Count)
+        switch (weaponType)
         {
-            Debug.LogError("weaponIndex không hợp lệ!");
-            return;
-        }
+            case WeaponType.Sword:
+                if (index < swordUnlocked.Length)
+                {
+                    swordUnlocked[index] = true;
+                    Debug.Log($"Sword {index} unlocked!");
+                }
+                break;
 
-        // Tắt tất cả vũ khí
-        foreach (var weapon in weaponLevelChoose)
-        {
-            if (weapon != null)
-                weapon.SetActive(false);
-        }
+            case WeaponType.Bow:
+                if (index < bowUnlocked.Length)
+                {
+                    bowUnlocked[index] = true;
+                    Debug.Log($"Bow {index} unlocked!");
+                }
+                break;
 
-        // Bật vũ khí được chọn
-        if (weaponLevelChoose[weaponIndex] != null)
-            weaponLevelChoose[weaponIndex].SetActive(true);
+            case WeaponType.Magic:
+                if (index < magicUnlocked.Length)
+                {
+                    magicUnlocked[index] = true;
+                    Debug.Log($"Magic {index} unlocked!");
+                }
+                break;
 
-        // Cập nhật loại vũ khí trong WeaponLevel
-        string weaponType = GetWeaponTypeFromIndex(weaponIndex);
-        weaponLevel?.SetWeaponType(weaponType);
-
-        // Cập nhật thông tin vũ khí
-        UpdateCurrentWeaponStats();
-    }
-
-    public void SetWeaponLevel(int level)
-    {
-        if (weaponLevel != null)
-        {
-            weaponLevel.SetWeaponLevel(level);
-            UpdateCurrentWeaponStats();
-        }
-    }
-
-    private void UpdateCurrentWeaponStats()
-    {
-        currentWeaponStats = weaponDatabase.weapons.Find(w =>
-            w.weaponName == weaponLevel.GetWeaponType() && w.level == weaponLevel.GetWeaponLevel());
-
-        if (currentWeaponStats != null)
-        {
-            weaponLevel.SetCurrentWeaponStats(currentWeaponStats); // Cập nhật vào WeaponLevel
-            Debug.Log($"Vũ khí hiện tại: {currentWeaponStats.weaponName}, cấp {currentWeaponStats.level}");
-        }
-        else
-        {
-            Debug.LogWarning($"Không tìm thấy vũ khí '{weaponLevel.GetWeaponType()}' cấp {weaponLevel.GetWeaponLevel()}!");
-            SetDefaultWeapon();
+            default:
+                Debug.LogWarning("Invalid weapon type or index.");
+                break;
         }
     }
 
-
-    private void SetDefaultWeapon()
+    /// <summary>
+    /// Chọn vũ khí
+    /// </summary>
+    public void SwitchWeapon(int index, WeaponType weaponType)
     {
-        // Đặt vũ khí mặc định
-        currentWeaponStats = weaponDatabase.weapons.Find(w => w.weaponName == "Sword" && w.level == 1);
-        if (currentWeaponStats != null)
+        Debug.Log($"Attempting to switch to {weaponType} at level {index}");
+        switch (weaponType)
         {
-            weaponLevel.SetWeaponType("Sword");
-            weaponLevel.SetWeaponLevel(1);
-            Debug.Log("Đã đặt vũ khí mặc định: Sword cấp 1.");
-        }
-        else
-        {
-            Debug.LogError("Không thể đặt vũ khí mặc định! Hãy kiểm tra WeaponDatabase.");
+            case WeaponType.Sword:
+                if (index < swordWeapons.Length && swordUnlocked[index])
+                {
+                    currentWeapon = swordWeapons[index];
+                    Debug.Log($"Switched to sword: {currentWeapon.weaponName}");
+                }
+                else
+                {
+                    Debug.LogWarning($"Sword {index} is locked or invalid.");
+                }
+                break;
+
+            case WeaponType.Bow:
+                if (index < bowWeapons.Length && bowUnlocked[index])
+                {
+                    currentWeapon = bowWeapons[index]; // Gán vũ khí mới trước
+                    playerAction?.UpdateWeaponPrefabs(currentWeapon); // Sau đó cập nhật prefab
+                    Debug.Log($"Switched to bow: {currentWeapon.weaponName}");
+                }
+                else
+                {
+                    Debug.LogWarning("Bow is locked or invalid index.");
+                }
+                break;
+
+            case WeaponType.Magic:
+                if (index < magicWeapons.Length && magicUnlocked[index])
+                {
+                    currentWeapon = magicWeapons[index];
+                    Debug.Log($"Switched to magic: {currentWeapon.weaponName}");
+                }
+                else
+                {
+                    Debug.LogWarning("Magic is locked or invalid index.");
+                }
+                break;
+
+            default:
+                Debug.LogWarning("Invalid weapon type.");
+                break;
         }
     }
 
-    private string GetWeaponTypeFromIndex(int index)
-    {
-        switch (index)
-        {
-            case 0: return "Sword";
-            case 1: return "Bow";
-            case 2: return "Magic";
-            default: return null;
-        }
-    }
 
-    public WeaponMeleeStats GetCurrentWeaponStats()
+    /// <summary>
+    /// Trả về thông tin vũ khí đang sử dụng
+    /// </summary>
+    public WeaponStats GetCurrentWeaponStats()
     {
-        return currentWeaponStats;
+        return currentWeapon;
     }
 }

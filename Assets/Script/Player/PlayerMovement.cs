@@ -2,72 +2,105 @@
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Joystick Reference")]
     [SerializeField] private Joystick joystick;
-    [SerializeField] private PlayerStats playerStats; // Tham chiếu đến PlayerStats
+
+    [Header("Player Stats & Speed")]
+    [SerializeField] private PlayerStats playerStats;
 
     private Animator animator;
-    private Vector2 movement;
+    private Vector2 currentMovementInput;
     private bool isFacingRight = true;
-    private bool isRunning;
 
-    void Start()
+    private void Start()
     {
         animator = GetComponent<Animator>();
     }
-    void Update()
+
+    private void Update()
+    {
+        HandleInput();
+        UpdateAnimation();
+    }
+
+    private void FixedUpdate()
+    {
+        MovePlayer();
+    }
+
+    #region Input Handling
+    /// <summary>
+    /// Handle input from the joystick
+    /// </summary>
+    private void HandleInput()
     {
         if (joystick != null)
         {
-            PlayerMove(new Vector2(joystick.Direction.x, joystick.Direction.y));
-            FlipCharacter();
+            currentMovementInput = joystick.Direction;
 
-            isRunning = movement.magnitude > 0.2f;
-            animator.SetBool("isRunning", isRunning);
+            if (currentMovementInput.magnitude < 0.2f)
+            {
+                currentMovementInput = Vector2.zero; // Stop movement when stick input is too small
+            }
         }
         else
         {
-            Debug.LogWarning("Joystick is not assigned or active!");
+            Debug.LogWarning("Joystick reference is missing.");
+            currentMovementInput = Vector2.zero;
         }
+
+        HandleCharacterFlip();
     }
+    #endregion
 
-
-    void FixedUpdate()
+    #region Movement & Animation
+    /// <summary>
+    /// Move the player using physics and calculate movement speed
+    /// </summary>
+    private void MovePlayer()
     {
-        if (movement != Vector2.zero)
+        if (currentMovementInput != Vector2.zero)
         {
-            transform.position += (Vector3)(movement * playerStats.GetMoveSpeed() * Time.fixedDeltaTime);
+            Vector2 desiredMovement = Vector2.ClampMagnitude(currentMovementInput, 1f) * playerStats.GetMoveSpeed();
+            transform.Translate(desiredMovement * Time.fixedDeltaTime, Space.Self);
         }
     }
 
-
-    public void PlayerMove(Vector2 newJoystickPosition)
+    /// <summary>
+    /// Update the player's animation based on movement state
+    /// </summary>
+    private void UpdateAnimation()
     {
-        movement.x = newJoystickPosition.x;
-        movement.y = newJoystickPosition.y;
-
-        if (movement.magnitude < 0.2f)
-        {
-            movement = Vector2.zero;
-        }
+        bool isRunning = currentMovementInput.magnitude > 0.2f;
+        animator.SetBool("isRunning", isRunning);
     }
+    #endregion
 
-    private void FlipCharacter()
+    #region Flip Logic
+    /// <summary>
+    /// Flip the character's facing direction based on movement input
+    /// </summary>
+    private void HandleCharacterFlip()
     {
-        if (movement.x < 0 && isFacingRight)
+        if (currentMovementInput.x > 0 && !isFacingRight)
         {
             Flip();
         }
-        else if (movement.x > 0 && !isFacingRight)
+        else if (currentMovementInput.x < 0 && isFacingRight)
         {
             Flip();
         }
     }
 
+    /// <summary>
+    /// Handle flipping the character's scale on the x-axis
+    /// </summary>
     private void Flip()
     {
         isFacingRight = !isFacingRight;
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
+        Vector3 newScale = transform.localScale;
+        newScale.x *= -1;
+        transform.localScale = newScale;
     }
+    #endregion
 }

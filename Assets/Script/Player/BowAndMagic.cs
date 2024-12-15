@@ -2,18 +2,18 @@
 
 public class BowAndArrow : MonoBehaviour
 {
-    [SerializeField] private WeaponRangedDatabase weaponDatabase; // Danh sách các vũ khí
+    //[SerializeField] private WeaponRangedDatabase weaponDatabase; // Danh sách các vũ khí
     [SerializeField] private Transform shootPoint;  // Vị trí xuất phát mũi tên
     [SerializeField] private Animator bowAnimator;  // Animator của cây cung
     [SerializeField] private GameObject arrowPrefab; // Prefab mũi tên
-    private WeaponRangedStats currentWeaponStats;   // Vũ khí hiện tại
+    private WeaponBowStats currentWeaponStats;   // Vũ khí hiện tại
 
     private float lastAttackTime;  // Thời gian bắn lần cuối
 
     // Cập nhật vũ khí hiện tại (Có thể thay đổi vũ khí theo cấp độ)
     public void SetWeapon(string weaponName, int level)
     {
-        currentWeaponStats = weaponDatabase.weapons.Find(w => w.weaponName == weaponName && w.level == level);
+        //currentWeaponStats = weaponDatabase.weapons.Find(w => w.weaponName == weaponName && w.level == level);
         if (currentWeaponStats != null)
         {
             Debug.Log($"Vũ khí hiện tại: {currentWeaponStats.weaponName}, cấp {currentWeaponStats.level}, sát thương: {currentWeaponStats.damage}");

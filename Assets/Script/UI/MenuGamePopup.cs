@@ -23,6 +23,7 @@ public class MenuGamePopup : UIPopup
     public void StartGame()
     {
         SceneManager.LoadScene(nextSceneName);
+        UIManager.Instance?.HidePopup(PopupName.MainMenu);
     }
     public void QuitGame()
     {

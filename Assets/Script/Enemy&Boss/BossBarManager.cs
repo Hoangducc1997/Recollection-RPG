@@ -35,6 +35,7 @@ public class BossBarManager : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            StartCoroutine(DestroyBoss());
             isDead = true; // Đánh dấu boss đã chết
             Debug.Log("BossDeath");
             // Tăng điểm kinh nghiệm cho Player nếu PlayerExpManager đã được tham chiếu
@@ -46,12 +47,18 @@ public class BossBarManager : MonoBehaviour
             {
                 Debug.LogWarning("Không thể thêm EXP: PlayerExpManager không tồn tại.");
             }
-            LevelManager levelManager = FindObjectOfType<LevelManager>();
-            if (levelManager != null)
+            LevelMapBossAfterManager levelMapBossAfterManager = FindObjectOfType<LevelMapBossAfterManager>();
+            if (levelMapBossAfterManager != null)
             {
-                levelManager.AppearObjNextScene();
+                levelMapBossAfterManager.AppearObjNextScene();
             }
-            StartCoroutine(DestroyBoss());
+
+            LevelMapBossBeforeManager levelMapBossBeforeManager = FindObjectOfType<LevelMapBossBeforeManager>();
+            if (levelMapBossBeforeManager != null)
+            {
+                levelMapBossBeforeManager.AppearObjNextScene();
+            }
+
         }
     }
 
@@ -63,11 +70,15 @@ public class BossBarManager : MonoBehaviour
 
     private IEnumerator DestroyBoss()
     {
+        Debug.Log("DestroyBoss started");
         animator.SetBool("isDeath", true);
+        Collider2D collider = GetComponent<Collider2D>();
+        if (collider != null) collider.enabled = false; // Tắt collider
         yield return new WaitForSeconds(3f);
-        
+        Debug.Log("Destroying Boss");
         Destroy(gameObject);
     }
+
 
     // Hàm để kiểm tra trạng thái chết từ script khác
     public bool IsDead()

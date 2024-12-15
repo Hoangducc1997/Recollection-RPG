@@ -1,103 +1,57 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class WeaponManager : MonoBehaviour
 {
-    [SerializeField] public List<GameObject> weaponChoose = new List<GameObject>(); // Danh sách các vũ khí
-    private List<bool> weaponOwned = new List<bool>(); // Trạng thái sở hữu vũ khí
+    public static WeaponManager Instance { get; private set; }
 
-    private int currentWeaponIndex = 0; // Vũ khí hiện tại của Player
-    private static WeaponManager instance;
-    public static WeaponManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<WeaponManager>();
-                if (instance == null)
-                {
-                    Debug.LogError("WeaponManager không tìm thấy trong scene!");
-                }
-            }
-            return instance;
-        }
-    }
+    [SerializeField] private WeaponLevelManager weaponLevelManager;
+    private HashSet<int> pickedUpWeapons = new HashSet<int>(); // Lưu các index của vũ khí đã nhặt
+
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // Giữ WeaponManager khi chuyển scene
+            Instance = this;
         }
         else
         {
-            Destroy(gameObject); // Nếu đã có instance, hủy đối tượng này
+            Destroy(gameObject);
         }
     }
 
-
-    private void Start()
+    public WeaponLevelManager GetWeaponLevelManager()
     {
-        // Khởi tạo danh sách trạng thái sở hữu
-        weaponOwned = new List<bool>(new bool[weaponChoose.Count]);
+        return weaponLevelManager;
+    }
 
-        // Mặc định Player sở hữu vũ khí đầu tiên nếu danh sách không rỗng
-        if (weaponChoose.Count > 0)
+    public void PickUpWeapon(int index)
+    {
+        if (!pickedUpWeapons.Contains(index))
         {
-            weaponOwned[0] = true; // Sở hữu vũ khí đầu tiên
-            SwitchWeapon(0);      // Trang bị vũ khí đầu tiên
+            pickedUpWeapons.Add(index);
+            Debug.Log($"Weapon {index} has been picked up and unlocked.");
         }
         else
         {
-            Debug.LogWarning("Danh sách weaponChoose trống!");
+            Debug.Log($"Weapon {index} was already unlocked.");
         }
     }
 
-    // Chuyển đổi sang vũ khí khác
-    public void SwitchWeapon(int weaponIndex)
+    public void SwitchWeapon(int index, WeaponType weaponType)
     {
-        if (weaponIndex < 0 || weaponIndex >= weaponChoose.Count)
+        if (pickedUpWeapons.Contains(index))
         {
-            Debug.LogError("weaponIndex không hợp lệ!");
-            return;
+            weaponLevelManager.SwitchWeapon(index, weaponType);
         }
-
-        if (!weaponOwned[weaponIndex])
+        else
         {
-            Debug.LogWarning($"Vũ khí {weaponIndex} chưa được nhặt!");
-            return;
-        }
-
-        // Tắt tất cả vũ khí
-        foreach (var weapon in weaponChoose)
-        {
-            if (weapon != null)
-                weapon.SetActive(false);
-        }
-
-        // Bật vũ khí được chọn
-        if (weaponChoose[weaponIndex] != null)
-        {
-            weaponChoose[weaponIndex].SetActive(true);
-            currentWeaponIndex = weaponIndex;
+            Debug.LogWarning($"Weapon {index} has not been picked up yet.");
         }
     }
 
-    // Nhặt vũ khí
-    public void PickUpWeapon(int weaponIndex)
+    public bool IsWeaponPickedUp(int index)
     {
-        if (weaponIndex < 0 || weaponIndex >= weaponChoose.Count)
-        {
-            Debug.LogError("weaponIndex không hợp lệ!");
-            return;
-        }
-
-        // Đánh dấu là đã sở hữu
-        weaponOwned[weaponIndex] = true;
-        Debug.Log($"Player đã nhặt vũ khí {weaponIndex}!");
-
-        // Tự động chuyển đổi sang vũ khí vừa nhặt
-        SwitchWeapon(weaponIndex);
+        return pickedUpWeapons.Contains(index);
     }
 }

@@ -3,80 +3,77 @@ using UnityEngine.UI;
 
 public class WeaponChangeManager : MonoBehaviour
 {
-    [SerializeField] private WeaponManager weaponManager; // Quản lý kích hoạt vũ khí
-    [SerializeField] private WeaponLevel weaponLevelManager; // Quản lý loại và cấp độ vũ khí
+    [SerializeField] private WeaponLevelManager weaponLevelsManager;
     [SerializeField] private Button chooseWeaponButton;
     [SerializeField] private Button weapon1Button;
     [SerializeField] private Button weapon2Button;
     [SerializeField] private Button weapon3Button;
-    [SerializeField] private GameObject weaponObj; // UI chọn vũ khí
+    [SerializeField] private GameObject weaponMenu;
+    [SerializeField] private AudioSource weaponSwitchSound;
 
-    private bool isWeaponObjActive = false;
+    private Image chooseWeaponImage;
+    private Image weapon1Image;
+    private Image weapon2Image;
+    private Image weapon3Image;
+
+    private bool isWeaponMenuActive;
 
     void Start()
     {
-        weaponObj.SetActive(false); // Ẩn UI chọn vũ khí ban đầu
-        chooseWeaponButton.onClick.AddListener(ToggleWeaponChoose);
-
-        // Gán sự kiện nhấn vào các nút vũ khí
-        weapon1Button.onClick.AddListener(() => SelectWeapon(0, "Sword"));
-        weapon2Button.onClick.AddListener(() => SelectWeapon(1, "Bow"));
-        weapon3Button.onClick.AddListener(() => SelectWeapon(2, "Magic"));
-    }
-    public void PickUpWeapon(int weaponIndex)
-    {
-        if (weaponManager == null)
+        if (weaponMenu == null || chooseWeaponButton == null || weapon1Button == null ||
+            weapon2Button == null || weapon3Button == null)
         {
-            Debug.LogError("WeaponManager chưa được gán!");
+            Debug.LogError("Các thành phần UI chưa được gán trong Inspector!");
             return;
         }
 
-        weaponManager.PickUpWeapon(weaponIndex); // Gọi hàm nhặt vũ khí trong WeaponManager
-    }
+        weaponMenu.SetActive(false);
 
-    private void ToggleWeaponChoose()
-    {
-        isWeaponObjActive = !isWeaponObjActive; // Đảo trạng thái
-        weaponObj.SetActive(isWeaponObjActive); // Hiển thị hoặc ẩn UI
+        chooseWeaponImage = chooseWeaponButton.GetComponent<Image>();
+        weapon1Image = weapon1Button.GetComponent<Image>();
+        weapon2Image = weapon2Button.GetComponent<Image>();
+        weapon3Image = weapon3Button.GetComponent<Image>();
+
+        chooseWeaponButton.onClick.AddListener(ToggleWeaponMenu);
+        weapon1Button.onClick.AddListener(() => SelectWeapon(0, WeaponType.Sword, weapon1Image.sprite));
+        weapon2Button.onClick.AddListener(() => SelectWeapon(1, WeaponType.Bow, weapon2Image.sprite));
+        weapon3Button.onClick.AddListener(() => SelectWeapon(2, WeaponType.Magic, weapon3Image.sprite));
     }
 
-    public void SelectWeapon(int weaponIndex, string weaponType)
+    private void ToggleWeaponMenu()
     {
-        Debug.Log($"Đang chọn vũ khí: Index = {weaponIndex}, Type = {weaponType}");
+        isWeaponMenuActive = !isWeaponMenuActive;
+        weaponMenu.SetActive(isWeaponMenuActive);
+    }
 
-        // Kiểm tra WeaponManager
-        if (weaponManager == null)
+    private void SelectWeapon(int weaponIndex, WeaponType weaponType, Sprite selectedWeaponSprite)
+    {
+        if (weaponSwitchSound != null) weaponSwitchSound.Play();
+
+        Debug.Log($"Switching to weapon index: {weaponIndex} with sprite: {selectedWeaponSprite}");
+        if (selectedWeaponSprite == null)
         {
-            Debug.LogError("WeaponManager chưa được gán!");
+            Debug.LogError("Selected weapon sprite is null! Check weapon button images.");
             return;
         }
 
-        // Kiểm tra WeaponLevelManager
-        if (weaponLevelManager == null)
+        weaponLevelsManager.SwitchWeapon(weaponIndex, weaponType);
+
+        isWeaponMenuActive = false;
+        weaponMenu.SetActive(false);
+
+        UpdateWeaponButtons(weaponIndex);
+
+        chooseWeaponImage.sprite = selectedWeaponSprite;
+        Debug.Log("Updated chooseWeaponButton image successfully!");
+    }
+
+    private void UpdateWeaponButtons(int activeWeaponIndex)
+    {
+        Button[] weaponButtons = { weapon1Button, weapon2Button, weapon3Button };
+        for (int i = 0; i < weaponButtons.Length; i++)
         {
-            Debug.LogError("WeaponLevelManager chưa được gán!");
-            return;
+            weaponButtons[i].interactable = i != activeWeaponIndex;
         }
-
-        // Kiểm tra Index hợp lệ
-        if (weaponIndex < 0 || weaponIndex >= weaponManager.weaponChoose.Count)
-        {
-            Debug.LogError("weaponIndex không hợp lệ!");
-            return;
-        }
-
-        // Chuyển đổi vũ khí
-        weaponManager.SwitchWeapon(weaponIndex);
-        Debug.Log($"Đã kích hoạt vũ khí: {weaponType}");
-
-        // Cập nhật loại vũ khí trong WeaponLevel
-        weaponLevelManager.SetWeaponType(weaponType);
-
-        // Thử cập nhật cấp độ vũ khí nếu cần (mặc định cấp 1)
-        weaponLevelManager.SetWeaponLevel(1);
-
-        // Tắt UI chọn vũ khí sau khi chọn
-        isWeaponObjActive = false;
-        weaponObj.SetActive(false);
     }
 }

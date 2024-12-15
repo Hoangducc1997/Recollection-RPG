@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 15
   m_Sprite: {fileID: -849180730, guid: 6c6bc2cfefcdb744182e632aef8af329, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -197,9 +197,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905236867731c4248ad961194ce5edd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceAttack: 1
-  damageEnemyAttack: 2
+  damageEnemyAttack: 3
   attackCooldown: 5
+  distanceAttack: 2
 --- !u!114 &7549112748728249901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,9 +214,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   timeForAnimDeath: 1
-  expForPlayer: 5
+  expForPlayer: 20
   enemySpawner: {fileID: 0}
   enemyTypeIndex: 0
+  itemDrops:
+  - itemPrefab: {fileID: 3858064487098320177, guid: 64de109d69ff0b24c961bf79f6b8bf64, type: 3}
+    dropRate: 40
 --- !u!114 &3699656049215534042
 MonoBehaviour:
   m_ObjectHideFlags: 0

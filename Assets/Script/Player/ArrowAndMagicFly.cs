@@ -1,29 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ArrowAndMagicFly : MonoBehaviour
 {
-    private int damage;  // Sát thương của mũi tên
+    private int damage;
+    private Animator playerAnimator;
+    private int animationIndex;
 
-    public void SetDamage(int damageAmount)
+    public void SetDamage(int damageValue)
     {
-        damage = damageAmount;
+        damage = damageValue;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void SetPlayerAnimator(Animator animator, int index)
     {
-        // Kiểm tra xem mũi tên có va chạm với đối tượng có script EnemyHealth không
-        if (collision.gameObject.CompareTag("Enemy"))
+        playerAnimator = animator;
+        animationIndex = index;
+    }
+
+    // Ví dụ: sử dụng playerAnimator và animationIndex trong logic của đạn/phép thuật
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy") || collision.CompareTag("Boss"))
         {
-            EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
-            if (enemyHealth != null)
+            // Sử dụng animation index nếu cần
+            if (playerAnimator != null)
             {
-                enemyHealth.TakeDamage(damage);  // Gọi hàm TakeDamage trên kẻ thù
+                playerAnimator.SetInteger("isWeaponType", animationIndex);
             }
 
-            // Hủy mũi tên sau khi va chạm
-            Destroy(gameObject);
+            // Xử lý sát thương
+            if (collision.TryGetComponent(out EnemyHealth enemyHealth))
+            {
+                enemyHealth.TakeDamage(damage);  // Gọi hàm nhận sát thương
+            }
+            else if (collision.TryGetComponent(out BossBarManager bossHealth))
+            {
+                bossHealth.TakeDamage(damage);  // Gọi hàm nhận sát thương cho Boss
+            }
+
+            Destroy(gameObject); // Phá hủy mũi tên sau khi va chạm
         }
     }
+
 }
