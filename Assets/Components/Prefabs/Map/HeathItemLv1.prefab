@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7552281057644643198}
   - component: {fileID: 2530529869586143761}
   m_Layer: 0
-  m_Name: HeathItem
+  m_Name: HeathItemLv1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 0
-  healthIncreaseAmount: 2
+  healthIncreaseAmount: 5
 --- !u!95 &2530529869586143761
 Animator:
   serializedVersion: 5

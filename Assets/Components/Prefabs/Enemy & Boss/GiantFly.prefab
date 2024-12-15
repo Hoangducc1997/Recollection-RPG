@@ -198,12 +198,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5bbf89477363ad4ebaf6c566ea68cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 15
+  maxHealth: 10
   timeForAnimDeath: 1
-  expForPlayer: 20
+  expForPlayer: 30
   enemySpawner: {fileID: 0}
   enemyTypeIndex: 0
-  itemDrops: []
+  itemDrops:
+  - itemPrefab: {fileID: 3858064487098320177, guid: 64de109d69ff0b24c961bf79f6b8bf64, type: 3}
+    dropRate: 30
+  - itemPrefab: {fileID: 2907713894764559918, guid: b5e67018819b40f4dacff39958d56262, type: 3}
+    dropRate: 15
 --- !u!114 &3528416514598170418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,9 +220,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb5d6052819b6104489483fdd80ce2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageEnemyAttack: 2
-  attackCooldown: 2
-  distanceAttack: 10
+  damageEnemyAttack: 3
+  attackCooldown: 3
+  distanceAttack: 4.5
   minDistanceToPlayer: 3.6
   moveSpeed: 2
   bulletPrefab: {fileID: 8481146432629821022, guid: ca5cd31aad9c0374c929c623910388d7, type: 3}

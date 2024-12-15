@@ -265,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthBar: {fileID: 5110547034227218295}
-  expForPlayer: 100
+  expForPlayer: 900
 --- !u!114 &900960382738865807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f1b574a6cd6164ebb6ca292756722e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.8
+  moveSpeed: 2.5
 --- !u!114 &9192752001914584669
 MonoBehaviour:
   m_ObjectHideFlags: 0

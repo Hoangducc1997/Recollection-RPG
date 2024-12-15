@@ -198,8 +198,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageEnemyAttack: 2
-  attackCooldown: 5
-  distanceAttack: 2
+  attackCooldown: 3
+  distanceAttack: 1.5
 --- !u!114 &9119155583376347947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,14 +214,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   timeForAnimDeath: 1.5
-  expForPlayer: 40
+  expForPlayer: 10
   enemySpawner: {fileID: 0}
   enemyTypeIndex: 0
   itemDrops:
   - itemPrefab: {fileID: 3858064487098320177, guid: 64de109d69ff0b24c961bf79f6b8bf64, type: 3}
-    dropRate: 100
-  - itemPrefab: {fileID: 6589351444115238859, guid: 0964d7a3bb5cbf540886fd9a496401aa, type: 3}
-    dropRate: 100
+    dropRate: 35
 --- !u!114 &8244115686558920001
 MonoBehaviour:
   m_ObjectHideFlags: 0
