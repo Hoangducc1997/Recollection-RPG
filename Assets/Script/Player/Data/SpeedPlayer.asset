@@ -16,13 +16,19 @@ MonoBehaviour:
   levelSpeedData:
   - level: 2
     speedBoost: 2
-  - level: 3
-    speedBoost: 3
+  - level: 2
+    speedBoost: 2.7
   - level: 4
-    speedBoost: 4.5
+    speedBoost: 3.6
   - level: 5
-    speedBoost: 6
+    speedBoost: 5.4
   - level: 6
-    speedBoost: 8
+    speedBoost: 7.2
   - level: 7
-    speedBoost: 10
+    speedBoost: 8.1
+  - level: 8
+    speedBoost: 9.5
+  - level: 9
+    speedBoost: 10.9
+  - level: 10
+    speedBoost: 12
