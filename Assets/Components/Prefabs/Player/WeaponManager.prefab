@@ -45,9 +45,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b14b8778d863e884282aa811de82ea6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordWeapons: []
-  bowWeapons: []
-  magicWeapons: []
+  swordWeapons:
+  - {fileID: 11400000, guid: 6686b77e583defd4098ff5ba2ea72938, type: 2}
+  - {fileID: 11400000, guid: 4bc52078e3ec17f46a0a3722043303b6, type: 2}
+  - {fileID: 11400000, guid: e558b88986c36f14d91be535cf06575a, type: 2}
+  - {fileID: 11400000, guid: 3a720d6e7773a8144a8872494fe7d4b1, type: 2}
+  bowWeapons:
+  - {fileID: 11400000, guid: 408d16391fa457f4d9bb9b734b336de0, type: 2}
+  - {fileID: 11400000, guid: b142c4ac1b2288d44917ec9fe943e9a1, type: 2}
+  - {fileID: 11400000, guid: 481f4fd88d34fc548a5355e58ea46bb6, type: 2}
+  - {fileID: 11400000, guid: f3f3e829b09b4964793abb18338dafd3, type: 2}
+  magicWeapons:
+  - {fileID: 11400000, guid: 26f3c125299b3694baa2fe8fce0e4382, type: 2}
+  - {fileID: 11400000, guid: 9786c3b0119722e4abad8ff55ce2bef1, type: 2}
+  - {fileID: 11400000, guid: fc767f801d1064e40992cb26a58896e9, type: 2}
+  - {fileID: 11400000, guid: cd4e3588198a6554186f06ff86797f39, type: 2}
+  Shieldweapons:
+  - {fileID: 11400000, guid: 4d8b038736e395e40b5caee36fb1df21, type: 2}
+  - {fileID: 11400000, guid: 8eb32a6511477e147b9070e7183acb93, type: 2}
+  - {fileID: 11400000, guid: 6171c80d3154d9b42a8c6d3bba9fe166, type: 2}
+  - {fileID: 11400000, guid: 31ec7e166414b73448c2add4ed4a535e, type: 2}
+  playerAction: {fileID: 0}
 --- !u!114 &5591340246834166046
 MonoBehaviour:
   m_ObjectHideFlags: 0

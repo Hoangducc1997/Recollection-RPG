@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Bow2
   level: 2
-  damage: 50
-  rangeAtk: 3
-  cooldownTime: 2
-  attackDuration: 2
+  damage: 15
+  rangeAtk: 4.5
+  cooldownTime: 4.5
+  attackDuration: 4.5
   animationIndex: 5
   arrowPrefab: {fileID: 3406338057238139975, guid: 6582f5650b02a1f4f99baf5e19d9f3f4, type: 3}
-  arrowSpeed: 2
+  arrowSpeed: 3.6

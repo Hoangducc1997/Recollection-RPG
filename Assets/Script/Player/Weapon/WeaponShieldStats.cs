@@ -2,7 +2,7 @@
 
 [CreateAssetMenu(fileName = "NewShieldWeapon", menuName = "Weapons/Shield")]
 
-public class WeaponShieldStats : MonoBehaviour
+public class WeaponShieldStats : ScriptableObject
 {
     public string weaponName;       // Tên loại vũ khí
     public int level;               // Cấp độ vũ khí

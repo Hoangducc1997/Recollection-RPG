@@ -7,6 +7,7 @@ public class WeaponLevelManager : MonoBehaviour
     public WeaponSwordStats[] swordWeapons;
     public WeaponBowStats[] bowWeapons;
     public WeaponMagicStats[] magicWeapons;
+    public WeaponShieldStats[] Shieldweapons;
 
     private WeaponStats currentWeapon; // Vũ khí đang được sử dụng
     [SerializeField] private PlayerAction playerAction;
