@@ -3,13 +3,15 @@
 [CreateAssetMenu(fileName = "NewMagicWeapon", menuName = "Weapons/Magic")]
 public class WeaponMagicStats : WeaponStats
 {
-    // public float heathCost;    // Lượng máu tiêu hao
-    [SerializeField] private GameObject magicPrefab;  // Thêm vào đây để gán prefab trong Inspector
+    [SerializeField] private GameObject magicPrefab;  // Prefab của phép thuật
+    [SerializeField] private float magicSpeed;        // Tốc độ phép thuật
 
-    public GameObject MagicPrefab => magicPrefab; // Getter để truy cập arrowPrefab từ bên ngoài
+    public GameObject MagicPrefab => magicPrefab;     // Getter để lấy prefab
+    public float MagicSpeed => magicSpeed;            // Getter để lấy magicSpeed
+
     public override void Attack()
     {
         base.Attack();
-       // Debug.Log($"Swing range is {swingRange}");
+        // Có thể thêm logic tấn công riêng cho phép thuật ở đây
     }
 }
