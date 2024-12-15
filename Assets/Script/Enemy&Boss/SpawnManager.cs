@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,31 +40,51 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator SpawnEnemies()
     {
+        // Tạo danh sách để quản lý số lượng còn lại của từng loại enemy
+        List<int> remainingIndexes = new List<int>();
         for (int i = 0; i < enemySpawners.Length; i++)
         {
             for (int j = 0; j < enemySpawners[i].enemyCount; j++)
             {
-                yield return new WaitForSeconds(enemySpawners[i].enemyTimeSpawn);
-
-                int spawnIndex = Random.Range(0, spawnPoints.Length);
-                Transform spawnPoint = spawnPoints[spawnIndex];
-
-                GameObject spawnedEnemy = Instantiate(enemySpawners[i].enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-
-                EnemyHealth enemyHealth = spawnedEnemy.GetComponent<EnemyHealth>();
-                if (enemyHealth != null)
-                {
-                    enemyHealth.enemySpawner = this;
-                    enemyHealth.enemyTypeIndex = i;
-                }
-
-                // Cập nhật số lượng kẻ địch đã spawn
-                currentSpawnedCounts[i]++;
-                remainingEnemyCounts[i]--;
-                UpdateEnemyCountText(i);
+                remainingIndexes.Add(i);
             }
         }
+
+        while (remainingIndexes.Count > 0)
+        {
+            // Chọn ngẫu nhiên một loại enemy từ danh sách còn lại
+            int randomEnemyIndex = Random.Range(0, remainingIndexes.Count);
+            int selectedEnemyType = remainingIndexes[randomEnemyIndex];
+            remainingIndexes.RemoveAt(randomEnemyIndex);
+
+            // Chọn ngẫu nhiên một điểm spawn
+            int spawnIndex = Random.Range(0, spawnPoints.Length);
+            Transform spawnPoint = spawnPoints[spawnIndex];
+
+            // Spawn enemy
+            GameObject spawnedEnemy = Instantiate(
+                enemySpawners[selectedEnemyType].enemyPrefab,
+                spawnPoint.position,
+                spawnPoint.rotation
+            );
+
+            EnemyHealth enemyHealth = spawnedEnemy.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.enemySpawner = this;
+                enemyHealth.enemyTypeIndex = selectedEnemyType;
+            }
+
+            // Cập nhật số lượng kẻ địch đã spawn
+            currentSpawnedCounts[selectedEnemyType]++;
+            remainingEnemyCounts[selectedEnemyType]--;
+            UpdateEnemyCountText(selectedEnemyType);
+
+            // Thời gian chờ giữa các lần spawn
+            yield return new WaitForSeconds(enemySpawners[selectedEnemyType].enemyTimeSpawn);
+        }
     }
+
 
     public void EnemyDefeated(int enemyTypeIndex)
     {
