@@ -21,7 +21,6 @@ public class PlayerAction : MonoBehaviour
 
         if (currentWeaponStats == null)
         {
-            Debug.LogWarning("No weapon equipped.");
             playerAnimator.SetBool("isAttacking", false); // Đặt lại trạng thái tấn công
             return;
         }
@@ -88,12 +87,12 @@ public class PlayerAction : MonoBehaviour
             if (target.TryGetComponent(out EnemyHealth enemyHealth))
             {
                 enemyHealth.TakeDamage(currentWeapon.damage);
-                Debug.Log($"Dealt {currentWeapon.damage} damage to enemy {target.name}");
+               
             }
             else if (target.TryGetComponent(out BossBarManager bossBarManager))
             {
                 bossBarManager.TakeDamage(currentWeapon.damage);
-                Debug.Log($"Dealt {currentWeapon.damage} damage to boss {target.name}");
+                
             }
             else
             {

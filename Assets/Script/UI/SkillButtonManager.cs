@@ -24,13 +24,14 @@ public class SkillButtonManager : MonoBehaviour
         if (currentLevel + 1 < weaponLevelManager.swordWeapons.Length)
         {
             currentLevel++; // Tăng cấp độ
+            Debug.Log($"Upgrading sword to Level {currentLevel}");
+
             weaponLevelManager.UnlockWeapon(currentLevel, WeaponType.Sword); // Mở khóa kiếm
             weaponLevelManager.SwitchWeapon(currentLevel, WeaponType.Sword); // Chuyển vũ khí
-            Debug.Log($"Sword upgraded to Level {currentLevel}");
         }
         else
         {
-            Debug.Log("No more sword levels available!");
+            Debug.LogWarning("No more sword levels available!");
         }
 
         CloseSkillPanel(); // Đóng bảng kỹ năng

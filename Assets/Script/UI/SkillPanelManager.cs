@@ -12,8 +12,7 @@ public class SkillPanelManager : MonoBehaviour
 
         for (int i = 0; i < skillPanels.Length; i++)
         {
-            // Chỉ mở các panel nếu level >= 2 và panel phù hợp với level
-            if (currentLevel >= 1 && i < currentLevel)
+            if (i < currentLevel)
             {
                 skillPanels[i].SetActive(true);
                 PauseGame(); // Dừng game khi hiển thị panel

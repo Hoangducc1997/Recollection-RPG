@@ -1,13 +1,12 @@
-﻿using UnityEngine;
+﻿// WeaponLevelManager.cs
+using UnityEngine;
 
-// Main Weapon Manager
 public class WeaponLevelManager : MonoBehaviour
 {
     [Header("Weapon Arrays")]
     public WeaponSwordStats[] swordWeapons;
     public WeaponBowStats[] bowWeapons;
     public WeaponMagicStats[] magicWeapons;
-    public WeaponShieldStats[] Shieldweapons;
 
     private WeaponStats currentWeapon; // Vũ khí đang được sử dụng
     [SerializeField] private PlayerAction playerAction;
@@ -23,7 +22,8 @@ public class WeaponLevelManager : MonoBehaviour
         bowUnlocked = new bool[bowWeapons.Length];
         magicUnlocked = new bool[magicWeapons.Length];
 
-        // Giả định Level 1 đã được mở khóa mặc định
+        Debug.Log($"Sword Weapons Length: {swordWeapons.Length}");
+
         if (swordWeapons.Length > 0)
             swordUnlocked[0] = true; // Mở khóa vũ khí đầu tiên
     }
@@ -39,7 +39,11 @@ public class WeaponLevelManager : MonoBehaviour
                 if (index < swordUnlocked.Length)
                 {
                     swordUnlocked[index] = true;
-                    Debug.Log($"Sword {index} unlocked!");
+                    Debug.Log($"Sword {index} unlocked! Current Unlock Status: {GetUnlockedLevels(swordUnlocked)}");
+                }
+                else
+                {
+                    Debug.LogWarning($"Invalid index {index} for Sword.");
                 }
                 break;
 
@@ -47,7 +51,11 @@ public class WeaponLevelManager : MonoBehaviour
                 if (index < bowUnlocked.Length)
                 {
                     bowUnlocked[index] = true;
-                    Debug.Log($"Bow {index} unlocked!");
+                    Debug.Log($"Bow {index} unlocked! Current Unlock Status: {GetUnlockedLevels(bowUnlocked)}");
+                }
+                else
+                {
+                    Debug.LogWarning($"Invalid index {index} for Bow.");
                 }
                 break;
 
@@ -55,12 +63,16 @@ public class WeaponLevelManager : MonoBehaviour
                 if (index < magicUnlocked.Length)
                 {
                     magicUnlocked[index] = true;
-                    Debug.Log($"Magic {index} unlocked!");
+                    Debug.Log($"Magic {index} unlocked! Current Unlock Status: {GetUnlockedLevels(magicUnlocked)}");
+                }
+                else
+                {
+                    Debug.LogWarning($"Invalid index {index} for Magic.");
                 }
                 break;
 
             default:
-                Debug.LogWarning("Invalid weapon type or index.");
+                Debug.LogWarning("Invalid weapon type.");
                 break;
         }
     }
@@ -77,6 +89,7 @@ public class WeaponLevelManager : MonoBehaviour
                 if (index < swordWeapons.Length && swordUnlocked[index])
                 {
                     currentWeapon = swordWeapons[index];
+                    playerAction?.UpdateWeaponPrefabs(currentWeapon);
                     Debug.Log($"Switched to sword: {currentWeapon.weaponName}");
                 }
                 else
@@ -88,13 +101,13 @@ public class WeaponLevelManager : MonoBehaviour
             case WeaponType.Bow:
                 if (index < bowWeapons.Length && bowUnlocked[index])
                 {
-                    currentWeapon = bowWeapons[index]; // Gán vũ khí mới trước
-                    playerAction?.UpdateWeaponPrefabs(currentWeapon); // Sau đó cập nhật prefab
+                    currentWeapon = bowWeapons[index];
+                    playerAction?.UpdateWeaponPrefabs(currentWeapon);
                     Debug.Log($"Switched to bow: {currentWeapon.weaponName}");
                 }
                 else
                 {
-                    Debug.LogWarning("Bow is locked or invalid index.");
+                    Debug.LogWarning($"Bow {index} is locked or invalid.");
                 }
                 break;
 
@@ -102,11 +115,12 @@ public class WeaponLevelManager : MonoBehaviour
                 if (index < magicWeapons.Length && magicUnlocked[index])
                 {
                     currentWeapon = magicWeapons[index];
+                    playerAction?.UpdateWeaponPrefabs(currentWeapon);
                     Debug.Log($"Switched to magic: {currentWeapon.weaponName}");
                 }
                 else
                 {
-                    Debug.LogWarning("Magic is locked or invalid index.");
+                    Debug.LogWarning($"Magic {index} is locked or invalid.");
                 }
                 break;
 
@@ -116,6 +130,16 @@ public class WeaponLevelManager : MonoBehaviour
         }
     }
 
+    private string GetUnlockedLevels(bool[] unlocked)
+    {
+        string levels = "";
+        for (int i = 0; i < unlocked.Length; i++)
+        {
+            if (unlocked[i])
+                levels += $"{i} ";
+        }
+        return levels.Trim();
+    }
 
     /// <summary>
     /// Trả về thông tin vũ khí đang sử dụng

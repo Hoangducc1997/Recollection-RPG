@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 
 public class WeaponPickup : MonoBehaviour
 {
@@ -32,3 +33,4 @@ public class WeaponPickup : MonoBehaviour
         }
     }
 }
+
