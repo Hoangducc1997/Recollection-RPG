@@ -4,7 +4,8 @@ public class SkillButtonManager : MonoBehaviour
 {
     public PlayerStats playerStats; // Tham chiếu đến PlayerStats
     public SkillPanelManager skillPanelManager; // Tham chiếu đến SkillPanelManager
-    public WeaponLevelManager weaponLevelManager; // Thêm tham chiếu đến WeaponLevelManager
+    public WeaponLevelManager weaponLevelManager; // Tham chiếu đến WeaponLevelManager
+    public PlayerHealthManager playerHealthManager; // Tham chiếu đến PlayerHealthManager
 
     private int currentLevel = 0; // Lưu cấp độ hiện tại của kiếm
 
@@ -12,6 +13,7 @@ public class SkillButtonManager : MonoBehaviour
     {
         currentLevel = 0; // Khởi đầu cấp độ kiếm là 0
     }
+
     public void IncreaseSpeed(int level)
     {
         playerStats.IncreaseSpeedByLevel(level); // Gọi phương thức với cấp độ cụ thể
@@ -37,7 +39,19 @@ public class SkillButtonManager : MonoBehaviour
         CloseSkillPanel(); // Đóng bảng kỹ năng
     }
 
-
+    public void HealthIncrease(int healthIncreaseAmount)
+    {
+        if (playerHealthManager != null)
+        {
+            playerHealthManager.IncreaseHealth(healthIncreaseAmount); // Tăng máu
+            Debug.Log($"Health increased by {healthIncreaseAmount}. Current Health: {playerHealthManager.CurrentHealth}");
+        }
+        else
+        {
+            Debug.LogWarning("PlayerHealthManager is not assigned!");
+        }
+        CloseSkillPanel();
+    }
 
     private void CloseSkillPanel()
     {
