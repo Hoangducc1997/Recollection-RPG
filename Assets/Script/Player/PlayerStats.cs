@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "PlayerStats", menuName = "Game/PlayerStats")]
 public class PlayerStats : ScriptableObject
 {
-    public float baseMoveSpeed = 2.0f; // Tốc độ cơ bản
+    public float baseMoveSpeed = 1.5f; // Tốc độ cơ bản
     public List<LevelSpeedData> levelSpeedData; // Danh sách tốc độ tăng theo cấp độ
 
     private float currentMoveSpeed;
@@ -11,8 +12,19 @@ public class PlayerStats : ScriptableObject
 
     private void OnEnable()
     {
-        currentMoveSpeed = baseMoveSpeed; // Gán tốc độ cơ bản khi bắt đầu
+        if (levelSpeedData != null && levelSpeedData.Count > 0)
+        {
+            currentLevel = 0; // Khởi tạo cấp độ đầu tiên
+            currentMoveSpeed = levelSpeedData[currentLevel].speedBoost; // Gán tốc độ của cấp độ đầu tiên
+        }
+        else
+        {
+            currentMoveSpeed = baseMoveSpeed;
+            Debug.LogWarning("LevelSpeedData is empty or not assigned!");
+        }
     }
+
+
 
     public float GetMoveSpeed()
     {
@@ -24,24 +36,22 @@ public class PlayerStats : ScriptableObject
         return currentLevel; // Trả về cấp độ hiện tại
     }
 
-    public void IncreaseSpeedByLevel(int level)
+    public void IncreaseSpeed()
     {
-        Debug.Log($"IncreaseSpeedByLevel called with level: {level}");
+        Debug.Log($"Attempting to increase speed. CurrentLevel: {currentLevel}, MaxLevel: {levelSpeedData.Count - 1}");
 
-        // Tìm giá trị tốc độ cho cấp độ hiện tại
-        float newSpeed = baseMoveSpeed; // Tốc độ mặc định là baseMoveSpeed
-
-        foreach (var data in levelSpeedData)
+        if (currentLevel < levelSpeedData.Count - 1)
         {
-            if (data.level == level)
-            {
-                newSpeed = data.speedBoost; // Chỉ định tốc độ mới cho cấp độ
-                break;
-            }
+            currentLevel++;
+            currentMoveSpeed = levelSpeedData[currentLevel].speedBoost;
+            Debug.Log($"Speed increased to {currentMoveSpeed} at Level {currentLevel}");
         }
-
-        currentMoveSpeed = newSpeed; // Chỉ định tốc độ mới cho cấp độ
-        currentLevel = level; // Cập nhật cấp độ hiện tại
-        Debug.Log($"Move Speed updated: Base = {baseMoveSpeed}, New Speed = {currentMoveSpeed}");
+        else
+        {
+            Debug.LogWarning("Max speed level reached!");
+        }
     }
+
+
+
 }

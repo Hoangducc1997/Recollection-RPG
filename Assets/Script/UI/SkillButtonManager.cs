@@ -14,12 +14,20 @@ public class SkillButtonManager : MonoBehaviour
         currentLevel = 0; // Khởi đầu cấp độ kiếm là 0
     }
 
-    public void IncreaseSpeed(int level)
+    public void IncreaseSpeed()
     {
-        playerStats.IncreaseSpeedByLevel(level); // Gọi phương thức với cấp độ cụ thể
-        Debug.Log($"Speed upgraded at Level {level}. New Speed: {playerStats.GetMoveSpeed()}");
-        CloseSkillPanel(); // Đóng bảng kỹ năng
+        if (playerStats != null)
+        {
+            playerStats.IncreaseSpeed(); // Tăng tốc độ theo cấp độ
+            Debug.Log($"New Speed: {playerStats.GetMoveSpeed()}");
+        }
+        else
+        {
+            Debug.LogWarning("PlayerStats is not assigned!");
+        }
+        CloseSkillPanel();
     }
+
 
     public void UpgradeSword()
     {

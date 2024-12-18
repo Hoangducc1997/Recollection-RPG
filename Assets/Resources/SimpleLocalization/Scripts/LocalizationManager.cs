@@ -6,9 +6,11 @@ using UnityEngine;
 
 namespace Assets.SimpleLocalization.Scripts
 {
-	/// <summary>
-	/// Localization manager.
-	/// </summary>
+  
+
+    /// <summary>
+    /// Localization manager.
+    /// </summary>
     public static class LocalizationManager
     {
 		/// <summary>

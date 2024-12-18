@@ -81,7 +81,7 @@ public class PlayerAction : MonoBehaviour
     {
         playerAnimator.SetBool("isAttacking", true);
         playerAnimator.SetInteger("isWeaponType", currentWeapon.animationIndex);
-
+        AudioManager.Instance.PlayVFX("SwordAttack");
         foreach (Collider2D target in targets)
         {
             if (target.TryGetComponent(out EnemyHealth enemyHealth))
@@ -148,7 +148,7 @@ public class PlayerAction : MonoBehaviour
 
         playerAnimator.SetInteger("isWeaponType", rangedStats.animationIndex);
         playerAnimator.SetTrigger("isAttacking");
-
+        AudioManager.Instance.PlayVFX("BowShoot");  
         lastAttackTime = Time.time;
     }
 
@@ -188,7 +188,7 @@ public class PlayerAction : MonoBehaviour
 
         playerAnimator.SetInteger("isWeaponType", magicStats.animationIndex);
         playerAnimator.SetTrigger("isAttacking");
-
+        AudioManager.Instance.PlayVFX("MagicCast");
         lastAttackTime = Time.time;
     }
 

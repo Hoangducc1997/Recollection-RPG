@@ -190,8 +190,16 @@ MonoBehaviour:
   - SceneName: Boss2
     AudioClip: {fileID: 8300000, guid: 38db7c82402bc174299b00a48f1f15dd, type: 3}
   _vfxByNameList:
+  - Name: StartGame
+    AudioClip: {fileID: 8300000, guid: 9389e836bf21f3c46805f74d8aaca512, type: 3}
   - Name: Touch
     AudioClip: {fileID: 8300000, guid: 2a62d3e66f7a4174182084e52175cbf6, type: 3}
+  - Name: SwordAttack
+    AudioClip: {fileID: 8300000, guid: 9805ea951e9b332479f4bca4df11efbc, type: 3}
+  - Name: BowShoot
+    AudioClip: {fileID: 8300000, guid: dcc125e9efd99004ca22e2b6525fae1c, type: 3}
+  - Name: MagicCast
+    AudioClip: {fileID: 8300000, guid: fd2c0d512e159834ab4024214962194e, type: 3}
   _isPause: 0
 --- !u!1 &4093364848182160563
 GameObject:

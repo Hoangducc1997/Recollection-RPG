@@ -26,7 +26,13 @@ MonoBehaviour:
   - Name: Island
     Id: 1222706732
     TextAsset: {fileID: 4900000, guid: 932b895935fcf1846b1e4a7174ca7a99, type: 3}
-  - Name: Map
+  - Name: MapOvercome1
     Id: 1450822807
-    TextAsset: {fileID: 4900000, guid: 7698459fba008284082109400ab20062, type: 3}
+    TextAsset: {fileID: 4900000, guid: b296c51789f8fc04cb750b2186c77377, type: 3}
+  - Name: MapOvercome2
+    Id: 509615588
+    TextAsset: {fileID: 4900000, guid: c718985eea91e9743b8c0b36ccb02a07, type: 3}
+  - Name: MapBoss1
+    Id: 1067417251
+    TextAsset: {fileID: 4900000, guid: 82d8a80a47a99984a9b85a8c76fbf49b, type: 3}
   SaveFolder: {fileID: 102900000, guid: c392831e85f928548b8494fefd912562, type: 3}

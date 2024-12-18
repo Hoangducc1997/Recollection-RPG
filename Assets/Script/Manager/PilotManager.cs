@@ -1,7 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; // To manage scene transitions
+using Assets.SimpleLocalization.Scripts;
 
 public class ScrollingText : MonoBehaviour
 {
@@ -11,6 +11,7 @@ public class ScrollingText : MonoBehaviour
     [SerializeField] private UnityEngine.GameObject panelPilotText;
     [SerializeField] private UnityEngine.GameObject buttonNextScene;
 
+    [SerializeField] private string LocalizationKey; // Thêm LocalizationKey
     private string fullText; // The full text to display
     private int currentCharIndex = 0; // Tracks the current character to reveal
     private bool isRevealing = true; // Indicates if text is revealing or not
@@ -20,16 +21,40 @@ public class ScrollingText : MonoBehaviour
     {
         panelPilotText.SetActive(true);
         buttonNextScene.SetActive(false);
-        // Store the full text and start with an empty display
-        fullText = uiText.text;
-        uiText.text = "";
 
-        // Start revealing the text
+        // Lấy text từ LocalizationManager trước
+        fullText = LocalizationManager.Localize(LocalizationKey);
+        uiText.text = ""; // Đặt text ban đầu là rỗng
+
+        // Bắt đầu hiển thị chữ
         StartCoroutine(RevealText());
 
-        // Add listener for the button click
+        // Add listener cho nút bấm
         revealAllButton.onClick.AddListener(OnButtonClick);
     }
+
+
+    void OnDestroy()
+    {
+        // Hủy đăng ký sự kiện khi Object bị phá hủy
+        LocalizationManager.OnLocalizationChanged -= UpdateFullText;
+    }
+
+    private void UpdateFullText()
+    {
+        // Lấy giá trị đã dịch từ LocalizationManager
+        fullText = LocalizationManager.Localize(LocalizationKey); // Sửa lại tên biến
+
+        // Reset trạng thái hiển thị
+        uiText.text = "";
+        currentCharIndex = 0;
+        isRevealing = true;
+
+        // Dừng coroutine cũ và khởi chạy lại
+        StopAllCoroutines();
+        StartCoroutine(RevealText());
+    }
+
 
     IEnumerator RevealText()
     {
@@ -48,8 +73,6 @@ public class ScrollingText : MonoBehaviour
         isRevealing = false;
     }
 
-
-    // Handle button clicks based on the current state
     private void OnButtonClick()
     {
         buttonClickCount++; // Increase the button click count
@@ -67,7 +90,6 @@ public class ScrollingText : MonoBehaviour
         }
     }
 
-    // Function to instantly reveal all the text when the button is pressed
     private void RevealAllText()
     {
         if (isRevealing)
