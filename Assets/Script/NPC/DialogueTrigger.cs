@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
     public Message[] messages;
     public Actor[] actors;
+
     public void StartDialogue()
     {
         DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
@@ -24,15 +23,15 @@ public class DialogueTrigger : MonoBehaviour
         DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
         if (dialogueManager != null)
         {
-            dialogueManager.CloseDialogue(); // Đóng đối thoại khi kết thúc           
+            dialogueManager.CloseDialogue(); // Đóng đối thoại khi kết thúc
         }
     }
 
     [System.Serializable]
     public class Message
     {
-        public int actorId;
-        public string message;
+        public string localizationKey; // Thay vì message trực tiếp+
+        public int actorId; // Thêm actorId
     }
 
     [System.Serializable]

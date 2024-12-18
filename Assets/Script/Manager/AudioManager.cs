@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource _vfxAudio;
 
     [SerializeField] List<MusicByScene> _musicBySceneList;
+    [SerializeField] List<VFXByName> _vfxByNameList;
+
     [SerializeField] bool _isPause = false;
 
     void Awake()
@@ -37,31 +39,29 @@ public class AudioManager : MonoBehaviour
     }
 
     public void RunBackgroundMusic(string sceneName)
-{
-    if (_isPause)
     {
-        _backgroundAudio.UnPause();
-        _isPause = false;
-        return;
-    }
-
-    AudioClip sceneClip = GetAudioClipByScene(sceneName);
-    if (sceneClip != null)
-    {
-        // Kiểm tra nếu nhạc hiện tại đã giống với nhạc của scene mới
-        if (_backgroundAudio.clip == sceneClip && _backgroundAudio.isPlaying)
+        if (_isPause)
         {
-            return; // Không đổi nhạc nếu nhạc đã đúng
+            _backgroundAudio.UnPause();
+            _isPause = false;
+            return;
         }
 
-        float currentVolume = _backgroundAudio.volume; // Lưu volume hiện tại
-        _backgroundAudio.clip = sceneClip;
-        _backgroundAudio.volume = currentVolume; // Phục hồi volume
-        _backgroundAudio.Play();
+        AudioClip sceneClip = GetAudioClipByScene(sceneName);
+        if (sceneClip != null)
+        {
+            // Kiểm tra nếu nhạc hiện tại đã giống với nhạc của scene mới
+            if (_backgroundAudio.clip == sceneClip && _backgroundAudio.isPlaying)
+            {
+                return; // Không đổi nhạc nếu nhạc đã đúng
+            }
+
+            float currentVolume = _backgroundAudio.volume; // Lưu volume hiện tại
+            _backgroundAudio.clip = sceneClip;
+            _backgroundAudio.volume = currentVolume; // Phục hồi volume
+            _backgroundAudio.Play();
+        }
     }
-}
-
-
 
     AudioClip GetAudioClipByScene(string sceneName)
     {
@@ -91,12 +91,44 @@ public class AudioManager : MonoBehaviour
         return _vfxAudio;
     }
 
-}
+    // Hàm phát VFX dựa trên tên
+    public void PlayVFX(string vfxName)
+    {
+        AudioClip vfxClip = GetVFXClipByName(vfxName);
+        if (vfxClip != null)
+        {
+            _vfxAudio.PlayOneShot(vfxClip);
+        }
+        else
+        {
+            Debug.LogWarning($"VFX '{vfxName}' not found!");
+        }
+    }
 
+    // Tìm VFX theo tên
+    AudioClip GetVFXClipByName(string vfxName)
+    {
+        foreach (var vfx in _vfxByNameList)
+        {
+            if (vfx.Name == vfxName)
+            {
+                return vfx.AudioClip;
+            }
+        }
+        return null;
+    }
+}
 
 [System.Serializable]
 public class MusicByScene
 {
     public string SceneName;
+    public AudioClip AudioClip;
+}
+
+[System.Serializable]
+public class VFXByName
+{
+    public string Name;
     public AudioClip AudioClip;
 }

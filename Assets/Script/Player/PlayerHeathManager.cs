@@ -6,8 +6,11 @@ public class PlayerHealthManager : MonoBehaviour
 {
     Animator animator;
 
-    [SerializeField] int maxHealth;
+    [SerializeField] int maxHealth;    
+    public int MaxHealth => maxHealth; // Trả về giá trị maxHealth
     int currentHealth;
+    public int CurrentHealth => currentHealth; // Trả về giá trị currentHealth
+
     public PlayerBar healthBar;
 
     void Start()

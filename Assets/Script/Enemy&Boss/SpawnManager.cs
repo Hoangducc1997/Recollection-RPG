@@ -18,6 +18,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private EnemySpawnInfo[] enemySpawners;
     [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private float spawnDelay = 2f; // Thời gian delay trước khi bắt đầu spawn
 
     private int[] currentSpawnedCounts; // Số lượng kẻ địch đã spawn hiện tại
     private int[] remainingEnemyCounts; // Số lượng kẻ địch còn lại để spawn
@@ -35,6 +36,16 @@ public class SpawnManager : MonoBehaviour
             UpdateTotalEnemyCountText(i); // Hiển thị tổng số lượng sẽ spawn
         }
 
+        // Delay trước khi bắt đầu spawn
+        StartCoroutine(SpawnEnemiesWithDelay());
+    }
+
+    private IEnumerator SpawnEnemiesWithDelay()
+    {
+        // Đợi khoảng thời gian delay trước khi bắt đầu spawn
+        yield return new WaitForSeconds(spawnDelay);
+
+        // Bắt đầu spawn enemy sau delay
         StartCoroutine(SpawnEnemies());
     }
 
@@ -126,7 +137,7 @@ public class SpawnManager : MonoBehaviour
         if (enemySpawners[enemyIndex].enemyCountInputs != null)
         {
             enemySpawners[enemyIndex].enemyCountInputs.text =
-                $"{enemySpawners[enemyIndex].enemyName}: {Mathf.Max(0, currentSpawnedCounts[enemyIndex])}";
+                $"{enemySpawners[enemyIndex].enemyName}'S EXIST: {Mathf.Max(0, currentSpawnedCounts[enemyIndex])}";
         }
     }
 
