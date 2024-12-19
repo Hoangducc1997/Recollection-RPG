@@ -15,6 +15,7 @@ public class Boss : MonoBehaviour
         {
             // Spawn bossPrefab tại vị trí spawnPoint
             Instantiate(bossPrefab, spawnPoint.position, spawnPoint.rotation);
+            AudioManager.Instance.PlayVFX("BossAppear");
             bossAppear.SetActive(false);
         }
     }

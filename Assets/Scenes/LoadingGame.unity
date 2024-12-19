@@ -214,7 +214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
       propertyPath: _vfxByNameList.Array.size
-      value: 5
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
       propertyPath: _vfxByNameList.Array.data[0].Name
@@ -237,6 +237,38 @@ PrefabInstance:
       value: MagicCast
       objectReference: {fileID: 0}
     - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[5].Name
+      value: PlayerAppear
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[6].Name
+      value: PlayerDeath
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[7].Name
+      value: BossAppear
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[8].Name
+      value: Boss1Death
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[9].Name
+      value: PickupItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[10].Name
+      value: PlayerLevelUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[11].Name
+      value: SkillUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[12].Name
+      value: SkillUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
       propertyPath: _vfxByNameList.Array.data[0].AudioClip
       value: 
       objectReference: {fileID: 8300000, guid: 9389e836bf21f3c46805f74d8aaca512, type: 3}
@@ -256,6 +288,38 @@ PrefabInstance:
       propertyPath: _vfxByNameList.Array.data[4].AudioClip
       value: 
       objectReference: {fileID: 8300000, guid: fd2c0d512e159834ab4024214962194e, type: 3}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[5].AudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 050032d88f9a9324f8ffb261a4337d54, type: 3}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[6].AudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5d90f76463d19034eb0dccbf31303669, type: 3}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[7].AudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 43411b64f63ed7341b5eb346416e00cb, type: 3}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[8].AudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0aed1065221bb1f4c810d4f99c8ea04f, type: 3}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[9].AudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2c7459d9fbb80044b956c914fbc395de, type: 3}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[10].AudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 93ef1919e51eaae4bbbd48f7be3ba8e0, type: 3}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[11].AudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f145d4520bfab8e44908aa49f0097b0c, type: 3}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[12].AudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f145d4520bfab8e44908aa49f0097b0c, type: 3}
     - target: {fileID: 8779043118897403081, guid: 90195280605bba5419c9a37080282086, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0

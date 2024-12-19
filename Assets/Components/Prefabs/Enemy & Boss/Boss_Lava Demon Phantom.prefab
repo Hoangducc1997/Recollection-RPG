@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 8966449200185286299}
   - component: {fileID: 3957860244041629541}
   - component: {fileID: 1839484679851059711}
+  - component: {fileID: 1666697835403236030}
   - component: {fileID: 6871973366848007431}
   - component: {fileID: 900960382738865807}
   - component: {fileID: 9192752001914584669}
@@ -113,6 +114,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 999242748875904328}
+  - {fileID: 4519455589477285295}
   - {fileID: 8440195676947203699}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -251,6 +253,23 @@ CircleCollider2D:
   m_Offset: {x: 0.6859646, y: -0.43162328}
   serializedVersion: 2
   m_Radius: 0.8668661
+--- !u!114 &1666697835403236030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413496089536513882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b504d4ddb235445b83c2aad7edd6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 200
+  healthBar: {fileID: 5110547034227218295}
+  expForPlayer: 900
+  BulletPlus: {fileID: 1353675727544828420}
+  BossAngryHeath: 30
 --- !u!114 &6871973366848007431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,6 +444,91 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1353675727544828420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4519455589477285295}
+  - component: {fileID: 515487197288264413}
+  - component: {fileID: 883812993997206558}
+  m_Layer: 6
+  m_Name: Shot1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4519455589477285295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353675727544828420}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.35, y: -0.13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8679835787931924612}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &515487197288264413
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353675727544828420}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.2011302, y: -0.30969763}
+  serializedVersion: 2
+  m_Radius: 7.9983444
+--- !u!114 &883812993997206558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353675727544828420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902153fc3d5b9a24197c49686c0fc342, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageBossAttack: 5
+  attackCooldown: 2
+  animator: {fileID: 8966449200185286299}
+  bulletPrefab: {fileID: 2957173194091732556, guid: 66c0981a209d51344b95955d7666c0de, type: 3}
+  shootingPoint: {fileID: 4519455589477285295}
 --- !u!1 &1866501749980093856
 GameObject:
   m_ObjectHideFlags: 0

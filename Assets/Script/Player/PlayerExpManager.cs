@@ -55,6 +55,7 @@ public class PlayerExpManager : MonoBehaviour
         {
             currentLevelIndex++;
             levelManager.LevelUp(); // Gọi chức năng lên cấp từ PlayerLevelManager
+            AudioManager.Instance.PlayVFX("PlayerLevelUp");
         }
         else
         {

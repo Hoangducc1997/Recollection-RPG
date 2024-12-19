@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class DestroyObject : MonoBehaviour
 {
     private Animator animator;  // Animator để theo dõi trạng thái animation
@@ -9,6 +8,7 @@ public class DestroyObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.Instance.PlayVFX("PlayerAppear");
         animator = GetComponent<Animator>(); // Lấy Animator từ đối tượng
         if (animator == null)
         {

@@ -9,6 +9,7 @@ public class ItemPlayer : MonoBehaviour
     {
         if (collision.CompareTag("Player")) // Kiểm tra va chạm với Player
         {
+            AudioManager.Instance.PlayVFX("PickupItem");
             PlayerHealthManager playerHealth = collision.GetComponent<PlayerHealthManager>();
             if (playerHealth != null && itemType == ItemType.HeathIncrease)
             {

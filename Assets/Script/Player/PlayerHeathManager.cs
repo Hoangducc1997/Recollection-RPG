@@ -38,6 +38,7 @@ public class PlayerHealthManager : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            AudioManager.Instance.PlayVFX("PlayerDeath");
             animator.SetBool("isDeath", true);
             StartCoroutine(RestartLevel());
         }

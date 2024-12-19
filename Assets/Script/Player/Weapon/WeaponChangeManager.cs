@@ -9,7 +9,6 @@ public class WeaponChangeManager : MonoBehaviour
     [SerializeField] private Button weapon2Button;
     [SerializeField] private Button weapon3Button;
     [SerializeField] private GameObject weaponMenu;
-    [SerializeField] private AudioSource weaponSwitchSound;
 
     private Image chooseWeaponImage;
     private Image weapon1Image;
@@ -48,7 +47,8 @@ public class WeaponChangeManager : MonoBehaviour
 
     private void SelectWeapon(int weaponIndex, WeaponType weaponType, Sprite selectedWeaponSprite)
     {
-        if (weaponSwitchSound != null) weaponSwitchSound.Play();
+        // Thêm âm thanh khi đổi vũ khí
+        AudioManager.Instance.PlayVFX("PickupItem");
 
         Debug.Log($"Switching to weapon index: {weaponIndex} with sprite: {selectedWeaponSprite}");
         if (selectedWeaponSprite == null)

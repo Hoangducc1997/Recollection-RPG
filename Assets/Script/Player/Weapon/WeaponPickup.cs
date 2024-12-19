@@ -11,6 +11,7 @@ public class WeaponPickup : MonoBehaviour
     {
         if (other.CompareTag(playerTag))
         {
+            AudioManager.Instance.PlayVFX("PickupItem");
             WeaponManager weaponManager = WeaponManager.Instance; // Truy cập WeaponManager qua Singleton
             if (weaponManager != null)
             {

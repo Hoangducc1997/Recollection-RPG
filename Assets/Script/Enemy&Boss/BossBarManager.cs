@@ -8,20 +8,21 @@ public class BossBarManager : MonoBehaviour
     private bool isDead = false; // Thêm cờ kiểm tra trạng thái chết của boss
 
     [SerializeField] int maxHealth;
-    int currentHealth;
+    protected int currentHealth; // Cho phép truy cập từ lớp con
+
     public BossBar healthBar;
     [SerializeField] private int expForPlayer; // Điểm kinh nghiệm cho Player
     private PlayerExpManager playerExpManager; // Tham chiếu PlayerExpManager
-    public void Start()
+    public virtual void Start()
     {
         animator = GetComponent<Animator>();
-        // Tìm và tham chiếu PlayerExpManager trong scene
         playerExpManager = FindObjectOfType<PlayerExpManager>();
         currentHealth = maxHealth;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
-    public void TakeDamage(int damage)
+
+    public virtual void TakeDamage(int damage)
     {
         if (isDead) return; // Không thực hiện gì nếu boss đã chết
 
@@ -37,6 +38,7 @@ public class BossBarManager : MonoBehaviour
         {
             StartCoroutine(DestroyBoss());
             isDead = true; // Đánh dấu boss đã chết
+            AudioManager.Instance.PlayVFX("Boss1Death");
             Debug.Log("BossDeath");
             // Tăng điểm kinh nghiệm cho Player nếu PlayerExpManager đã được tham chiếu
             if (playerExpManager != null)
@@ -58,7 +60,6 @@ public class BossBarManager : MonoBehaviour
             {
                 levelMapBossBeforeManager.AppearObjNextScene();
             }
-
         }
     }
 
