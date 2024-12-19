@@ -48,7 +48,7 @@ public class WeaponChangeManager : MonoBehaviour
     private void SelectWeapon(int weaponIndex, WeaponType weaponType, Sprite selectedWeaponSprite)
     {
         // Thêm âm thanh khi đổi vũ khí
-        AudioManager.Instance.PlayVFX("PickupItem");
+        AudioManager.Instance.PlayVFX("PickupItem2");
 
         Debug.Log($"Switching to weapon index: {weaponIndex} with sprite: {selectedWeaponSprite}");
         if (selectedWeaponSprite == null)

@@ -46,6 +46,41 @@ public class SkillButtonManager : MonoBehaviour
 
         CloseSkillPanel(); // Đóng bảng kỹ năng
     }
+    public void UpgradeBow()
+    {
+        if (currentLevel + 1 < weaponLevelManager.bowWeapons.Length)
+        {
+            currentLevel++; // Tăng cấp độ
+            Debug.Log($"Upgrading bow to Level {currentLevel}");
+
+            weaponLevelManager.UnlockWeapon(currentLevel, WeaponType.Bow); // Mở khóa cung
+            weaponLevelManager.SwitchWeapon(currentLevel, WeaponType.Bow); // Chuyển vũ khí
+        }
+        else
+        {
+            Debug.LogWarning("No more bow levels available!");
+        }
+
+        CloseSkillPanel(); // Đóng bảng kỹ năng
+    }
+
+    public void UpgradeMagic()
+    {
+        if (currentLevel + 1 < weaponLevelManager.magicWeapons.Length)
+        {
+            currentLevel++; // Tăng cấp độ
+            Debug.Log($"Upgrading magic to Level {currentLevel}");
+
+            weaponLevelManager.UnlockWeapon(currentLevel, WeaponType.Magic); // Mở khóa phép thuật
+            weaponLevelManager.SwitchWeapon(currentLevel, WeaponType.Magic); // Chuyển vũ khí
+        }
+        else
+        {
+            Debug.LogWarning("No more magic levels available!");
+        }
+
+        CloseSkillPanel(); // Đóng bảng kỹ năng
+    }
 
     public void HealthIncrease(int healthIncreaseAmount)
     {

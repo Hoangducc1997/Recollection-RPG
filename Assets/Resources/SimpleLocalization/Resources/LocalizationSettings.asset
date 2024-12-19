@@ -35,4 +35,7 @@ MonoBehaviour:
   - Name: MapBoss1
     Id: 1067417251
     TextAsset: {fileID: 4900000, guid: 82d8a80a47a99984a9b85a8c76fbf49b, type: 3}
+  - Name: MapBoss2
+    Id: 1499774296
+    TextAsset: {fileID: 4900000, guid: 2c7d459289cbabc4f8ee5c4e567de9ea, type: 3}
   SaveFolder: {fileID: 102900000, guid: c392831e85f928548b8494fefd912562, type: 3}

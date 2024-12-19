@@ -36159,9 +36159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messages:
-  - actorId: 0
-    message: "\u1EE6a kh\xF4ng ph\u1EA3i \u1EDF \u0111\xE2y l\xE0 khu r\u1EEBng hay
-      sao?"
+  - localizationKey: 
+    actorId: 0
   actors:
   - name: "Kh\xE1"
     sprite: {fileID: 584670330, guid: 0c775b8733a90d24c857d6d8db5299b3, type: 3}
@@ -42321,7 +42320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 530016522104726581, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: messages.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 530016522104726581, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: messages.Array.data[0].message
@@ -42330,6 +42329,18 @@ PrefabInstance:
     - target: {fileID: 530016522104726581, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: messages.Array.data[1].message
       value: "C\xF2n kh\xF4ng th\xEC \u1EDF l\u1EA1i \u0111\xE2y m\xE3i m\xE3i haha"
+      objectReference: {fileID: 0}
+    - target: {fileID: 530016522104726581, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[0].localizationKey
+      value: MapBoss1.NPC.2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 530016522104726581, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[1].localizationKey
+      value: MapBoss1.NPC.2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 530016522104726581, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[2].localizationKey
+      value: MapBoss1.NPC.2.3
       objectReference: {fileID: 0}
     - target: {fileID: 976188308837030183, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_Name
@@ -42341,7 +42352,7 @@ PrefabInstance:
       objectReference: {fileID: 118830115}
     - target: {fileID: 1784140234172325197, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: messages.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1784140234172325197, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: messages.Array.data[2].message
@@ -42361,13 +42372,53 @@ PrefabInstance:
       propertyPath: messages.Array.data[5].message
       value: "H\xE3y nh\u1EA5n v\xE0o \xF4 vu\xF4ng g\xF3c ph\u1EA3i m\xE0n h\xECnh"
       objectReference: {fileID: 0}
+    - target: {fileID: 1784140234172325197, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[0].localizationKey
+      value: MapBoss1.NPCTutorial1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784140234172325197, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[1].localizationKey
+      value: MapBoss1.NPCTutorial2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784140234172325197, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[2].localizationKey
+      value: MapBoss1.NPCTutorial3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784140234172325197, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[3].localizationKey
+      value: MapBoss1.NPCTutorial4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784140234172325197, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[4].localizationKey
+      value: MapBoss1.NPCTutorial5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784140234172325197, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[5].localizationKey
+      value: MapBoss1.NPCTutorial6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784140234172325197, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[6].localizationKey
+      value: MapBoss1.NPCTutorial7
+      objectReference: {fileID: 0}
     - target: {fileID: 2334176562081407862, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: messages.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2334176562081407862, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: messages.Array.data[1].message
       value: "Gi\u1EA5c m\u01A1 s\u1EBD k\xE9o d\xE0i \u0111\u1EA5y..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2334176562081407862, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[0].localizationKey
+      value: MapBoss1.NPC.1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2334176562081407862, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[1].localizationKey
+      value: MapBoss1.NPC.1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2334176562081407862, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[2].localizationKey
+      value: MapBoss1.NPC.1.3
       objectReference: {fileID: 0}
     - target: {fileID: 3634219842893401092, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: tutorialPanel
@@ -42444,11 +42495,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7202656359549314652, guid: 348e12de731534b4fa9eb1a3140cf29a, type: 3}
       propertyPath: enemySpawners.Array.data[0].enemyCount
-      value: 30
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7202656359549314652, guid: 348e12de731534b4fa9eb1a3140cf29a, type: 3}
       propertyPath: enemySpawners.Array.data[1].enemyCount
-      value: 20
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7202656359549314652, guid: 348e12de731534b4fa9eb1a3140cf29a, type: 3}
       propertyPath: enemySpawners.Array.data[0].enemyTimeSpawn
