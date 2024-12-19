@@ -65033,12 +65033,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 51027990863332512, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.6
+      value: 34.92
       objectReference: {fileID: 0}
     - target: {fileID: 51027990863332512, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.5
+      value: -23.45
       objectReference: {fileID: 0}
+    - target: {fileID: 281270629418491779, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: tutorialPanel
+      value: 
+      objectReference: {fileID: 1114193742}
     - target: {fileID: 380681205043073589, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.223067
@@ -65094,6 +65098,14 @@ PrefabInstance:
     - target: {fileID: 530016522104726581, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: messages.Array.data[2].localizationKey
       value: MapBoss2.NPC.2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 769032816144855352, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 769032816144855352, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.05
       objectReference: {fileID: 0}
     - target: {fileID: 976188308837030183, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_Name
@@ -65156,6 +65168,10 @@ PrefabInstance:
       value: MapBoss2.NPC.3.3
       objectReference: {fileID: 0}
     - target: {fileID: 2680545085682379587, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680545085682379587, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_LocalPosition.y
       value: 12.8
       objectReference: {fileID: 0}
@@ -65165,15 +65181,15 @@ PrefabInstance:
       objectReference: {fileID: 1114193742}
     - target: {fileID: 3714166843516107269, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 34.89
+      value: 39.79
       objectReference: {fileID: 0}
     - target: {fileID: 3714166843516107269, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.6
+      value: -23.45
       objectReference: {fileID: 0}
     - target: {fileID: 3961818821474512986, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: speed
-      value: 0.5
+      value: 0.68
       objectReference: {fileID: 0}
     - target: {fileID: 4034466043472089881, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_Size.x
@@ -65193,7 +65209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4577148160129693376, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.24
+      value: -1.92
       objectReference: {fileID: 0}
     - target: {fileID: 4577148160129693376, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_LocalPosition.y
@@ -65206,6 +65222,30 @@ PrefabInstance:
     - target: {fileID: 5197334422948174017, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_Name
       value: NPC_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5300151239032975418, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5300151239032975418, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[0].localizationKey
+      value: MapBoss2.NPC.4.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5300151239032975418, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: messages.Array.data[1].localizationKey
+      value: MapBoss2.NPC.4.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5615224843200186900, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701698864683884488, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701698864683884488, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.48
       objectReference: {fileID: 0}
     - target: {fileID: 6039078065753762857, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_Size.x
@@ -65232,8 +65272,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6134569637195292684, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 6134569637195292684, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_LocalPosition.y
       value: 12.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190396333623211135, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: m_Size.y
+      value: 0.6169319
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190396333623211135, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.5891781
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190396333623211135, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6262237016089822643, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_Name
@@ -65267,9 +65323,13 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -23.2
       objectReference: {fileID: 0}
+    - target: {fileID: 6586785698024910390, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 860605a7ae87f7546b95abbfe57d8c6c, type: 3}
     - target: {fileID: 6693383439662439981, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_FlipX
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6693383439662439981, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_Sprite
@@ -65277,11 +65337,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: f5c30a1b7b6e85747b7f96a36cb9723d, type: 3}
     - target: {fileID: 6694200468885180380, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.92
+      value: 5.6
       objectReference: {fileID: 0}
     - target: {fileID: 6694200468885180380, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -19.84
+      value: -19
       objectReference: {fileID: 0}
     - target: {fileID: 6992112241573706928, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_Name
@@ -65305,7 +65365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7679572933482156212, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -19.65
+      value: -19
       objectReference: {fileID: 0}
     - target: {fileID: 8224873603560931286, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: tutorialPanel
@@ -65313,11 +65373,15 @@ PrefabInstance:
       objectReference: {fileID: 1114193742}
     - target: {fileID: 8344528214378647801, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.13
+      value: -3.88
       objectReference: {fileID: 0}
     - target: {fileID: 8344528214378647801, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -19.899998
+      value: -19
+      objectReference: {fileID: 0}
+    - target: {fileID: 9102919694693150676, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: speed
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 9195780880868376608, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: m_FlipX

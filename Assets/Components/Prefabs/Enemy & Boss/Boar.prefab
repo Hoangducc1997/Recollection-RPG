@@ -214,7 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   timeForAnimDeath: 1
-  expForPlayer: 100
+  expForPlayer: 20
   enemySpawner: {fileID: 0}
   enemyTypeIndex: 0
   itemDrops:
