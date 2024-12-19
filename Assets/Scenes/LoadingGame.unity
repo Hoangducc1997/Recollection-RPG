@@ -209,7 +209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
       propertyPath: _vfxByNameList.Array.size
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
       propertyPath: _vfxByNameList.Array.data[0].Name
@@ -264,6 +264,10 @@ PrefabInstance:
       value: SkillUp
       objectReference: {fileID: 0}
     - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[13].Name
+      value: Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
       propertyPath: _vfxByNameList.Array.data[0].AudioClip
       value: 
       objectReference: {fileID: 8300000, guid: 9389e836bf21f3c46805f74d8aaca512, type: 3}
@@ -315,6 +319,10 @@ PrefabInstance:
       propertyPath: _vfxByNameList.Array.data[12].AudioClip
       value: 
       objectReference: {fileID: 8300000, guid: f145d4520bfab8e44908aa49f0097b0c, type: 3}
+    - target: {fileID: 7129785371189305034, guid: 90195280605bba5419c9a37080282086, type: 3}
+      propertyPath: _vfxByNameList.Array.data[13].AudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 20a4df9758f5a8741a9d2d7b0b320593, type: 3}
     - target: {fileID: 8779043118897403081, guid: 90195280605bba5419c9a37080282086, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0

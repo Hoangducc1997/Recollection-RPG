@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93663a05b0f750f4282c4581cdb4491c, type: 3}
-  m_Name: Bow2
+  m_Name: Bow5
   m_EditorClassIdentifier: 
-  weaponName: Bow2
-  level: 2
-  damage: 10
-  rangeAtk: 4.5
-  cooldownTime: 4.5
-  attackDuration: 4.5
+  weaponName: Bow4
+  level: 4
+  damage: 50
+  rangeAtk: 9
+  cooldownTime: 1.5
+  attackDuration: 1.5
   animationIndex: 5
-  arrowPrefab: {fileID: 3406338057238139975, guid: 6582f5650b02a1f4f99baf5e19d9f3f4, type: 3}
-  arrowSpeed: 2.7
+  arrowPrefab: {fileID: 4285369466554397623, guid: 123095ec2103d4a4a86379a91905f5c1, type: 3}
+  arrowSpeed: 9

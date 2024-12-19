@@ -10,6 +10,7 @@ public class DialogueTrigger : MonoBehaviour
         DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
         if (dialogueManager != null)
         {
+            AudioManager.Instance.PlayVFX("Dialogue");
             dialogueManager.OpenDialogue(messages, actors);
         }
         else
