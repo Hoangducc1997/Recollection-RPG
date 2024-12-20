@@ -12,6 +12,10 @@ MainMenu.QualitySettingHigh,CAO,HIGH
 MainMenu.LanguageSetting,NGÔN NGỮ,LANGUAGE
 MainMenu.SaveSetting,LƯU,SAVE
 ,,
+Pause,TẠM DỪNG,PAUSE
 Pause.Save,LƯU,SAVE
 Pause.Setting,CÀI ĐẶT,SETTING
 Pause.Exit,THOÁT,EXIT
+,,
+SkillUpgrade,NÂNG CẤP KỸ NĂNG,Skill Upgrade
+Player.Level,CẤP ĐỘ,LEVEL
