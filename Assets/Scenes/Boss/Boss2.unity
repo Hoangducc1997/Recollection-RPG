@@ -65088,6 +65088,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 530016522104726581, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: actors.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 449c4030bc8db5441955a1cf722cf6cd, type: 3}
+    - target: {fileID: 530016522104726581, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: messages.Array.data[0].localizationKey
       value: MapBoss2.NPC.2.1
       objectReference: {fileID: 0}
@@ -65155,6 +65159,10 @@ PrefabInstance:
       propertyPath: messages.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2334176562081407862, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: actors.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 00146cb5a9c7d904ba0ff208bd7f8715, type: 3}
     - target: {fileID: 2334176562081407862, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: messages.Array.data[0].localizationKey
       value: MapBoss2.NPC.3.1
@@ -65227,6 +65235,10 @@ PrefabInstance:
       propertyPath: messages.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5300151239032975418, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: actors.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 860605a7ae87f7546b95abbfe57d8c6c, type: 3}
     - target: {fileID: 5300151239032975418, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: messages.Array.data[0].localizationKey
       value: MapBoss2.NPC.4.1

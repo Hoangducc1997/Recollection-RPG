@@ -512,6 +512,22 @@ PrefabInstance:
       propertyPath: fillExpBar
       value: 
       objectReference: {fileID: 1218254449}
+    - target: {fileID: 3454760133661063073, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3454760133661063073, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3454760133661063073, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 350.3103
+      objectReference: {fileID: 0}
+    - target: {fileID: 3454760133661063073, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1213.6392
+      objectReference: {fileID: 0}
     - target: {fileID: 3554314630043452442, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -688,6 +704,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6340626218310422696, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340626218310422696, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340626218310422696, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 350.3103
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340626218310422696, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -256.60785
+      objectReference: {fileID: 0}
     - target: {fileID: 6366835674761132297, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -855,6 +887,22 @@ PrefabInstance:
     - target: {fileID: 7990804508848122157, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500111725339674234, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500111725339674234, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500111725339674234, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 350.3103
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500111725339674234, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -735.12354
       objectReference: {fileID: 0}
     - target: {fileID: 8527103713524434805, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -42192,6 +42240,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1784140234172325197, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: actors.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2594d95de9ed7734b8853b6393593aa6, type: 3}
+    - target: {fileID: 1784140234172325197, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: messages.Array.data[2].message
       value: "\u0110i\u1EC3m kinh nghi\u1EC7m s\u1EBD cho ng\u01B0\u01A1i n\xE2ng
         c\u1EA5p nhi\u1EC1u th\u1EE9 hay ho"
@@ -42241,6 +42293,10 @@ PrefabInstance:
       propertyPath: messages.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2334176562081407862, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
+      propertyPath: actors.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b2972854b986380469e308f8be1aded9, type: 3}
     - target: {fileID: 2334176562081407862, guid: 7cde45aae6b00904bb92b50edf2beb17, type: 3}
       propertyPath: messages.Array.data[1].message
       value: "Gi\u1EA5c m\u01A1 s\u1EBD k\xE9o d\xE0i \u0111\u1EA5y..."
