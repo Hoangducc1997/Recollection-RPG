@@ -11,7 +11,7 @@ public class BulletBoss : BossBase
     {
         animator = GetComponent<Animator>();
         base.Start();
-        // Hủy viên đạn sau 10 giây
+        // Hủy viên đạn sau 8 giây
         Destroy(gameObject, 8f);
     }
 
@@ -30,7 +30,6 @@ public class BulletBoss : BossBase
         }
     }
 
-
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -38,13 +37,22 @@ public class BulletBoss : BossBase
             Debug.Log("BulletBoss hit the Player.");
             if (playerBarManager != null)
             {
-                playerBarManager.TakeDamage(10);
+                // Gây sát thương dựa trên damageBossAttack
+                playerBarManager.TakeDamage(Mathf.FloorToInt(damageBossAttack));
             }
-            animator.SetTrigger("Explosion");
-            StartCoroutine(DestroyAfterAnimation());
+
+            // Kích hoạt animation nổ
+            if (animator != null)
+            {
+                animator.SetTrigger("Explosion");
+                StartCoroutine(DestroyAfterAnimation());
+            }
+            else
+            {
+                Destroy(gameObject); // Nếu không có Animator, hủy ngay lập tức
+            }
         }
     }
-
 
     protected IEnumerator DestroyAfterAnimation() // Đổi từ private thành protected
     {
