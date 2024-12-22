@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class WeaponChangeManager : MonoBehaviour
 {
+    public static WeaponChangeManager Instance { get; private set; } // Thêm thuộc tính Singleton
+
     [SerializeField] private WeaponLevelManager weaponLevelsManager;
     [SerializeField] private Button chooseWeaponButton;
     [SerializeField] private Button weapon1Button;
@@ -11,11 +13,23 @@ public class WeaponChangeManager : MonoBehaviour
     [SerializeField] private GameObject weaponMenu;
 
     private Image chooseWeaponImage;
-    private Image weapon1Image;
-    private Image weapon2Image;
-    private Image weapon3Image;
+    private Image weapon1Image; // Sword
+    private Image weapon2Image; // Bow
+    private Image weapon3Image; // Magic
 
     private bool isWeaponMenuActive;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this; // Gán Instance
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -27,6 +41,11 @@ public class WeaponChangeManager : MonoBehaviour
         }
 
         weaponMenu.SetActive(false);
+
+        // Ẩn các nút vũ khí khi bắt đầu
+        weapon1Button.gameObject.SetActive(false);
+        weapon2Button.gameObject.SetActive(false);
+        weapon3Button.gameObject.SetActive(false);
 
         chooseWeaponImage = chooseWeaponButton.GetComponent<Image>();
         weapon1Image = weapon1Button.GetComponent<Image>();
@@ -47,10 +66,8 @@ public class WeaponChangeManager : MonoBehaviour
 
     private void SelectWeapon(int weaponIndex, WeaponType weaponType, Sprite selectedWeaponSprite)
     {
-        // Thêm âm thanh khi đổi vũ khí
         AudioManager.Instance.PlayVFX("PickupItem2");
 
-        Debug.Log($"Switching to weapon index: {weaponIndex} with sprite: {selectedWeaponSprite}");
         if (selectedWeaponSprite == null)
         {
             Debug.LogError("Selected weapon sprite is null! Check weapon button images.");
@@ -76,4 +93,26 @@ public class WeaponChangeManager : MonoBehaviour
             weaponButtons[i].interactable = i != activeWeaponIndex;
         }
     }
+
+    public void UnlockWeapon(int weaponIndex)
+    {
+        switch (weaponIndex)
+        {
+            case 0:
+                weapon1Button.gameObject.SetActive(true); // Kích hoạt nút vũ khí 1
+                break;
+            case 1:
+                weapon2Button.gameObject.SetActive(true); // Kích hoạt nút vũ khí 2
+                break;
+            case 2:
+                weapon3Button.gameObject.SetActive(true); // Kích hoạt nút vũ khí 3
+                break;
+            default:
+                Debug.LogWarning($"Weapon index {weaponIndex} is locked or invalid.");
+                break;
+        }
+    }
+
+
+
 }

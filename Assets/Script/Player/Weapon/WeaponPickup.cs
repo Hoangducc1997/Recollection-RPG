@@ -12,20 +12,12 @@ public class WeaponPickup : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             AudioManager.Instance.PlayVFX("PickupItem");
-            WeaponManager weaponManager = WeaponManager.Instance; // Truy cập WeaponManager qua Singleton
+            WeaponManager weaponManager = WeaponManager.Instance;
+
             if (weaponManager != null)
             {
-                WeaponLevelManager weaponLevelManager = weaponManager.GetWeaponLevelManager(); // Lấy WeaponLevelManager
-                if (weaponLevelManager != null)
-                {
-                    Debug.Log($"Player nhặt được vũ khí {weaponType} tại index {weaponIndex}");
-                    weaponLevelManager.UnlockWeapon(weaponIndex, weaponType); // Mở khóa vũ khí
-                    Destroy(gameObject); // Xóa vũ khí khỏi màn chơi
-                }
-                else
-                {
-                    Debug.LogError("WeaponLevelManager chưa được gán hoặc không tìm thấy!");
-                }
+                weaponManager.PickUpWeapon(weaponIndex); // Gọi PickUpWeapon
+                Destroy(gameObject); // Xóa vũ khí khỏi màn chơi
             }
             else
             {
@@ -33,5 +25,6 @@ public class WeaponPickup : MonoBehaviour
             }
         }
     }
+
 }
 

@@ -13,12 +13,14 @@ public class WeaponManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
     }
+
 
     public WeaponLevelManager GetWeaponLevelManager()
     {
@@ -31,6 +33,9 @@ public class WeaponManager : MonoBehaviour
         {
             pickedUpWeapons.Add(index);
             Debug.Log($"Weapon {index} has been picked up and unlocked.");
+
+            // Hiển thị nút UI liên quan
+            WeaponChangeManager.Instance?.UnlockWeapon(index);
         }
         else
         {
