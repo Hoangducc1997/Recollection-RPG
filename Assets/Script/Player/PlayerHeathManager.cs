@@ -5,17 +5,22 @@ using System.Collections;
 public class PlayerHealthManager : MonoBehaviour
 {
     Animator animator;
+    SpriteRenderer spriteRenderer;
 
-    [SerializeField] int maxHealth;    
-    public int MaxHealth => maxHealth; // Trả về giá trị maxHealth
+    [SerializeField] private Material flashMaterial; // Material chuyển màu
+    [SerializeField] private Material defaultMaterial; // Material mặc định
+    [SerializeField] private float timePlayerHurt = 0.2f; // Thời gian giữ màu đỏ
+    [SerializeField] int maxHealth;
+    public int MaxHealth => maxHealth;
     int currentHealth;
-    public int CurrentHealth => currentHealth; // Trả về giá trị currentHealth
+    public int CurrentHealth => currentHealth;
 
     public PlayerBar healthBar;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         InitializeHealth();
     }
 
@@ -29,11 +34,8 @@ public class PlayerHealthManager : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        if (!animator.GetBool("isHurt"))
-        {
-            animator.SetBool("isHurt", true);
-            StartCoroutine(HurtAnim());
-        }
+
+        StartCoroutine(FlashRed()); // Gọi hàm chuyển màu đỏ
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
@@ -43,6 +45,7 @@ public class PlayerHealthManager : MonoBehaviour
             StartCoroutine(RestartLevel());
         }
     }
+
     public void IncreaseHealth(int amount)
     {
         currentHealth += amount;
@@ -53,11 +56,11 @@ public class PlayerHealthManager : MonoBehaviour
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
-
-    private IEnumerator HurtAnim()
+    private IEnumerator FlashRed()
     {
-        yield return new WaitForSeconds(1f);
-        animator.SetBool("isHurt", false);
+        spriteRenderer.material = flashMaterial; // Chuyển sang Material đỏ
+        yield return new WaitForSeconds(timePlayerHurt); // Thời gian giữ màu đỏ
+        spriteRenderer.material = defaultMaterial; // Trả về Material mặc định
     }
 
     private IEnumerator RestartLevel()
