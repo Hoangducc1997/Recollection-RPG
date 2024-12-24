@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TableId: 1UVi4je_uG7UuwDsbY18CiCEGXa7MNJ2yGCI4W7IlZSY
   Sheets:
+  - Name: BossName
+    Id: 1205227674
+    TextAsset: {fileID: 4900000, guid: 69cf4b9049f191d4bae8c3b28004b340, type: 3}
   - Name: Intro
     Id: 0
     TextAsset: {fileID: 4900000, guid: 7139db2251302234099ff73b57099419, type: 3}
