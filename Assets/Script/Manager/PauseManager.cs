@@ -21,14 +21,14 @@ public class PauseManager : UIPopup
         Debug.Log("Game has exited."); // Chỉ hoạt động trong Editor
     }
 
-    private void PauseGame()
+    public void PauseGame()
     {
         pausePanel.SetActive(true);
         Time.timeScale = 0f; // Ngừng thời gian trong game
         Debug.Log("Game Paused.");
     }
 
-    private void ResumeGame()
+    public void ResumeGame()
     {
         pausePanel.SetActive(false);
         Time.timeScale = 1f; // Tiếp tục thời gian trong game

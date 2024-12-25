@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: Sword4
   level: 4
   damage: 20
-  rangeAtk: 1
-  cooldownTime: 1
-  attackDuration: 1
+  rangeAtk: 2.5
+  cooldownTime: 7
+  attackDuration: 7
   animationIndex: 4

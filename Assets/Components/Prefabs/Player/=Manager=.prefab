@@ -722,7 +722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 0}
-  playerStats: {fileID: 0}
+  playerStats: {fileID: 11400000, guid: a66ba5ab54d342b4f9e56fbc25d8f82b, type: 2}
 --- !u!114 &3431123154571321382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,11 +735,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9185c7514bdb3445bfee7f0ed5e8f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponLevelsManager: {fileID: 0}
+  weaponLevelsManager: {fileID: 6371176794972010366}
   shootPoint: {fileID: 2383334974853668309}
   arrowPrefab: {fileID: 3406338057238139975, guid: 6582f5650b02a1f4f99baf5e19d9f3f4, type: 3}
-  magicPrefab: {fileID: 0}
+  magicPrefab: {fileID: 3482160972571668525, guid: 0ce7eb99a45b06240b7a5050de0fb310, type: 3}
   playerAnimator: {fileID: 6093526842696714867}
+  joystick: {fileID: 0}
 --- !u!114 &434886188451907554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,6 +774,38 @@ MonoBehaviour:
     expThreshold: 150
   - level: 3
     expThreshold: 250
+  - level: 5
+    expThreshold: 400
+  - level: 6
+    expThreshold: 600
+  - level: 7
+    expThreshold: 900
+  - level: 8
+    expThreshold: 1200
+  - level: 9
+    expThreshold: 1700
+  - level: 10
+    expThreshold: 2200
+  - level: 11
+    expThreshold: 2800
+  - level: 12
+    expThreshold: 3500
+  - level: 13
+    expThreshold: 4350
+  - level: 14
+    expThreshold: 5400
+  - level: 15
+    expThreshold: 6800
+  - level: 16
+    expThreshold: 7900
+  - level: 17
+    expThreshold: 10000
+  - level: 18
+    expThreshold: 12900
+  - level: 19
+    expThreshold: 15900
+  - level: 20
+    expThreshold: 20000
   expBar: {fileID: 0}
   levelManager: {fileID: 8250193242533143918}
   levelUIText: {fileID: 0}
@@ -953,3 +986,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1063768283841658190, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
   m_PrefabInstance: {fileID: 2548611994887600947}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6371176794972010366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8877873121635830861, guid: cc2e4e0fe1c629c4082db9282340ae59, type: 3}
+  m_PrefabInstance: {fileID: 2548611994887600947}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14b8778d863e884282aa811de82ea6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

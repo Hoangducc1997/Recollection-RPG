@@ -1,25 +1,27 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using Assets.SimpleLocalization.Scripts;
 
 [System.Serializable]
 public class LevelData
 {
-    public string level; // Tên cấp độ
-    public int expThreshold; // Kinh nghiệm cần thiết để lên cấp độ này
+    public string level;         // Số cấp độ (dùng hiển thị trực tiếp)
+    public string levelNameKey;  // LocalizationKey cho tên cấp độ
+    public int expThreshold;     // Kinh nghiệm cần thiết để lên cấp
 }
 
 public class PlayerExpManager : MonoBehaviour
 {
-    [SerializeField] private LevelData[] levels; // Danh sách thông tin cấp độ
-    private int currentExp = 0;                 // Kinh nghiệm hiện tại
-    private int currentLevelIndex = 0;         // Index của cấp độ hiện tại
+    [SerializeField] private LevelData[] levels;      // Danh sách thông tin cấp độ
+    private int currentExp = 0;                       // Kinh nghiệm hiện tại
+    private int currentLevelIndex = 0;               // Index của cấp độ hiện tại
 
-    public PlayerExpBar expBar; // Tham chiếu tới thanh exp
-    public PlayerLevelManager levelManager; // Tham chiếu tới quản lý cấp độ
-    public TMP_Text levelUIText;
+    public PlayerExpBar expBar;                      // Tham chiếu tới thanh exp
+    public PlayerLevelManager levelManager;          // Tham chiếu tới quản lý cấp độ
+    public TMP_Text levelUIText;                     // Hiển thị số cấp độ
+    public TMP_Text levelNameText;                   // Hiển thị tên cấp độ
     [SerializeField] private SkillPanelManager skillPanelManager;
-        
+
     void Start()
     {
         InitializeExp();
@@ -55,6 +57,7 @@ public class PlayerExpManager : MonoBehaviour
         {
             currentLevelIndex++;
             levelManager.LevelUp(); // Gọi chức năng lên cấp từ PlayerLevelManager
+            AudioManager.Instance.PlayVFX("PlayerLevelUp");
         }
         else
         {
@@ -69,6 +72,10 @@ public class PlayerExpManager : MonoBehaviour
 
     private void UpdateLevelText()
     {
-        levelUIText.text = $"LEVEL-{levels[currentLevelIndex].level}"; // Cập nhật text UI
+        // Cập nhật text số cấp độ
+        levelUIText.text = levels[currentLevelIndex].level;
+
+        // Cập nhật tên cấp độ qua LocalizationKey
+        levelNameText.GetComponent<LocalizedTMPText>().LocalizationKey = levels[currentLevelIndex].levelNameKey;
     }
 }

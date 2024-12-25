@@ -4,6 +4,8 @@ public enum ItemType
 {
     HeathIncrease,
     ExpInCrease,
+    Key1,
+    Key2
 }
 
 [System.Serializable]

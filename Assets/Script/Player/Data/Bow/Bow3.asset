@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Bow3
   level: 3
-  damage: 2
-  rangeAtk: 2
-  cooldownTime: 2
-  attackDuration: 2
+  damage: 20
+  rangeAtk: 5.4
+  cooldownTime: 3.6
+  attackDuration: 3.6
   animationIndex: 5
-  arrowPrefab: {fileID: 3406338057238139975, guid: 6582f5650b02a1f4f99baf5e19d9f3f4, type: 3}
+  arrowPrefab: {fileID: 3482160972571668525, guid: 0ce7eb99a45b06240b7a5050de0fb310, type: 3}
+  arrowSpeed: 4.5

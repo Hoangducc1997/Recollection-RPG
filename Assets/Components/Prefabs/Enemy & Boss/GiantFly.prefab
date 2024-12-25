@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageEnemyAttack: 3
-  attackCooldown: 3
+  attackCooldown: 3.6
   distanceAttack: 4.5
   minDistanceToPlayer: 3.6
   moveSpeed: 2

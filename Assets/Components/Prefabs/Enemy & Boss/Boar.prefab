@@ -199,7 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageEnemyAttack: 3
   attackCooldown: 5
-  distanceAttack: 2
+  distanceAttack: 1.5
 --- !u!114 &7549112748728249901
 MonoBehaviour:
   m_ObjectHideFlags: 0

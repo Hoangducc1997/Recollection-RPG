@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.SimpleLocalization.Scripts;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
@@ -46,12 +47,13 @@ public class DialogueManager : UIPopup
     void DisplayMessage()
     {
         Message messageToDisplay = currentMessages[activeMessage];
-        messageText.text = messageToDisplay.message;
-        actorName.text = currentActors[messageToDisplay.actorId].name;
+        messageText.text = LocalizationManager.Localize(messageToDisplay.localizationKey); // Sử dụng khóa dịch
+        actorName.text = currentActors[messageToDisplay.actorId].name; // Truy cập actorId
         actorImage.sprite = currentActors[messageToDisplay.actorId].sprite;
         AnimateTextColor();
-        
     }
+
+
 
     public void NextMessage()
     {

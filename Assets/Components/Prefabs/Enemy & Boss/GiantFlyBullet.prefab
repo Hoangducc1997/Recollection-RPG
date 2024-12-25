@@ -134,9 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34b83f5fba08354b9309a9c36f22efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 5
   bulletDamage: 2
-  stunDuration: 0.1
+  stunDuration: 0.2
 --- !u!95 &4011534178883204836
 Animator:
   serializedVersion: 5
