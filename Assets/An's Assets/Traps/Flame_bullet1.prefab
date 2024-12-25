@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7509330396001127325}
   - component: {fileID: -7770788388431670500}
   m_Layer: 0
-  m_Name: Flame_bullet
+  m_Name: Flame_bullet1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,7 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f226b9d679ce954ba3b655a2d1bfb97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 3.6
+  timeToLive: 5
+  knockbackForce: 200
+  damage: 1
 --- !u!61 &-7770788388431670500
 BoxCollider2D:
   m_ObjectHideFlags: 0

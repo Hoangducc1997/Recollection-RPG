@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7ec44f781ffe54fbd86fd29698969a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rewardPrefab: {fileID: 5134913848561947107, guid: 97f86664369237040b57c441bd019fc9, type: 3}
 --- !u!61 &4409642774992316454
 BoxCollider2D:
   m_ObjectHideFlags: 0

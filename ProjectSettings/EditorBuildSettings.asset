@@ -18,12 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Island-Castle.unity
     guid: 30706d0d81ad3fc44b374150992d7765
   - enabled: 1
+    path: Assets/Scenes/Overcome/Overcome1.unity
+    guid: 55ed7fea20625ac47a935f91a0be32b9
+  - enabled: 1
     path: Assets/Scenes/Boss/Boss1.unity
     guid: b7a03599ba5b0294790069d466bc3d2e
   - enabled: 1
     path: Assets/Scenes/Boss/Boss2.unity
     guid: 6301295e2ae6b234aa66f6f1355ff4b7
-  - enabled: 0
-    path: Assets/Scenes/Boss/Boss3.unity
-    guid: 76e61657b1d1e63429fea0acfa008d30
   m_configObjects: {}
