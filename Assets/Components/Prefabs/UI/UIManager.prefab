@@ -182,7 +182,11 @@ MonoBehaviour:
     popup: 4
   - sceneName: Island-Castle
     popup: 5
+  - sceneName: Overcome1
+    popup: 6
   - sceneName: Boss1
+    popup: 6
+  - sceneName: Overcome2
     popup: 6
   - sceneName: Boss2
     popup: 6

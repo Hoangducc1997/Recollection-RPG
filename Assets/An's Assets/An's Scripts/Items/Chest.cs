@@ -22,11 +22,14 @@ public class Chest : MonoBehaviour
             // Kiểm tra nếu Player đã sở hữu chìa khóa
             if (PlayerPrefs.GetInt(requiredKeyID, 0) == 1)
             {
+           
                 OpenChest();
+                AudioManager.Instance.PlayVFX("PlayerLevelUp");
             }
             else
             {
                 Debug.Log("You need the key to open this chest!");
+                AudioManager.Instance.PlayVFX("Touch");
             }
         }
     }

@@ -7,6 +7,7 @@ public class MissionManager : MonoBehaviour
     [SerializeField] private Button missionOpenButton;
     [SerializeField] private Button closeButton;
     [SerializeField] private GameObject missionPanel;
+    [SerializeField] private GameObject missionPanelBegin;
     private Animator animator;
     public virtual void Start()
     {
@@ -30,14 +31,18 @@ public class MissionManager : MonoBehaviour
     }
     public void CloseMissionPanel()
     {
-
         StartCoroutine(DeactivatePanelAfterAnimation());
-        missionPanel.SetActive(false);
+        missionPanelBegin.SetActive(false);
     }
     private IEnumerator DeactivatePanelAfterAnimation()
     {
-        // Chờ cho đến khi animation đóng hoàn thành.
-        yield return new WaitForSeconds(GetAnimationClipLength("CloseAnimation"));
+        // Đặt trạng thái Animator để bắt đầu animation đóng
+        animator.SetBool("isOpen", false);
+
+        // Chờ thời gian hoàn thành của animation đóng
+        yield return new WaitForSeconds(GetAnimationClipLength("BookClose"));
+
+        // Sau khi animation đóng hoàn tất, tắt panel
         missionPanel.SetActive(false);
     }
     private float GetAnimationClipLength(string clipName)
