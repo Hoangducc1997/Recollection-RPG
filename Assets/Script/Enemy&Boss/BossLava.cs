@@ -22,5 +22,10 @@ public class BossLava : BossBarManager
             BulletPlus.SetActive(true);
             Debug.Log("BulletPlus has been activated!");
         }
+        if (currentHealth <= 0 && !isDead) // Kiểm tra nếu boss chết và chưa xử lý
+        {
+            isDead = true; // Đảm bảo không xử lý lại nhiều lần
+            MissionOvercomeMap.Instance?.ShowMissionComplete4(); // Gọi hàm khi boss chết
+        }
     }
 }

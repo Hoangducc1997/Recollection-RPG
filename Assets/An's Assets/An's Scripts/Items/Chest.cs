@@ -22,7 +22,7 @@ public class Chest : MonoBehaviour
             if (PlayerPrefs.GetInt(requiredKeyID, 0) == 1)
             {
                 OpenChest();
-                MissionOvercomeMap.Instance?.ShowMissionComplete2(); // Hiển thị missionComplete1
+                MissionOvercomeMap.Instance?.ShowMissionComplete2(); // Hiển thị missionComplete2
                 AudioManager.Instance.PlayVFX("PlayerLevelUp");
             }
             else
@@ -40,10 +40,12 @@ public class Chest : MonoBehaviour
 
         if (rewardPrefab != null)
         {
-            Instantiate(rewardPrefab, transform.position + Vector3.up, Quaternion.identity);
+            Vector3 spawnOffset = new Vector3(0.5f, 2f, 0f); // Tùy chỉnh vị trí spawn
+            Instantiate(rewardPrefab, transform.position + spawnOffset, Quaternion.identity);
             appearNextScene.SetActive(true);
         }
 
         Debug.Log("Chest opened!");
     }
+
 }

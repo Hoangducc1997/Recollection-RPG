@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossBarManager : MonoBehaviour
 {
     Animator animator;
-    private bool isDead = false; // Thêm cờ kiểm tra trạng thái chết của boss
+    protected bool isDead = false; // Thêm cờ kiểm tra trạng thái chết của boss
 
     [SerializeField] int maxHealth;
     protected int currentHealth; // Cho phép truy cập từ lớp con
@@ -69,7 +69,7 @@ public class BossBarManager : MonoBehaviour
         animator.SetBool("isHurt", false);
     }
 
-    private IEnumerator DestroyBoss()
+    public virtual IEnumerator DestroyBoss()
     {
         Debug.Log("DestroyBoss started");
         animator.SetBool("isDeath", true);

@@ -1,61 +1,186 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MissionManager : MonoBehaviour
 {
     [SerializeField] private Button missionOpenButton;
-    [SerializeField] private Button closeButton;
-    [SerializeField] private GameObject missionPanel;
+    [SerializeField] private Button close1Button;
+    [SerializeField] private Button close2Button;
     [SerializeField] private GameObject missionPanelBegin;
+    [SerializeField] private List<MissionPanelMapping> missionMappings; // Danh sách ánh xạ scene và panel
+    private Dictionary<string, GameObject> missionPanelDictionary;
     private Animator animator;
+    private GameObject currentMissionPanel;
+
+    private void OnEnable()
+    {
+        // Đăng ký sự kiện khi chuyển scene
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        // Hủy đăng ký sự kiện khi đối tượng bị vô hiệu hóa
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     protected virtual void Start()
     {
-        // Lấy Animator từ con của missionPanel.
-        animator = missionPanel.GetComponentInChildren<Animator>();
+        // Log tên scene hiện tại
+        Debug.Log($"Current Scene: {SceneManager.GetActiveScene().name}");
+
+        // Tạo dictionary từ danh sách ánh xạ
+        missionPanelDictionary = new Dictionary<string, GameObject>();
+        foreach (var mapping in missionMappings)
+        {
+            if (!missionPanelDictionary.ContainsKey(mapping.sceneName))
+            {
+                missionPanelDictionary.Add(mapping.sceneName, mapping.panel);
+            }
+        }
+
+        InitializeMissionPanel();
+        if (currentMissionPanel != null)
+        {
+            Debug.Log($"Active Mission Panel: {currentMissionPanel.name}");
+        }
+        else
+        {
+            Debug.LogError("No mission panel set for this scene.");
+        }
+
         if (animator == null)
         {
             Debug.LogError("Animator component is missing on a child of missionPanel!");
             return;
         }
+
         missionOpenButton.onClick.AddListener(OpenMissionPanel);
-        closeButton.onClick.AddListener(CloseMissionPanel);
-        missionPanel.SetActive(false);
+        close1Button.onClick.AddListener(CloseMissionPanel);
+        close2Button.onClick.AddListener(CloseMissionPanel);
+
+        // Tắt tất cả các panel trước khi khởi tạo
+        foreach (var mapping in missionMappings)
+        {
+            mapping.panel.SetActive(false);
+        }
+
+        if (currentMissionPanel != null)
+        {
+            currentMissionPanel.SetActive(false);
+        }
+
         animator.SetBool("isOpen", false); // Bắt đầu với trạng thái đóng.
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log($"Scene changed to: {scene.name}");
+
+        // Gọi lại hàm khởi tạo panel khi chuyển scene
+        InitializeMissionPanel();
+
+        if (currentMissionPanel != null)
+        {
+            Debug.Log($"Updated panel for scene: {scene.name} → {currentMissionPanel.name}");
+        }
+        else
+        {
+            Debug.LogWarning($"No mission panel assigned for the scene '{scene.name}'!");
+        }
+    }
+
+    private void InitializeMissionPanel()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        foreach (var mapping in missionMappings)
+        {
+            if (mapping.sceneName == currentSceneName)
+            {
+                currentMissionPanel = mapping.panel;
+                currentMissionPanel.SetActive(true); // Chỉ bật panel của scene hiện tại
+                animator = currentMissionPanel?.GetComponentInChildren<Animator>();
+                if (animator == null)
+                {
+                    Debug.LogError("Animator component is missing!");
+                }
+            }
+            else
+            {
+                mapping.panel.SetActive(false); // Tắt các panel không liên quan
+            }
+        }
+
+        if (currentMissionPanel != null)
+        {
+            currentMissionPanel.SetActive(false); // Tắt panel sau khi gán để đảm bảo
+            Debug.Log($"Initialized panel for scene: {currentSceneName} → {currentMissionPanel.name}");
+        }
+        else
+        {
+            Debug.LogWarning($"No mission panel assigned for the scene '{currentSceneName}'!");
+        }
+    }
+
+
     public void OpenMissionPanel()
     {
-        missionPanel.SetActive(true);
-        animator.SetBool("isOpen", true);
+        if (currentMissionPanel != null)
+        {
+            currentMissionPanel.SetActive(true);
+            animator.SetBool("isOpen", true);
+        }
     }
-    public void CloseMissionPanel()
+
+    protected virtual void CloseMissionPanel()
     {
-        StartCoroutine(DeactivatePanelAfterAnimation());
+        if (currentMissionPanel != null)
+        {
+            StartCoroutine(DeactivatePanelAfterAnimation());
+        }
         missionPanelBegin.SetActive(false);
     }
+
     private IEnumerator DeactivatePanelAfterAnimation()
     {
-        // Đặt trạng thái Animator để bắt đầu animation đóng
-        animator.SetBool("isOpen", false);
+        if (animator != null)
+        {
+            // Đặt trạng thái Animator để bắt đầu animation đóng
+            animator.SetBool("isOpen", false);
 
-        // Chờ thời gian hoàn thành của animation đóng
-        yield return new WaitForSeconds(GetAnimationClipLength("BookClose"));
+            // Chờ thời gian hoàn thành của animation đóng
+            yield return new WaitForSeconds(GetAnimationClipLength("BookClose"));
 
-        // Sau khi animation đóng hoàn tất, tắt panel
-        missionPanel.SetActive(false);
+            // Sau khi animation đóng hoàn tất, tắt panel
+            currentMissionPanel.SetActive(false);
+        }
     }
+
     private float GetAnimationClipLength(string clipName)
     {
-        // Tìm chiều dài của clip animation dựa trên tên clip.
-        foreach (var clip in animator.runtimeAnimatorController.animationClips)
+        // Tìm chiều dài của clip animation dựa trên tên clip
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
-            if (clip.name == clipName)
+            foreach (var clip in animator.runtimeAnimatorController.animationClips)
             {
-                return clip.length;
+                if (clip.name == clipName)
+                {
+                    return clip.length;
+                }
             }
         }
         Debug.LogWarning($"Animation clip '{clipName}' không tìm thấy!");
         return 0f;
     }
+}
+
+[System.Serializable]
+public class MissionPanelMapping
+{
+    public string sceneName; // Tên scene
+    public GameObject panel; // Panel tương ứng
 }
