@@ -3,11 +3,11 @@
 public class Chest : MonoBehaviour
 {
     [SerializeField] private GameObject appearNextScene;
-    private Animator animator; // Animator của hộp
-    private bool isOpened = false; // Đảm bảo hộp chỉ mở một lần
+    private Animator animator;
+    private bool isOpened = false;
 
-    public GameObject rewardPrefab; // Phần thưởng xuất hiện khi mở hộp (nếu có)
-    public string requiredKeyID = "Key1"; // ID của chìa khóa cần thiết
+    public GameObject rewardPrefab;
+    public string requiredKeyID = "Key1";
 
     void Start()
     {
@@ -19,11 +19,10 @@ public class Chest : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isOpened)
         {
-            // Kiểm tra nếu Player đã sở hữu chìa khóa
             if (PlayerPrefs.GetInt(requiredKeyID, 0) == 1)
             {
-           
                 OpenChest();
+                MissionOvercomeMap.Instance?.ShowMissionComplete2(); // Hiển thị missionComplete1
                 AudioManager.Instance.PlayVFX("PlayerLevelUp");
             }
             else
@@ -36,10 +35,9 @@ public class Chest : MonoBehaviour
 
     private void OpenChest()
     {
-        isOpened = true; // Đánh dấu hộp đã được mở
-        animator.SetTrigger("OpenChest"); // Kích hoạt trigger trong Animator
+        isOpened = true;
+        animator.SetTrigger("OpenChest");
 
-        // Sinh phần thưởng nếu có
         if (rewardPrefab != null)
         {
             Instantiate(rewardPrefab, transform.position + Vector3.up, Quaternion.identity);

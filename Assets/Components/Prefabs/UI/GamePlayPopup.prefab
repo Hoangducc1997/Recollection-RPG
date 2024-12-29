@@ -8747,6 +8747,7 @@ GameObject:
   - component: {fileID: 5179417263332326158}
   - component: {fileID: 9187631556602365716}
   - component: {fileID: 6384355226700212710}
+  - component: {fileID: 6315411312522638101}
   m_Layer: 5
   m_Name: OpenMission
   m_TagString: Untagged
@@ -8871,6 +8872,30 @@ MonoBehaviour:
   closeButton: {fileID: 7261975377638139648}
   missionPanel: {fileID: 7907360417112248296}
   missionPanelBegin: {fileID: 3349893104396045771}
+  missionComplete1: {fileID: 4408467767906074643}
+  missionComplete2: {fileID: 7716499208244208138}
+  nextMap: {fileID: 6247334601796480956}
+--- !u!95 &6315411312522638101
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4611153826199772912}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c77c3a90a0a6dae428b8a3ad71cfdf1f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4666517477863839728
 GameObject:
   m_ObjectHideFlags: 0

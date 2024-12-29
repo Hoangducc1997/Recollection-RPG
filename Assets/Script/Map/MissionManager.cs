@@ -9,7 +9,7 @@ public class MissionManager : MonoBehaviour
     [SerializeField] private GameObject missionPanel;
     [SerializeField] private GameObject missionPanelBegin;
     private Animator animator;
-    public virtual void Start()
+    protected virtual void Start()
     {
         // Lấy Animator từ con của missionPanel.
         animator = missionPanel.GetComponentInChildren<Animator>();
