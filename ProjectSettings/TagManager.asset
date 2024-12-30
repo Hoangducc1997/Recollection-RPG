@@ -8,6 +8,8 @@ TagManager:
   - PlayerLevel1
   - BoundaryCamera
   - Enemy
+  - BossElder
+  - BossLava
   layers:
   - Default
   - TransparentFX

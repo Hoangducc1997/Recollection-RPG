@@ -15,12 +15,33 @@ public class LevelMapBossAfterManager : MonoBehaviour
 
     public void AppearObjNextScene()
     {
-        nextScene.SetActive(true);
-        bossAppear.SetActive(false);
+        if (nextScene != null)
+        {
+            nextScene.SetActive(true);
+            Debug.Log("Next scene activated!");
+        }
+        else
+        {
+            Debug.LogWarning("NextScene is not assigned!");
+        }
+
+        if (bossAppear != null)
+        {
+            bossAppear.SetActive(false);
+        }
     }
 
     public void AppearObjBoss()
     {
-        bossAppear.SetActive(true);
+        if (bossAppear != null)
+        {
+            bossAppear.SetActive(true);
+            Debug.Log("Boss appeared!");
+        }
+        else
+        {
+            Debug.LogWarning("BossAppear is not assigned!");
+        }
     }
+
 }

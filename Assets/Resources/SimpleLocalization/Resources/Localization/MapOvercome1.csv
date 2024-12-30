@@ -1,1 +1,13 @@
 Key,Vietnamese,English
+TutorialBegin,Hãy nhấn vào cuốn sách sẽ hiện nhiệm vụ bạn cần làm để vượt qua vòng này!,Click on the book to see the tasks you need to complete to pass this level!
+,,
+Mission1,Nhiệm vụ 1: Hãy đi tìm chiếc chìa khóa,Mission 1: Go find the key
+Mission2,Nhiệm vụ 2: Hãy đi tìm hòm báu vật,Mission 2: Go find the treasure chest
+,,
+MapOvercome1.NPC.1.1,"Chào chàng trai trẻ, ta là người bị giam giữ nơi đây, không lối thoát","Hello young man, I am the one imprisoned here, with no way out"
+MapOvercome1.NPC.1.2,Cậu hãy đi tìm lối ra bằng cách hoàn thành nhiệm vụ,You must find the way out by completing the mission
+MapOvercome1.NPC.1.3,"Cố lên ta tin ở cậu, cậu sẽ cứu chúng tôi khỏi nơi địa ngục này","Keep going, I believe in you. You will save us from this hell"
+,,
+MapOvercome1.NPC.2.1,Ngươi cầm chìa khóa đó qua nơi khác và nộp mạng cho trùm Elder đi!,Take that key elsewhere and surrender yourself to the Elder Boss
+MapOvercome1.NPC.2.2,Tên yếu đuối như ngươi không chống chọi được lâu đâu,A weakling like you won't last long
+MapOvercome1.NPC.2.3,Hahaha...,Hahaha...

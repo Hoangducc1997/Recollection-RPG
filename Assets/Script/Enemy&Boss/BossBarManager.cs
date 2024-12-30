@@ -13,6 +13,7 @@ public class BossBarManager : MonoBehaviour
     public BossBar healthBar;
     [SerializeField] private int expForPlayer; // Điểm kinh nghiệm cho Player
     private PlayerExpManager playerExpManager; // Tham chiếu PlayerExpManager
+
     public virtual void Start()
     {
         animator = GetComponent<Animator>();
@@ -20,7 +21,6 @@ public class BossBarManager : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
-
 
     public virtual void TakeDamage(int damage)
     {
@@ -40,6 +40,7 @@ public class BossBarManager : MonoBehaviour
             isDead = true; // Đánh dấu boss đã chết
             AudioManager.Instance.PlayVFX("Boss1Death");
             Debug.Log("BossDeath");
+
             // Tăng điểm kinh nghiệm cho Player nếu PlayerExpManager đã được tham chiếu
             if (playerExpManager != null)
             {
@@ -49,12 +50,32 @@ public class BossBarManager : MonoBehaviour
             {
                 Debug.LogWarning("Không thể thêm EXP: PlayerExpManager không tồn tại.");
             }
+
+            // Kiểm tra tag và gọi hàm phù hợp
+            if (CompareTag("BossElder"))
+            {
+                MissionOvercomeMap.Instance?.ShowMissionComplete4();
+                Debug.Log("BossElder mission complete!");
+            }
+            else if (CompareTag("BossLava"))
+            {
+                MissionOvercomeMap.Instance?.ShowMissionComplete4();
+                Debug.Log("BossLava mission complete!");
+            }
+
+            // Gọi LevelMapBossAfterManager
             LevelMapBossAfterManager levelMapBossAfterManager = FindObjectOfType<LevelMapBossAfterManager>();
             if (levelMapBossAfterManager != null)
             {
+                Debug.Log("LevelMapBossAfterManager found!");
                 levelMapBossAfterManager.AppearObjNextScene();
             }
+            else
+            {
+                Debug.LogWarning("LevelMapBossAfterManager not found!");
+            }
 
+            // Gọi LevelMapBossBeforeManager
             LevelMapBossBeforeManager levelMapBossBeforeManager = FindObjectOfType<LevelMapBossBeforeManager>();
             if (levelMapBossBeforeManager != null)
             {
@@ -79,7 +100,6 @@ public class BossBarManager : MonoBehaviour
         Debug.Log("Destroying Boss");
         Destroy(gameObject);
     }
-
 
     // Hàm để kiểm tra trạng thái chết từ script khác
     public bool IsDead()
