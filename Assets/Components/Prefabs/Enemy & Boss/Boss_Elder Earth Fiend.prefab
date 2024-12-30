@@ -454,7 +454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthBar: {fileID: 7447415738125635019}
-  expForPlayer: 50
+  expForPlayer: 500
 --- !u!114 &7018015009251541427
 MonoBehaviour:
   m_ObjectHideFlags: 0
