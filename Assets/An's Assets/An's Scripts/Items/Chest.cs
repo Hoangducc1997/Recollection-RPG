@@ -2,23 +2,29 @@
 
 public class Chest : MonoBehaviour
 {
-    [SerializeField] private GameObject appearNextScene;
+    [SerializeField] private GameObject appearNextScene; // Đối tượng kích hoạt khi mở rương
+    [SerializeField] private Vector3 spawnOffset = new Vector3(0.5f, 2f, 0f); // Tùy chỉnh vị trí spawn
+
     private Animator animator;
     private bool isOpened = false;
 
-    public GameObject rewardPrefab;
-    public string requiredKeyID = "Key1";
+    public GameObject rewardPrefab; // Phần thưởng khi mở rương
+    public string requiredKeyID = "Key1"; // ID của khóa cần thiết để mở rương này
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        appearNextScene.SetActive(false);
+        if (appearNextScene != null)
+        {
+            appearNextScene.SetActive(false); // Đảm bảo đối tượng ẩn lúc đầu
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !isOpened)
         {
+            // Kiểm tra xem người chơi có khóa hay không
             if (PlayerPrefs.GetInt(requiredKeyID, 0) == 1)
             {
                 OpenChest();
@@ -27,7 +33,7 @@ public class Chest : MonoBehaviour
             }
             else
             {
-                Debug.Log("You need the key to open this chest!");
+                Debug.Log($"You need the {requiredKeyID} to open this chest!");
                 AudioManager.Instance.PlayVFX("Touch");
             }
         }
@@ -40,12 +46,14 @@ public class Chest : MonoBehaviour
 
         if (rewardPrefab != null)
         {
-            Vector3 spawnOffset = new Vector3(0.5f, 2f, 0f); // Tùy chỉnh vị trí spawn
             Instantiate(rewardPrefab, transform.position + spawnOffset, Quaternion.identity);
-            appearNextScene.SetActive(true);
+        }
+
+        if (appearNextScene != null)
+        {
+            appearNextScene.SetActive(true); // Kích hoạt đối tượng tiếp theo
         }
 
         Debug.Log("Chest opened!");
     }
-
 }

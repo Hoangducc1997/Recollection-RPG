@@ -8,7 +8,7 @@ public class Key : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            AudioManager.Instance.PlayVFX("PickupItem2");
+            //AudioManager.Instance.PlayVFX("PickupItem2");
             PlayerPrefs.SetInt(keyID, 1);
             Debug.Log("Key collected: " + keyID);
 

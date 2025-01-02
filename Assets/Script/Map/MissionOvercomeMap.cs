@@ -9,6 +9,9 @@ public class MissionOvercomeMap : MissionManager
     [SerializeField] private GameObject missionComplete2;
     [SerializeField] private GameObject missionComplete3;
     [SerializeField] private GameObject missionComplete4;
+    [SerializeField] private GameObject missionComplete5;
+    [SerializeField] private GameObject missionComplete6;
+    [SerializeField] private GameObject missionComplete7;
     [SerializeField] private GameObject nextMap;
     private Animator _animator;
     private void Awake()
