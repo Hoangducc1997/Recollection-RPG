@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5684786936207306848}
   - component: {fileID: 9060078878254367737}
   m_Layer: 0
-  m_Name: Arrow1
+  m_Name: Arrow2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 427f67256076b9248a63d66b6b3f4b7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -126,10 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 602fb5f457b5cf740b269ed68122af9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3.6
-  timeToLive: 5
+  moveSpeed: 2
+  timeToLive: 0.8
   knockbackForce: 200
-  damage: 1
+  damage: 5
 --- !u!61 &9060078878254367737
 BoxCollider2D:
   m_ObjectHideFlags: 0
