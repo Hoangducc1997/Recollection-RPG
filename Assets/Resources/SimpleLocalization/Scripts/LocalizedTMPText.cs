@@ -34,7 +34,7 @@ namespace Assets.SimpleLocalization.Scripts
             LocalizationManager.OnLocalizationChanged -= Localize;
         }
 
-        private void Localize()
+        public void Localize()
         {
             if (_textComponent == null)
             {

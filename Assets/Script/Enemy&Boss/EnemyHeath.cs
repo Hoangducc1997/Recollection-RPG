@@ -94,12 +94,13 @@ public class EnemyHealth : MonoBehaviour
 
         if (enemySpawner != null)
         {
-            enemySpawner.EnemyDefeated(enemyTypeIndex);
+            enemySpawner.ReportEnemyDefeated(enemyTypeIndex);
         }
         else
         {
             Debug.LogWarning("EnemySpawner not assigned.");
         }
+
 
         DropItems(); // Gọi hàm để rơi item
 

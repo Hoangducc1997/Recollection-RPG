@@ -97,7 +97,7 @@ public class SpawnManager : MonoBehaviour
     }
 
 
-    public void EnemyDefeated(int enemyTypeIndex)
+    protected virtual void EnemyDefeated(int enemyTypeIndex)
     {
         // Khi kẻ địch bị tiêu diệt, giảm số lượng đã spawn
         currentSpawnedCounts[enemyTypeIndex]--;
@@ -109,6 +109,7 @@ public class SpawnManager : MonoBehaviour
             GamePlayPopup gamePlayPopup = FindObjectOfType<GamePlayPopup>();
             if (gamePlayPopup != null)
             {
+                
                 gamePlayPopup.ShowFindBossText();
             }
 
@@ -130,6 +131,10 @@ public class SpawnManager : MonoBehaviour
             }
         }
         return true; // Tất cả kẻ địch đã bị tiêu diệt
+    }
+    public void ReportEnemyDefeated(int enemyTypeIndex)
+    {
+        EnemyDefeated(enemyTypeIndex);
     }
 
     private void UpdateEnemyCountText(int enemyIndex)

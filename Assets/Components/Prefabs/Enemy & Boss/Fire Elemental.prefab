@@ -127,7 +127,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1418454683357650705}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 57ca40eb72130574e9fb7f1e978d40bd, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -199,6 +199,7 @@ MonoBehaviour:
   expForPlayer: 0
   enemySpawner: {fileID: 0}
   enemyTypeIndex: 0
+  itemDrops: []
 --- !u!114 &2539906527747987912
 MonoBehaviour:
   m_ObjectHideFlags: 0

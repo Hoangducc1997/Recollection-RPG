@@ -89,13 +89,12 @@ GameObject:
   - component: {fileID: 3957860244041629541}
   - component: {fileID: 1839484679851059711}
   - component: {fileID: 1666697835403236030}
-  - component: {fileID: 6871973366848007431}
   - component: {fileID: 900960382738865807}
   - component: {fileID: 9192752001914584669}
   - component: {fileID: 341755092246913932}
   m_Layer: 6
   m_Name: Boss_Lava Demon Phantom
-  m_TagString: Enemy
+  m_TagString: BossLava
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,7 +206,7 @@ Rigidbody2D:
   m_LinearDrag: 1.5
   m_AngularDrag: 1
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 57ca40eb72130574e9fb7f1e978d40bd, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -227,7 +226,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 413496089536513882}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 57ca40eb72130574e9fb7f1e978d40bd, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -267,24 +266,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 200
   healthBar: {fileID: 5110547034227218295}
-  expForPlayer: 900
+  expForPlayer: 3500
   BulletPlus: {fileID: 1353675727544828420}
-  BossAngryHeath: 30
---- !u!114 &6871973366848007431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 413496089536513882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77b24c8b2328dc242b49ae9afa3a1041, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 200
-  healthBar: {fileID: 5110547034227218295}
-  expForPlayer: 900
+  BossAngryHeath: 50
 --- !u!114 &900960382738865807
 MonoBehaviour:
   m_ObjectHideFlags: 0
