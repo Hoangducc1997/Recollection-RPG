@@ -224,7 +224,7 @@ MonoBehaviour:
   attackCooldown: 4.5
   distanceAttack: 5.4
   minDistanceToPlayer: 3.9
-  moveSpeed: 1.5
+  moveSpeed: 1.8
   bulletPrefab: {fileID: 8821319634057034934, guid: 5b545237725d64f4c9400d4f36de117c, type: 3}
   shootingPoint: {fileID: 5466838554476570090}
 --- !u!114 &3320791139922768403
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f1b574a6cd6164ebb6ca292756722e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.5
+  moveSpeed: 1.8
 --- !u!114 &8879858773942803412
 MonoBehaviour:
   m_ObjectHideFlags: 0

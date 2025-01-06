@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65824a09e0fc8d448ab4dc2cf967092b, type: 3}
   m_Name: SpeedPlayerIsland
   m_EditorClassIdentifier: 
-  baseMoveSpeed: 1.8
+  baseMoveSpeed: 2
   levelSpeedData: []
