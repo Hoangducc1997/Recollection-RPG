@@ -42544,13 +42544,13 @@ MonoBehaviour:
   - enemyName: Cobra
     enemyPrefab: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
     enemyCount: 30
-    enemyTimeSpawn: 2
+    enemyTimeSpawn: 2.5
     enemyCountInputs: {fileID: 5009846424789614049}
     enemyCountTotalInputs: {fileID: 5009846424789614048}
   - enemyName: Boar
     enemyPrefab: {fileID: 2826979651492348882, guid: 9011a926b834bd6458f4eae041247922, type: 3}
     enemyCount: 20
-    enemyTimeSpawn: 5
+    enemyTimeSpawn: 3.9
     enemyCountInputs: {fileID: 217646987}
     enemyCountTotalInputs: {fileID: 1462928896}
   spawnPoints:
