@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: Sword2
   level: 2
   damage: 10
-  rangeAtk: 1.9
+  rangeAtk: 1.2
   cooldownTime: 2
   attackDuration: 2
   animationIndex: 2

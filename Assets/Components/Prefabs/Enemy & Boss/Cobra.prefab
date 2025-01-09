@@ -219,7 +219,7 @@ MonoBehaviour:
   enemyTypeIndex: 0
   itemDrops:
   - itemPrefab: {fileID: 3858064487098320177, guid: 64de109d69ff0b24c961bf79f6b8bf64, type: 3}
-    dropRate: 35
+    dropRate: 39
 --- !u!114 &8244115686558920001
 MonoBehaviour:
   m_ObjectHideFlags: 0

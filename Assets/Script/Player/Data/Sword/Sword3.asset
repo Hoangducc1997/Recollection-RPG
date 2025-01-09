@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: Sword1
   level: 3
   damage: 15
-  rangeAtk: 2.3
-  cooldownTime: 5
-  attackDuration: 5
+  rangeAtk: 1.5
+  cooldownTime: 3
+  attackDuration: 3
   animationIndex: 3
