@@ -11,7 +11,7 @@ public class Key : MonoBehaviour
             //AudioManager.Instance.PlayVFX("PickupItem2");
             PlayerPrefs.SetInt(keyID, 1);
             Debug.Log("Key collected: " + keyID);
-
+            AudioManager.Instance.PlayVFX("PickupItem2");
             MissionOvercomeMap.Instance?.ShowMissionComplete1(); // Hiển thị missionComplete2
             Destroy(gameObject);
         }

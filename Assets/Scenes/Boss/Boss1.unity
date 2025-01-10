@@ -846,7 +846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7344409309873324905, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7611974883674718684, guid: 4827e425a7bb3814daccbfadd3e3d7ca, type: 3}
       propertyPath: m_IsActive
@@ -41652,7 +41652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6065404996672404234, guid: 5c6d2a625ad428d418c361b8a3102c47, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6371176794972010366, guid: 5c6d2a625ad428d418c361b8a3102c47, type: 3}
       propertyPath: playerAction
@@ -41988,6 +41988,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 227423508644870755, guid: 99e7e0ea5dd17a74ca00186cc36ed379, type: 3}
+      propertyPath: sceneName
+      value: Overcome2
+      objectReference: {fileID: 0}
     - target: {fileID: 3455022024503600045, guid: 99e7e0ea5dd17a74ca00186cc36ed379, type: 3}
       propertyPath: m_Name
       value: LevelManager
@@ -42540,13 +42544,13 @@ MonoBehaviour:
   - enemyName: Cobra
     enemyPrefab: {fileID: 4614724405605656515, guid: d3e5fce4dd666e94d9a62386d363ae25, type: 3}
     enemyCount: 30
-    enemyTimeSpawn: 5
+    enemyTimeSpawn: 2.5
     enemyCountInputs: {fileID: 5009846424789614049}
     enemyCountTotalInputs: {fileID: 5009846424789614048}
   - enemyName: Boar
     enemyPrefab: {fileID: 2826979651492348882, guid: 9011a926b834bd6458f4eae041247922, type: 3}
     enemyCount: 20
-    enemyTimeSpawn: 6
+    enemyTimeSpawn: 3.9
     enemyCountInputs: {fileID: 217646987}
     enemyCountTotalInputs: {fileID: 1462928896}
   spawnPoints:

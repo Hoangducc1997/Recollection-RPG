@@ -72,15 +72,14 @@ public class PlayerExpManager : MonoBehaviour
 
     private void UpdateLevelText()
     {
-        // Cập nhật text số cấp độ
         levelUIText.text = levels[currentLevelIndex].level;
 
-        // Cập nhật tên cấp độ qua LocalizationKey
         LocalizedTMPText localizedText = levelNameText.GetComponent<LocalizedTMPText>();
         if (localizedText != null)
         {
+            Debug.Log($"LocalizationKey: {levels[currentLevelIndex].levelNameKey}");
             localizedText.LocalizationKey = levels[currentLevelIndex].levelNameKey;
-            localizedText.Localize();  // Gọi lại để cập nhật text
+            localizedText.Localize();
         }
         else
         {

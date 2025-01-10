@@ -219,7 +219,7 @@ MonoBehaviour:
   enemyTypeIndex: 0
   itemDrops:
   - itemPrefab: {fileID: 3858064487098320177, guid: 64de109d69ff0b24c961bf79f6b8bf64, type: 3}
-    dropRate: 40
+    dropRate: 45
 --- !u!114 &3699656049215534042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f1b574a6cd6164ebb6ca292756722e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 1.5
 --- !u!114 &5339072278145175067
 MonoBehaviour:
   m_ObjectHideFlags: 0
