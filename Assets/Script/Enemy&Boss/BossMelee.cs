@@ -58,6 +58,7 @@ public class BossMelee : BossBase
         if (collision.collider.CompareTag("Player"))
         {
             isPlayerInRange = true;
+
         }
     }
 
@@ -68,4 +69,6 @@ public class BossMelee : BossBase
             isPlayerInRange = false;
         }
     }
+
+
 }
