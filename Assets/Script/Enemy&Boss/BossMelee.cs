@@ -4,6 +4,7 @@ using UnityEngine;
 public class BossMelee : BossBase
 {
     private Animator animator; // Gán Animator từ đối tượng cha
+    [SerializeField] private Animator animatorEffect;
     [SerializeField] private int meleeDamage = 10; // Sát thương cận chiến
     protected float lastAttackTime;
     protected bool isPlayerInRange = false;
@@ -36,6 +37,7 @@ public class BossMelee : BossBase
     {
         // Bắt đầu animation tấn công
         animator.SetBool("isAttack", true);
+        animatorEffect.SetBool("isAttack", true);
         yield return new WaitForSeconds(0.5f);
 
         if (playerBarManager != null)
@@ -45,6 +47,7 @@ public class BossMelee : BossBase
 
         yield return new WaitForSeconds(1f);
         animator.SetBool("isAttack", false); // Tắt animation tấn công sau khi hoàn thành
+        animatorEffect.SetBool("isAttack", false);
     }
 
     void MeleeAttack()
