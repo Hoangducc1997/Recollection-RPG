@@ -19,5 +19,5 @@ MonoBehaviour:
   cooldownTime: 2
   attackDuration: 2
   animationIndex: 5
-  arrowPrefab: {fileID: 5318872819317430418, guid: 61c9be93fa8151446bd1b25ca3f0d9f5, type: 3}
+  arrowPrefab: {fileID: 4285369466554397623, guid: 123095ec2103d4a4a86379a91905f5c1, type: 3}
   arrowSpeed: 6.3
