@@ -59,7 +59,7 @@ public class BossBarManager : MonoBehaviour
             }
             else if (CompareTag("BossLava"))
             {
-                MissionOvercomeMap.Instance?.ShowMissionComplete4();
+                MissionOvercomeMap.Instance?.ShowMissionComplete9();
                 Debug.Log("BossLava mission complete!");
             }
 

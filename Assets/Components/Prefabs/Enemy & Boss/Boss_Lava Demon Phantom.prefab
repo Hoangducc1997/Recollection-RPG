@@ -114,6 +114,7 @@ Transform:
   m_Children:
   - {fileID: 999242748875904328}
   - {fileID: 4519455589477285295}
+  - {fileID: 5252842470669255530}
   - {fileID: 8440195676947203699}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -267,8 +268,11 @@ MonoBehaviour:
   maxHealth: 200
   healthBar: {fileID: 5110547034227218295}
   expForPlayer: 3500
+  BulletNormal: {fileID: 9205944090239590188}
   BulletPlus: {fileID: 1353675727544828420}
-  BossAngryHeath: 50
+  BulletStorm: {fileID: 5553136268591227044}
+  BossAngryHeath: 90
+  BossCrazyHeath: 50
 --- !u!114 &900960382738865807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,7 +444,7 @@ GameObject:
   - component: {fileID: 515487197288264413}
   - component: {fileID: 883812993997206558}
   m_Layer: 6
-  m_Name: Plus
+  m_Name: Plus1
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -888,6 +892,91 @@ MonoBehaviour:
   valueTextHealth: {fileID: 2474391352031712401}
   fillAngryBar: {fileID: 0}
   valueTextAngry: {fileID: 0}
+--- !u!1 &5553136268591227044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5252842470669255530}
+  - component: {fileID: 4407776569268958382}
+  - component: {fileID: 5967327407717332298}
+  m_Layer: 6
+  m_Name: Storm
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5252842470669255530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5553136268591227044}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.35, y: -0.13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8679835787931924612}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &4407776569268958382
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5553136268591227044}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.2011302, y: -0.30969763}
+  serializedVersion: 2
+  m_Radius: 7.9983444
+--- !u!114 &5967327407717332298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5553136268591227044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902153fc3d5b9a24197c49686c0fc342, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageBossAttack: 5
+  attackCooldown: 2
+  animator: {fileID: 8966449200185286299}
+  bulletPrefab: {fileID: 2957173194091732556, guid: 0195ec8a61776ce4eaa7b3f5762f408d, type: 3}
+  shootingPoint: {fileID: 5252842470669255530}
 --- !u!1 &5845230193663172030
 GameObject:
   m_ObjectHideFlags: 0

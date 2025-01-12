@@ -5,13 +5,15 @@ public class MissionOvercomeMap : MissionManager
 {
     public static MissionOvercomeMap Instance { get; private set; }
 
-    [SerializeField] private GameObject missionComplete1;
-    [SerializeField] private GameObject missionComplete2;
-    [SerializeField] private GameObject missionComplete3;
-    [SerializeField] private GameObject missionComplete4;
-    [SerializeField] private GameObject missionComplete5;
-    [SerializeField] private GameObject missionComplete6;
-    [SerializeField] private GameObject missionComplete7;
+    [SerializeField] private GameObject missionComplete1; //Map OverCome1
+    [SerializeField] private GameObject missionComplete2; //Map OverCome1
+    [SerializeField] private GameObject missionComplete3; //Map Boss1
+    [SerializeField] private GameObject missionComplete4; //Map Boss1
+    [SerializeField] private GameObject missionComplete5; //Map OverCome2
+    [SerializeField] private GameObject missionComplete6; //Map OverCome2
+    [SerializeField] private GameObject missionComplete7; //Map OverCome2
+    [SerializeField] private GameObject missionComplete8; //Map Boss2
+    [SerializeField] private GameObject missionComplete9; //Map Boss2
     [SerializeField] private GameObject nextMap;
     private Animator _animator;
     private void Awake()
@@ -35,6 +37,11 @@ public class MissionOvercomeMap : MissionManager
         missionComplete2.SetActive(false);
         missionComplete3.SetActive(false);
         missionComplete4.SetActive(false);
+        missionComplete5.SetActive(false);
+        missionComplete6.SetActive(false);
+        missionComplete7.SetActive(false);
+        missionComplete8.SetActive(false);
+        missionComplete9.SetActive(false);
         nextMap.SetActive(false);
         _animator.SetBool("isBookNotification", false);
     }
@@ -86,6 +93,48 @@ public class MissionOvercomeMap : MissionManager
         }
     }
 
+    public void ShowMissionComplete5()
+    {
+        if (missionComplete5 != null)
+        {
+            missionComplete5.SetActive(true);
+            _animator.SetBool("isBookNotification", true);
+        }
+    }
+    public void ShowMissionComplete6()
+    {
+        if (missionComplete6 != null)
+        {
+            missionComplete6.SetActive(true);
+            _animator.SetBool("isBookNotification", true);
+        }
+    }
+
+    public void ShowMissionComplete7()
+    {
+        if (missionComplete7 != null)
+        {
+            missionComplete7.SetActive(true);
+            _animator.SetBool("isBookNotification", true);
+        }
+    }
+    public void ShowMissionComplete8()
+    {
+        if (missionComplete8 != null)
+        {
+            missionComplete8.SetActive(true);
+            _animator.SetBool("isBookNotification", true);
+        }
+    }
+
+    public void ShowMissionComplete9()
+    {
+        if (missionComplete9 != null)
+        {
+            missionComplete9.SetActive(true);
+            _animator.SetBool("isBookNotification", true);
+        }
+    }
     private IEnumerator ShowNextMapTemporarily()
     {
         // Hiển thị nextMap
