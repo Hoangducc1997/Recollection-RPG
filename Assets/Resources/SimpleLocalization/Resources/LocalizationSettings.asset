@@ -17,12 +17,12 @@ MonoBehaviour:
   - Name: BossName
     Id: 1205227674
     TextAsset: {fileID: 4900000, guid: 69cf4b9049f191d4bae8c3b28004b340, type: 3}
-  - Name: Intro
-    Id: 0
-    TextAsset: {fileID: 4900000, guid: 7139db2251302234099ff73b57099419, type: 3}
   - Name: Menu
     Id: 1721203983
     TextAsset: {fileID: 4900000, guid: cf55c05861a4d264a855e6349bef560e, type: 3}
+  - Name: Intro
+    Id: 0
+    TextAsset: {fileID: 4900000, guid: 7139db2251302234099ff73b57099419, type: 3}
   - Name: Pilot
     Id: 258473932
     TextAsset: {fileID: 4900000, guid: 61b31a098fed6dd4eb94314174e724a6, type: 3}
@@ -41,4 +41,10 @@ MonoBehaviour:
   - Name: MapBoss2
     Id: 1499774296
     TextAsset: {fileID: 4900000, guid: 2c7d459289cbabc4f8ee5c4e567de9ea, type: 3}
+  - Name: InfoMapBoss
+    Id: 2065570662
+    TextAsset: {fileID: 4900000, guid: 59e832c179261d74c824793138e41bb0, type: 3}
+  - Name: Mission
+    Id: 52374179
+    TextAsset: {fileID: 4900000, guid: 6127455af96c51a49bceaa58d2b07ac8, type: 3}
   SaveFolder: {fileID: 102900000, guid: c392831e85f928548b8494fefd912562, type: 3}

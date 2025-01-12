@@ -9,6 +9,7 @@ public class MissionManager : MonoBehaviour
     [SerializeField] private Button missionOpenButton;
     [SerializeField] private Button close1Button;
     [SerializeField] private Button close2Button;
+    [SerializeField] private Button close3Button;
     [SerializeField] private GameObject missionPanelBegin;
     [SerializeField] private List<MissionPanelMapping> missionMappings; // Danh sách ánh xạ scene và panel
     private Dictionary<string, GameObject> missionPanelDictionary;
@@ -61,6 +62,7 @@ public class MissionManager : MonoBehaviour
         missionOpenButton.onClick.AddListener(OpenMissionPanel);
         close1Button.onClick.AddListener(CloseMissionPanel);
         close2Button.onClick.AddListener(CloseMissionPanel);
+        close3Button.onClick.AddListener(CloseMissionPanel);
 
         // Tắt tất cả các panel trước khi khởi tạo
         foreach (var mapping in missionMappings)

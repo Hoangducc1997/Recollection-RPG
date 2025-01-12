@@ -1,1 +1,21 @@
 Key,Vietnamese,English
+Mission1,Nhiệm vụ 1: Hãy đi tìm chiếc chìa khóa màu xanh dương,"Mission 1: Go find the blue key"""
+Mission2,Nhiệm vụ 2: Hãy đi tìm hòm báu vật màu nâu chứa chìa khóa màu vàng,Mission 2: Go find the brown treasure chest containing the yellow key
+Mission3,Nhiệm vụ 3: Hãy đi tìm hòm báu vật màu xanh chứa vũ khí,Mission 3: Go find the blue treasure chest containing weapon
+,,
+MapOvercome2.NPC.1.1,"Chào chàng trai trẻ, ngươi hãy đi theo nhiệm vụ ","Hello, young man, go forth and follow the quest."
+MapOvercome2.NPC.1.2,Hãy nhớ đường đi kẻo để lạc đấy!,"Remember the path, or you might get lost!"
+MapOvercome2.NPC.1.3,Hãy tiếp tục nhé!,Keep going!
+,,
+MapOvercome2.NPC.2.1,À ngươi đây rồi...,"Ah, there you are..."
+MapOvercome2.NPC.2.2,Hãy đi thẳng rẽ trái sẽ thấy được chìa khóa đó!,"Go straight and turn left, and you'll find the key!"
+MapOvercome2.NPC.2.3,Hahaha...,Hahaha...
+,,
+,,
+MapOvercome2.NPC.3.1,"Chào cậu, cậu đang tìm chìa khóa đúng chứ?","Hello there, you're looking for the key, aren't you?"
+MapOvercome2.NPC.3.2,Hãy đi ngược lại đừng nghe lời những tên xấu xa,Go back and don't listen to those wicked ones
+MapOvercome2.NPC.3.3,Hãy tin tôi nhé!,Trust me!
+,,
+MapOvercome2.NPC.4.1,Chào người xấu số tiếp theo...,"Greetings, the next unfortunate soul..."
+MapOvercome2.NPC.4.2,Lấy chìa khóa trong gương rồi nạp mạng cho quỷ vương đi,Take the key from the mirror and offer your life to the Demon King
+MapOvercome2.NPC.4.3,Hahaha,Hahaha

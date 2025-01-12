@@ -135,8 +135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageBossAttack: 5
-  attackCooldown: 2
-  speed: 3.2
+  attackCooldown: 1.8
+  speed: 3.6
 --- !u!95 &846426770306323798
 Animator:
   serializedVersion: 5

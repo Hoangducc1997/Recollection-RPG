@@ -109,7 +109,7 @@ public class SpawnManager : MonoBehaviour
             GamePlayPopup gamePlayPopup = FindObjectOfType<GamePlayPopup>();
             if (gamePlayPopup != null)
             {
-                
+
                 gamePlayPopup.ShowFindBossText();
             }
 
@@ -142,7 +142,7 @@ public class SpawnManager : MonoBehaviour
         if (enemySpawners[enemyIndex].enemyCountInputs != null)
         {
             enemySpawners[enemyIndex].enemyCountInputs.text =
-                $"{enemySpawners[enemyIndex].enemyName}'S EXIST: {Mathf.Max(0, currentSpawnedCounts[enemyIndex])}";
+                $"{enemySpawners[enemyIndex].enemyName}'S:{Mathf.Max(0, currentSpawnedCounts[enemyIndex])}";
         }
     }
 
@@ -151,7 +151,7 @@ public class SpawnManager : MonoBehaviour
         if (enemySpawners[enemyIndex].enemyCountTotalInputs != null)
         {
             enemySpawners[enemyIndex].enemyCountTotalInputs.text =
-                $"{enemySpawners[enemyIndex].enemyName} Total: {enemySpawners[enemyIndex].enemyCount}";
+                $"{enemySpawners[enemyIndex].enemyName}:{enemySpawners[enemyIndex].enemyCount}";
         }
     }
 }

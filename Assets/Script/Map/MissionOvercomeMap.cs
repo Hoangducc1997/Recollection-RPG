@@ -91,8 +91,8 @@ public class MissionOvercomeMap : MissionManager
         // Hiển thị nextMap
         nextMap.SetActive(true);
 
-        // Chờ 5 giây
-        yield return new WaitForSeconds(5f);
+        // Chờ 3 giây
+        yield return new WaitForSeconds(3f);
 
         // Tắt nextMap
         nextMap.SetActive(false);
